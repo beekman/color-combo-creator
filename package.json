@@ -27,6 +27,7 @@
   "dependencies": {
     "@simonwep/pickr": "1.5.1",
     "color-scheme": "1.0.1",
+    "nouislider": "14.2.0",
     "react": "16.13.1",
     "react-dom": "16.13.1"
   },

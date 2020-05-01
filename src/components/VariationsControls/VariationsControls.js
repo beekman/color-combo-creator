@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const VariationsControls = () => {
   return (
     <>
-      VariationsControls
+      
     </>
   );
 };

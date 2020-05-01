@@ -1,6 +1,6 @@
 import React from 'react';
-import ColorPicker from '../containers/ColorPicker';
+import PalettePicker from '../containers/PalettePicker';
 
 export default function App() {
-  return <ColorPicker />;
+  return <PalettePicker />;
 }

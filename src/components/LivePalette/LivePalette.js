@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Palette = () => {
+const LivePalette = () => {
   return (
     <>
       Palette
     </>
   );
 };
-Palette.propTypes = {};
+LivePalette.propTypes = {};
 
-export default Palette;
+export default LivePalette;

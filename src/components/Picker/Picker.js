@@ -3,7 +3,7 @@ import Pickr from '@simonwep/pickr';
 export default function Picker() {
   const pickr = Pickr.create({
     el: '.color-picker',
-    theme: 'classic', // or 'monolith', or 'nano'
+    theme: 'monolith', // or 'monolith', or 'nano'
 
     swatches: [
       'rgba(244, 67, 54, 1)',
@@ -42,8 +42,8 @@ export default function Picker() {
     }
   });
   return (
-    <>
+    <div>
       {pickr}
-    </>
+    </div>
   );
 }
