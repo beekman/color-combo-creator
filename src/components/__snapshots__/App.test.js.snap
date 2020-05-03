@@ -2,9 +2,19 @@
 
 exports[`App component renders App 1`] = `
 <Fragment>
-  <Picker />
+  <Header />
+  <ColorPickr
+    channel="h"
+    initialValue="#000"
+    mode="hsl"
+    onChange={[Function]}
+    readOnly={false}
+    reset={true}
+    theme={Object {}}
+  />
   <VariationsControls />
   <LivePalette />
   <ScratchPalette />
+  <Footer />
 </Fragment>
 `;
