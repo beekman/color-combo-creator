@@ -1,8 +1,10 @@
 import React from 'react';
 import Pickr from '@simonwep/pickr';
+import styles from './Picker.css';
+
 export default function Picker() {
   const pickr = Pickr.create({
-    el: '.color-picker',
+    el: '.picker',
     theme: 'monolith', // or 'monolith', or 'nano'
 
     swatches: [
@@ -42,8 +44,7 @@ export default function Picker() {
     }
   });
   return (
-    <div>
-      {pickr}
+    <div className={styles.pickr}>
     </div>
   );
 }
