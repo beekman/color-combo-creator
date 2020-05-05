@@ -2,11 +2,6 @@
 
 exports[`App component renders App 1`] = `
 <Fragment>
-  <Header />
-  <Picker />
-  <VariationsControls />
-  <LivePalette />
-  <ScratchPalette />
-  <Footer />
+  <PalettePicker />
 </Fragment>
 `;

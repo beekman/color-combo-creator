@@ -36,8 +36,8 @@ class Picker extends React.Component {
           background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`,
         },
         swatch: {
-          padding: '5px',
-          background: '#fff',
+          padding: '1px',
+          background: '#000',
           borderRadius: '1px',
           boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
           display: 'inline-block',
@@ -58,7 +58,7 @@ class Picker extends React.Component {
     });
 
     return (
-      <div>
+      <div style={styles.color}>
         <div style={styles.swatch} onClick={this.handleClick}>
           <div style={styles.color} />
         </div>

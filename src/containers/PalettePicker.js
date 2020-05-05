@@ -1,6 +1,10 @@
 import React from 'react';
 import reactCSS from 'reactcss';
-import { SketchPicker } from 'react-color';
+import Header from '../components//Header/Header';
+import VariationsControls from '../components/VariationsControls/VariationsControls';
+import LivePalette from '../components/LivePalette/LivePalette';
+import ScratchPalette from '../components/ScratchPalette/ScratchPalette';
+import Footer from '../components/Footer/Footer';
 import Picker from '../components/Picker/Picker';
 
 class PalettePicker extends React.Component {
@@ -60,17 +64,17 @@ class PalettePicker extends React.Component {
 
     return (
       <>
-        <div>
-          <div style={styles.swatch} onClick={this.handleClick}>
-            <div style={styles.color} />
-          </div>
-          {this.state.displayColorPicker ? <div style={styles.popover}>
-            <div style={styles.cover} onClick={this.handleClose} />
-            <SketchPicker color={this.state.color} onChange={this.handleChange} />
-          </div> : null}
-
-        </div>
-        <Picker color={this.state.color} />
+        <Header />
+        <label>Base <Picker color={this.state.color} />
+        </label>
+        <label>Matches
+          <LivePalette />
+        </label>
+        <label>
+          Variations
+          <VariationsControls />
+        </label>
+        <Footer />
       </>
     );
   }
