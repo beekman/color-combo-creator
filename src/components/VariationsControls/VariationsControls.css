@@ -1,0 +1,9 @@
+.VariationsControls {
+  display: flex;
+  flex-wrap: wrap;
+
+  input{
+    width: 2rem;
+    margin: 0 0.35rem 0 0;
+  }
+}
