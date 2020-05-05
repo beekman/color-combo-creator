@@ -5,7 +5,7 @@ import styles from './Footer.css';
 const Footer = () => {
   return (
     <footer className={styles.Footer}>
-      <p>Developed by Ben Beekman</p>
+      <p>Developed by Ben Beekman, 2020.</p>
     </footer>
   );
 };

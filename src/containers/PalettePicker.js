@@ -1,8 +1,9 @@
 import React from 'react';
 import reactCSS from 'reactcss';
 import { SketchPicker } from 'react-color';
+import Picker from '../components/Picker/Picker';
 
-class Picker extends React.Component {
+class PalettePicker extends React.Component {
   state = {
     displayColorPicker: false,
     color: {
@@ -58,18 +59,21 @@ class Picker extends React.Component {
     });
 
     return (
-      <div>
-        <div style={styles.swatch} onClick={this.handleClick}>
-          <div style={styles.color} />
-        </div>
-        {this.state.displayColorPicker ? <div style={styles.popover}>
-          <div style={styles.cover} onClick={this.handleClose} />
-          <SketchPicker color={this.state.color} onChange={this.handleChange} />
-        </div> : null}
+      <>
+        <div>
+          <div style={styles.swatch} onClick={this.handleClick}>
+            <div style={styles.color} />
+          </div>
+          {this.state.displayColorPicker ? <div style={styles.popover}>
+            <div style={styles.cover} onClick={this.handleClose} />
+            <SketchPicker color={this.state.color} onChange={this.handleChange} />
+          </div> : null}
 
-      </div>
+        </div>
+        <Picker color={this.state.color} />
+      </>
     );
   }
 }
 
-export default Picker;
+export default PalettePicker;

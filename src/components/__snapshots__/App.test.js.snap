@@ -3,38 +3,7 @@
 exports[`App component renders App 1`] = `
 <Fragment>
   <Header />
-  <ColorPicker
-    color={
-      Object {
-        "a": 1,
-        "h": 250,
-        "l": 0.2,
-        "s": 0.5,
-      }
-    }
-    disableAlpha={false}
-    presetColors={
-      Array [
-        "#D0021B",
-        "#F5A623",
-        "#F8E71C",
-        "#8B572A",
-        "#7ED321",
-        "#417505",
-        "#BD10E0",
-        "#9013FE",
-        "#4A90E2",
-        "#50E3C2",
-        "#B8E986",
-        "#000000",
-        "#4A4A4A",
-        "#9B9B9B",
-        "#FFFFFF",
-      ]
-    }
-    styles={Object {}}
-    width={200}
-  />
+  <Picker />
   <VariationsControls />
   <LivePalette />
   <ScratchPalette />
