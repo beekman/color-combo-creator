@@ -1,6 +1,8 @@
 import React from 'react';
 import reactCSS from 'reactcss';
-import { SketchPicker } from 'react-color';
+import { PhotoshopPicker } from 'react-color';
+const Color = require('color');
+
 
 class Picker extends React.Component {
   state = {
@@ -11,7 +13,16 @@ class Picker extends React.Component {
       b: '19',
       a: '1',
     },
+    hsv: {
+      h: '340',
+      s: '100',
+      v: '.5',
+      a: '1'
+    }
   };
+
+
+
 
   handleClick = () => {
     this.setState({ displayColorPicker: !this.state.displayColorPicker });
@@ -23,10 +34,16 @@ class Picker extends React.Component {
 
   handleChange = (color) => {
     this.setState({ color: color.rgb });
+    let color1 = Color.rgb((this.state.color.r), (this.state.color.g), (this.state.color.b));
+    console.log(color1);
+    console.log(this.state.color.g);
+    console.log(this.state.color.b);
   };
 
+  getHsv = (color) => {
+    console.log(color.r);
+  };
   render() {
-
     const styles = reactCSS({
       'default': {
         color: {
@@ -64,7 +81,7 @@ class Picker extends React.Component {
         </div>
         {this.state.displayColorPicker ? <div style={styles.popover}>
           <div style={styles.cover} onClick={this.handleClose} />
-          <SketchPicker color={this.state.color} onChange={this.handleChange} />
+          <PhotoshopPicker color={this.state.color} onChange={this.handleChange} />
         </div> : null}
 
       </div>
