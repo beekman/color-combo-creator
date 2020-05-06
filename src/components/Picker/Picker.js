@@ -13,12 +13,12 @@ class Picker extends React.Component {
       b: '19',
       a: '1',
     },
-    hsv: {
-      h: '340',
-      s: '100',
-      v: '.5',
-      a: '1'
-    }
+    hsl: {
+      h: '0',
+      s: '0',
+      l: '.20',
+      a: '1',
+    },
   };
 
 
@@ -34,14 +34,10 @@ class Picker extends React.Component {
 
   handleChange = (color) => {
     this.setState({ color: color.rgb });
-    let color1 = Color.rgb((this.state.color.r), (this.state.color.g), (this.state.color.b));
-    console.log(color1);
-    console.log(this.state.color.g);
-    console.log(this.state.color.b);
-  };
-
-  getHsv = (color) => {
-    console.log(color.r);
+    let rgb = Color.rgb((this.state.color.r), (this.state.color.g), (this.state.color.b));
+    console.log(rgb.string());
+    let hsl = rgb.hsl();
+    console.log(hsl.string());  // 'hsla(262, 59%, 81%, 0.5)'
   };
   render() {
     const styles = reactCSS({
