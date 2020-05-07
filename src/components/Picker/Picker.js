@@ -71,18 +71,18 @@ class Picker extends React.Component {
     });
 
     return (
-
-      <div style={styles.color}>
-        <label for='base'>Base</label>
-        <div style={styles.swatch} onClick={this.handleClick} id='base'>
-          <div style={styles.color} />
+      <>
+        <label htmlFor='base'>Base</label>
+        <div style={styles.color}>
+          <div style={styles.swatch} onClick={this.handleClick} id='base'>
+            <div style={styles.color} />
+          </div>
+          {this.state.displayColorPicker ? <div style={styles.popover}>
+            <div style={styles.cover} onClick={this.handleClose} />
+            <PhotoshopPicker color={this.state.color} onChange={this.handleChange} />
+          </div> : null}
         </div>
-        {this.state.displayColorPicker ? <div style={styles.popover}>
-          <div style={styles.cover} onClick={this.handleClose} />
-          <PhotoshopPicker color={this.state.color} onChange={this.handleChange} />
-        </div> : null}
-
-      </div>
+      </>
     );
   }
 }
