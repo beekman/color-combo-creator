@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import LivePalette from '../LivePalette/LivePalette';
 import styles from '../VariationsControls/VariationsControls.css';
-
-
 
 const VariationsControls = () => {
   const [harmonies, setHarmonies] = useState('2');
@@ -25,6 +24,11 @@ const VariationsControls = () => {
   );
 };
 
-VariationsControls.propTypes = {};
+LivePalette.propTypes = {
+  harmonies: PropTypes.number.isRequired,
+  inverses: PropTypes.number.isRequired,
+  lighters: PropTypes.number.isRequired,
+  darkers: PropTypes.number.isRequired,
+};
 
 export default VariationsControls;

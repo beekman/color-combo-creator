@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const LivePalette = (harmonies, inverses, lighters, darkers) => {
   return (
     <>
-    
+
     </>
   );
 };
