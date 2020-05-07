@@ -71,8 +71,10 @@ class Picker extends React.Component {
     });
 
     return (
+
       <div style={styles.color}>
-        <div style={styles.swatch} onClick={this.handleClick}>
+        <label for='base'>Base</label>
+        <div style={styles.swatch} onClick={this.handleClick} id='base'>
           <div style={styles.color} />
         </div>
         {this.state.displayColorPicker ? <div style={styles.popover}>
