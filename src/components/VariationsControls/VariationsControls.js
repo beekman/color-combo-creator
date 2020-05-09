@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import LivePalette from '../LivePalette/LivePalette';
 import styles from '../VariationsControls/VariationsControls.css';
+var convert = require('color-convert');
+
 
 const VariationsControls = (color) => {
   const [harmonies, setHarmonies] = useState('2');
@@ -12,9 +14,17 @@ const VariationsControls = (color) => {
 
   useEffect(() => {
     console.log(color.color);
-    console.log(harmonies);
+    const base = color.color;
+    let baseR = base.r;
+    let baseG = base.g;
+    let baseB = base.b;
+    let colorString = base.r + ', ' + base.g + ', ' + base.b;
+
+    console.log(colorString);
+    let hsl = convert.rgb.hsl(colorString);
+    console.log(hsl);
+    console.log(harmonies + ' ' + inverses + ' ' + lighters + ' ' + darkers);
   });
-  console.log(color.color);
 
 
   return (
