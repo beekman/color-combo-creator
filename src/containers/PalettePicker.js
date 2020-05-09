@@ -3,7 +3,8 @@ import reactCSS from 'reactcss';
 import Header from '../components//Header/Header';
 import VariationsControls from '../components/VariationsControls/VariationsControls';
 import Footer from '../components/Footer/Footer';
-import Picker from '../components/Picker/Picker';
+import { PhotoshopPicker } from 'react-color';
+const Color = require('color');
 
 class PalettePicker extends React.Component {
   state = {
@@ -63,8 +64,17 @@ class PalettePicker extends React.Component {
     return (
       <>
         <Header />
-        <Picker color={this.state.color} />
-        <VariationsControls color={this.state.color} />
+        <div>
+          <div style={styles.swatch} onClick={this.handleClick}>
+            <div style={styles.color} />
+          </div>
+          {this.state.displayColorPicker ? <div style={styles.popover}>
+            <div style={styles.cover} onClick={this.handleClose} />
+            <PhotoshopPicker color={this.state.color} onChange={this.handleChange} />
+          </div> : null}
+
+        </div>
+        <VariationsControls color={this.state.color} onChange={this.handleChange} />
         <Footer />
       </>
     );

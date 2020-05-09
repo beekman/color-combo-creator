@@ -9,10 +9,17 @@ const VariationsControls = (color) => {
   const [lighters, setLighters] = useState('0');
   const [darkers, setDarkers] = useState('0');
 
+
+  useEffect(() => {
+    console.log(color.color);
+    console.log(harmonies);
+  });
+  console.log(color.color);
+
+
   return (
     <>
       <section className={styles.ColorMatches}>
-        <LivePalette color={color} harmonies={harmonies} inverses={inverses} lighters={lighters} darkers={darkers}/>
       </section>
       <div className={styles.VariationsControls}>
         <label htmlFor="harmonies">Harmonies</label><input type="number" id="harmonies" value={harmonies} onChange={({ target }) => setHarmonies(target.value)} />

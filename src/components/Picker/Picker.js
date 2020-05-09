@@ -3,7 +3,6 @@ import reactCSS from 'reactcss';
 import { PhotoshopPicker } from 'react-color';
 const Color = require('color');
 
-
 class Picker extends React.Component {
   state = {
     displayColorPicker: false,
@@ -15,9 +14,6 @@ class Picker extends React.Component {
     },
   };
 
-
-
-
   handleClick = () => {
     this.setState({ displayColorPicker: !this.state.displayColorPicker });
   };
@@ -28,7 +24,10 @@ class Picker extends React.Component {
 
   handleChange = (color) => {
     this.setState({ color: color.rgb });
-
+    let rgb = Color.rgb((this.state.color.r), (this.state.color.g), (this.state.color.b));
+    console.log(rgb.string());
+    let hsl = rgb.hsl();
+    console.log(hsl.string());  // 'hsla(262, 59%, 81%, 0.5)'
   };
   render() {
     const styles = reactCSS({
