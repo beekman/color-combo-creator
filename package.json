@@ -25,11 +25,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@mapbox/react-colorpickr": "8.2.0",
-    "@simonwep/pickr": "1.5.1",
-    "color-convert": "2.0.1",
-    "color-scheme": "1.0.1",
-    "nouislider": "14.2.0",
     "react": "16.13.1",
     "react-color": "2.18.0",
     "react-dom": "16.13.1"

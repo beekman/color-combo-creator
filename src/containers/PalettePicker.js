@@ -15,6 +15,12 @@ class PalettePicker extends React.Component {
       b: '19',
       a: '1',
     },
+    hsl: {
+      h: '27',
+      s: '100',
+      l: '50',
+      a: '1',
+    },
   };
 
   handleClick = () => {
@@ -27,6 +33,7 @@ class PalettePicker extends React.Component {
 
   handleChange = (color) => {
     this.setState({ color: color.rgb });
+    this.setState({ hsl: color.hsl });
   };
 
   render() {
@@ -74,7 +81,7 @@ class PalettePicker extends React.Component {
           </div> : null}
 
         </div>
-        <VariationsControls color={this.state.color} onChange={this.handleChange} />
+        <VariationsControls color={this.state.color} hsl={this.state.hsl} onChange={this.handleChange} />
         <Footer />
       </>
     );

@@ -11,18 +11,8 @@ const VariationsControls = (color) => {
   const [lighters, setLighters] = useState('0');
   const [darkers, setDarkers] = useState('0');
 
-
   useEffect(() => {
-    console.log(color.color);
-    const base = color.color;
-    let baseR = base.r;
-    let baseG = base.g;
-    let baseB = base.b;
-    let colorString = base.r + ', ' + base.g + ', ' + base.b;
-
-    console.log(colorString);
-    let hsl = convert.rgb.hsl(colorString);
-    console.log(hsl);
+    console.log(color.hsl);
     console.log(harmonies + ' ' + inverses + ' ' + lighters + ' ' + darkers);
   });
 
@@ -41,11 +31,8 @@ const VariationsControls = (color) => {
   );
 };
 
-LivePalette.propTypes = {
-  harmonies: PropTypes.string.isRequired,
-  inverses: PropTypes.string.isRequired,
-  lighters: PropTypes.string.isRequired,
-  darkers: PropTypes.string.isRequired,
+VariationsControls.propTypes = {
+
 };
 
 export default VariationsControls;
