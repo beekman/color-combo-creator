@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import LivePalette from '../LivePalette/LivePalette';
 import styles from '../VariationsControls/VariationsControls.css';
 
-const VariationsControls = () => {
+const VariationsControls = (color) => {
   const [harmonies, setHarmonies] = useState('2');
   const [inverses, setInverses] = useState('0');
   const [lighters, setLighters] = useState('0');
@@ -11,9 +11,9 @@ const VariationsControls = () => {
 
   return (
     <>
-      <div className={styles.ColorMatches}>
-        <LivePalette harmonies={harmonies} inverses={inverses} lighters={lighters} darkers={darkers} />
-      </div>
+      <section className={styles.ColorMatches}>
+        <LivePalette color={color} harmonies={harmonies} inverses={inverses} lighters={lighters} darkers={darkers}/>
+      </section>
       <div className={styles.VariationsControls}>
         <label htmlFor="harmonies">Harmonies</label><input type="number" id="harmonies" value={harmonies} onChange={({ target }) => setHarmonies(target.value)} />
         <label htmlFor="inverse">Inverses</label><input type="number" id="inverses" value={inverses} onChange={({ target }) => setInverses(target.value)} />
@@ -25,10 +25,10 @@ const VariationsControls = () => {
 };
 
 LivePalette.propTypes = {
-  harmonies: PropTypes.number.isRequired,
-  inverses: PropTypes.number.isRequired,
-  lighters: PropTypes.number.isRequired,
-  darkers: PropTypes.number.isRequired,
+  harmonies: PropTypes.string.isRequired,
+  inverses: PropTypes.string.isRequired,
+  lighters: PropTypes.string.isRequired,
+  darkers: PropTypes.string.isRequired,
 };
 
 export default VariationsControls;

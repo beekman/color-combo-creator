@@ -2,7 +2,6 @@ import React from 'react';
 import reactCSS from 'reactcss';
 import Header from '../components//Header/Header';
 import VariationsControls from '../components/VariationsControls/VariationsControls';
-
 import Footer from '../components/Footer/Footer';
 import Picker from '../components/Picker/Picker';
 
