@@ -18,7 +18,6 @@ export const getHarmonies = (hsl, harmonyQuantity) => {
     h = current;
     harmonicHSL.push({ h, s, l, a });
   }
-  console.log(harmonicHSL);
   return harmonicHSL;
 };
 
@@ -37,11 +36,18 @@ export const getInverses = (hsl, hslHarmonies, inverseQuantity) => {
   if(inverseQuantity > 0) {
     h = getOppositeDegree(h);
     hslInverses.push({ h, s, l, a });
+    inverseQuantity--;
   }
 
-  hslHarmonies.forEach(hslHarmony => {
-    console.log(hslHarmony);
-  });
+  while(inverseQuantity > 0) {
+    hslHarmonies.forEach(hslHarmony => {
+      console.log(hslHarmony);
+      console.log(hslHarmony.h);
+      h = getOppositeDegree(hslHarmony.h);
+      hslInverses.push({ h, s, l, a });
+    });
+  }
+  
   return hslInverses;
 };
 

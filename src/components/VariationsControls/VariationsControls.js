@@ -10,7 +10,6 @@ const VariationsControls = (color) => {
   const [darkerQuantity, setDarkerQuantity] = useState('0');
 
   useEffect(() => {
-    const hsl = color.hsl;
     getHarmonies(color.hsl, harmonyQuantity);
   });
 
