@@ -11,12 +11,8 @@ const VariationsControls = (color) => {
   const [darkers, setDarkers] = useState('0');
 
   useEffect(() => {
-    console.log(color.color);
-    console.log(color.hsl);
     const hsl = color.hsl;
-    console.log(hsl);
     getHarmonies(color.hsl, harmonies);
-    console.log(harmonies + ' ' + inverses + ' ' + lighters + ' ' + darkers);
   });
 
   return (
