@@ -13,18 +13,28 @@ const VariationsControls = (color) => {
 
   useEffect(() => {
     console.log(color.color);
-    console.log(color.hsl);
     const hsl = color.hsl;
-    console.log(hsl);
     getHarmonies(color.hsl, harmonies);
     console.log(harmonies + ' ' + inverses + ' ' + lighters + ' ' + darkers);
   });
 
   const getHarmonies = (hsl, harmonies) => {
-    harmonies = parseInt(harmonies) + 1;
-    console.log(harmonies);
+    harmonies = parseFloat(harmonies) + 1;
     const degreeShift = 360 / harmonies;
     console.log(degreeShift);
+    console.log(hsl.h);
+    let current = hsl.h;
+    let harmonicHues = [];
+    while((current - degreeShift) > 0) {
+      current = current - degreeShift;
+      harmonicHues.push(current);
+    }
+    current = hsl.h;
+    while((current + degreeShift) < 360) {
+      current = current + degreeShift;
+      harmonicHues.push(current);
+    }
+    return harmonicHues;
   };
 
   return (

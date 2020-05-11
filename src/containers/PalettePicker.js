@@ -16,7 +16,7 @@ class PalettePicker extends React.Component {
       a: '1',
     },
     hsl: {
-      h: '27',
+      h: '0',
       s: '100',
       l: '50',
       a: '1',
