@@ -41,13 +41,11 @@ export const getInverses = (hsl, hslHarmonies, inverseQuantity) => {
 
   while(inverseQuantity > 0) {
     hslHarmonies.forEach(hslHarmony => {
-      console.log(hslHarmony);
-      console.log(hslHarmony.h);
       h = getOppositeDegree(hslHarmony.h);
       hslInverses.push({ h, s, l, a });
     });
   }
-  
+  console.log(hslInverses);
   return hslInverses;
 };
 

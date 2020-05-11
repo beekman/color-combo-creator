@@ -79,4 +79,10 @@ describe('tests for getInverses function', () => {
     const inverseQuantity = 1;
     expect(getInverses(hsl, hslHarmonies, inverseQuantity)).toEqual([{ h: 0, s: 1, l: 0.5, a: 1 }]);
   });
+  it('should return a single color with h:0 for a base color with h:180, harmonies:0, and inverseQuantity: 1', () => {
+    const hsl = { h: 180, s: 1, l: 0.5, a: 1 };
+    const hslHarmonies = [];
+    const inverseQuantity = 1;
+    expect(getInverses(hsl, hslHarmonies, inverseQuantity)).toEqual([{ h: 0, s: 1, l: 0.5, a: 1 }]);
+  });
 });
