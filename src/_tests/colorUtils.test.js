@@ -1,10 +1,11 @@
-const { getHarmonies } = require('../utils/colorUtils');
+const { getHarmonies,
+  getInverses } = require('../utils/colorUtils');
 
 describe('tests for getHarmonies function', () => {
   it('should return an empty array for complements of 0', () => {
     const hsl = { h: 180, s: 1, l: 0.5, a: 1 };
     const harmonyQuantity = 0;
-    expect(getHarmonies(hsl, harmonies)).toEqual([]);
+    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([]);
   });
 
   it('should return 1 color with hue of 0 for 1 harmonyQuantity and base color with h:180', () => {
@@ -65,17 +66,17 @@ describe('tests for getHarmonies function', () => {
 });
 
 describe('tests for getInverses function', () => {
-  it('should return an empty array for inverseQuantity of 0', () => {
+  it('should return an empty array for getInverses with inverseQuantity: 0', () => {
     const hsl = { h: 180, s: 1, l: 0.5, a: 1 };
-    const harmonies = [{ h: 0, s: 1, l: 0.5, a: 1 }];
+    const hslHarmonies = [{ h: 0, s: 1, l: 0.5, a: 1 }];
     const inverseQuantity = 0;
-    expect(getInverses(hsl, harmonies, inverseQuantity)).toEqual([]);
+    expect(getInverses(hsl, hslHarmonies, inverseQuantity)).toEqual([]);
   });
 
-  it('should return a single color with h:0 for a color with h:180, 1 harmony, and 1 inverseQuantity', () => {
+  it('should return a single color with h:0 for a base color with h:180, harmonies:1, and inverseQuantity: 1', () => {
     const hsl = { h: 180, s: 1, l: 0.5, a: 1 };
-    const harmonies = [{ h: 0, s: 1, l: 0.5, a: 1 }];
+    const hslHarmonies = [{ h: 0, s: 1, l: 0.5, a: 1 }];
     const inverseQuantity = 1;
-    expect(getInverses(hsl, harmonies, inverseQuantity)).toEqual([{ h: 0, s: 1, l: 0.5, a: 1 }]);
+    expect(getInverses(hsl, hslHarmonies, inverseQuantity)).toEqual([{ h: 0, s: 1, l: 0.5, a: 1 }]);
   });
 });

@@ -4,7 +4,6 @@ import Header from '../components//Header/Header';
 import VariationsControls from '../components/VariationsControls/VariationsControls';
 import Footer from '../components/Footer/Footer';
 import { PhotoshopPicker } from 'react-color';
-const Color = require('color');
 
 class PalettePicker extends React.Component {
   state = {
