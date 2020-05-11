@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import LivePalette from '../LivePalette/LivePalette';
 import styles from '../VariationsControls/VariationsControls.css';
-var convert = require('color-convert');
-
+import { getHarmonies } from '../../utils/colorUtils';
 
 const VariationsControls = (color) => {
   const [harmonies, setHarmonies] = useState('2');
@@ -19,30 +18,6 @@ const VariationsControls = (color) => {
     getHarmonies(color.hsl, harmonies);
     console.log(harmonies + ' ' + inverses + ' ' + lighters + ' ' + darkers);
   });
-
-  const getHarmonies = (hsl, harmonies) => {
-    harmonies = parseFloat(harmonies) + 1;
-    console.log(harmonies);
-    const degreeShift = 360 / harmonies;
-    console.log(degreeShift);
-  
-    let current = hsl.h;
-    let harmonicHues = [];
-    console.log(hsl.h);
-    console.log(current);
-    console.log(degreeShift);
-    while((current - degreeShift) > 0) {
-      current = current - degreeShift;
-      harmonicHues.push(current);
-    }
-    current = hsl.h;
-    while((current + degreeShift) < 360) {
-      current = current + degreeShift;
-      harmonicHues.push(current);
-    }
-    console.log(harmonicHues);
-    return harmonicHues;
-  };
 
   return (
     <>
