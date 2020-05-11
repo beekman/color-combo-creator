@@ -13,7 +13,7 @@ export const getHarmonies = (hsl, harmonies) => {
   console.log(hsl.h);
   console.log(current);
   console.log(degreeShift);
-  while((current - degreeShift) > 0) {
+  while((current - degreeShift) >= 0) {
     current = current - degreeShift;
     h = current;
     harmonicHSL.push({ h, s, l, a });
