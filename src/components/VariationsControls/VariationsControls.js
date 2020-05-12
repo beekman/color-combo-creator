@@ -22,16 +22,16 @@ const VariationsControls = (color) => {
     console.log('Base, Harmonies, and Inverses Color List:');
     console.log(baseHarmoniesAndInversesColorList);
 
-    const hslLighters = getLighters(color.hsl, hslHarmonies, hslInverses, lighterQuantity);
+    const hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
     console.log('Lighter colors:');
     console.log(hslLighters);
 
-    const hslDarkers = getDarkers(color.hsl, hslHarmonies, hslInverses, darkerQuantity);
+    const hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
     console.log('Darker colors:');
     console.log(hslDarkers);
   });
 
- 
+
   return (
     <>
       <section className={styles.ColorMatches}>

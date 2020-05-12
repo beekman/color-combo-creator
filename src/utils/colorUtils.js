@@ -54,31 +54,29 @@ export const getInverses = (hsl, hslHarmonies, inverseQuantity) => {
 };
 
 export const getBaseHarmoniesAndInversesColorList = (hsl, hslHarmonies, hslInverses) => {
-  let hslColorList = [];
+  let baseHarmoniesAndInversesColorList = [];
   let h = hsl.h;
   const s = hsl.s;
   let l = hsl.l;
   const a = hsl.a;
 
-  hslColorList.push({ h, s, l, a });
+  baseHarmoniesAndInversesColorList.push({ h, s, l, a });
 
   hslHarmonies.forEach(hslHarmony => {
     h = hslHarmony.h;
     l = hslHarmony.l;
-    hslColorList.push({ h, s, l, a });
+    baseHarmoniesAndInversesColorList.push({ h, s, l, a });
   });
   hslInverses.forEach(hslInverse => {
     h = hslInverse.h;
     l = hslInverse.l;
-    hslColorList.push({ h, s, l, a });
+    baseHarmoniesAndInversesColorList.push({ h, s, l, a });
   });
+  return baseHarmoniesAndInversesColorList;
 };
 
 export const getLighters = (baseHarmoniesAndInversesColorList, lighterQuantity) => {
-  let h = hsl.h;
-  const s = hsl.s;
-  let l = hsl.l;
-  const a = hsl.a;
+
   const hslLighters = [];
 
   const getLighterColor = (l) => {
@@ -86,14 +84,16 @@ export const getLighters = (baseHarmoniesAndInversesColorList, lighterQuantity) 
     return l;
   };
 
-  if(lighterQuantity > baseHarmoniesAndInversesColorList.length) {
-    lighterQuantity = baseHarmoniesAndInversesColorList.length;
+  if(lighterQuantity > (baseHarmoniesAndInversesColorList.length)) {
+    lighterQuantity = (baseHarmoniesAndInversesColorList.length);
   }
 
   while(lighterQuantity > 0) {
     baseHarmoniesAndInversesColorList.forEach(hslColor => {
-      h = hslColor.h;
-      l = getLighterColor(hslColor.l);
+      const h = hslColor.h;
+      const s = hslColor.s;
+      const l = getLighterColor(hslColor.l);
+      const a = hslColor.a;
       hslLighters.push({ h, s, l, a });
       lighterQuantity--;
     });
@@ -102,10 +102,6 @@ export const getLighters = (baseHarmoniesAndInversesColorList, lighterQuantity) 
 };
 
 export const getDarkers = (baseHarmoniesAndInversesColorList, darkerQuantity) => {
-  let h = hsl.h;
-  const s = hsl.s;
-  let l = hsl.l;
-  const a = hsl.a;
   const hslDarkers = [];
 
   const getDarkerColor = (l) => {
