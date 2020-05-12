@@ -88,16 +88,14 @@ export const getLighters = (baseHarmoniesAndInversesColorList, lighterQuantity) 
     lighterQuantity = (baseHarmoniesAndInversesColorList.length);
   }
 
-  while(lighterQuantity > 0) {
-    baseHarmoniesAndInversesColorList.forEach(hslColor => {
-      const h = hslColor.h;
-      const s = hslColor.s;
-      const l = getLighterColor(hslColor.l);
-      const a = hslColor.a;
-      hslLighters.push({ h, s, l, a });
-      lighterQuantity--;
-    });
-  }
+  baseHarmoniesAndInversesColorList.forEach(hslColor => {
+    const h = hslColor.h;
+    const s = hslColor.s;
+    const l = getLighterColor(hslColor.l);
+    const a = hslColor.a;
+    hslLighters.push({ h, s, l, a });
+    lighterQuantity--;
+  });
   return hslLighters;
 };
 
@@ -113,13 +111,13 @@ export const getDarkers = (baseHarmoniesAndInversesColorList, darkerQuantity) =>
     darkerQuantity = baseHarmoniesAndInversesColorList.length;
   }
 
-  while(darkerQuantity > 0) {
-    baseHarmoniesAndInversesColorList.forEach(hslColor => {
-      h = hslColor.h;
-      l = getDarkerColor(hslColor.l);
-      hslDarkers.push({ h, s, l, a });
-      darkerQuantity--;
-    });
-  }
+  baseHarmoniesAndInversesColorList.forEach(hslColor => {
+    const h = hslColor.h;
+    const s = hslColor.s;
+    const l = getDarkerColor(hslColor.l);
+    const a = hslColor.a;
+    hslDarkers.push({ h, s, l, a });
+    darkerQuantity--;
+  });
   return hslDarkers;
 };

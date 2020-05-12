@@ -18,7 +18,7 @@ const VariationsControls = (color) => {
     console.log('Inverse colors:');
     console.log(hslInverses);
 
-    const baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.hsl, hslHarmonies, hslInverses);
+    let baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.hsl, hslHarmonies, hslInverses);
     console.log('Base, Harmonies, and Inverses Color List:');
     console.log(baseHarmoniesAndInversesColorList);
 
