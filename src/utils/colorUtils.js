@@ -79,8 +79,8 @@ export const getLighters = (baseHarmoniesAndInversesColorList, lighterQuantity) 
 
   const hslLighters = [];
 
-  const getLighterColor = (l) => {
-    l = (Number(l) + 1.00) / 2;
+  const getLighterColor = (l, multiplier = 0.5) => {
+    l = (Number(l) + 1.00) * multiplier;
     return l;
   };
 
@@ -88,7 +88,7 @@ export const getLighters = (baseHarmoniesAndInversesColorList, lighterQuantity) 
     lighterQuantity = (baseHarmoniesAndInversesColorList.length);
   }
 
-  baseHarmoniesAndInversesColorList.forEach(hslColor => {
+  baseHarmoniesAndInversesColorList.map(hslColor => {
     const h = hslColor.h;
     const s = hslColor.s;
     const l = getLighterColor(hslColor.l);
@@ -102,8 +102,8 @@ export const getLighters = (baseHarmoniesAndInversesColorList, lighterQuantity) 
 export const getDarkers = (baseHarmoniesAndInversesColorList, darkerQuantity) => {
   const hslDarkers = [];
 
-  const getDarkerColor = (l) => {
-    l = (l / 2);
+  const getDarkerColor = (l, divisor = 2) => {
+    l = (l / divisor);
     return l;
   };
 
@@ -111,7 +111,7 @@ export const getDarkers = (baseHarmoniesAndInversesColorList, darkerQuantity) =>
     darkerQuantity = baseHarmoniesAndInversesColorList.length;
   }
 
-  baseHarmoniesAndInversesColorList.forEach(hslColor => {
+  baseHarmoniesAndInversesColorList.map(hslColor => {
     const h = hslColor.h;
     const s = hslColor.s;
     const l = getDarkerColor(hslColor.l);
