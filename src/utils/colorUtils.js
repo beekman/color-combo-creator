@@ -43,8 +43,6 @@ export const getInverses = (hsl, hslHarmonies, inverseQuantity) => {
     inverseQuantity--;
   }
 
-
-
   while(inverseQuantity > 0) {
     hslHarmonies.forEach(hslHarmony => {
       h = getOppositeDegree(hslHarmony.h);
@@ -55,4 +53,19 @@ export const getInverses = (hsl, hslHarmonies, inverseQuantity) => {
   console.log('Inverse colors:');
   console.log(hslInverses);
   return hslInverses;
+};
+
+export const getLighters = (hsl, hslHarmonies, hslInverses, lighterQuantity) => {
+  let h = hsl.h;
+  const s = hsl.s;
+  let l = hsl.l;
+  const a = hsl.a;
+  const hslLighters = [];
+  if(lighterQuantity > 0) {
+    l = (l + 100) / 2;
+    hslLighters.push({ h, s, l, a });
+    lighterQuantity--;
+  }
+
+  return hslLighters;
 };
