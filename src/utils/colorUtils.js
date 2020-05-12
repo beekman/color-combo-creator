@@ -6,19 +6,21 @@ export const getHarmonies = (hsl, harmonyQuantity) => {
   let l = hsl.l;
   let a = hsl.a;
   let current = hsl.h;
-  let harmonicHSL = [];
+  let hslHarmonies = [];
   while((current - degreeShift) >= 0) {
     current = current - degreeShift;
     h = current;
-    harmonicHSL.push({ h, s, l, a });
+    hslHarmonies.push({ h, s, l, a });
   }
   current = hsl.h;
   while((current + degreeShift) < 360) {
     current = current + degreeShift;
     h = current;
-    harmonicHSL.push({ h, s, l, a });
+    hslHarmonies.push({ h, s, l, a });
   }
-  return harmonicHSL;
+  console.log('Harmonic colors:');
+  console.log(hslHarmonies);
+  return hslHarmonies;
 };
 
 export const getInverses = (hsl, hslHarmonies, inverseQuantity) => {
@@ -61,11 +63,64 @@ export const getLighters = (hsl, hslHarmonies, hslInverses, lighterQuantity) => 
   let l = hsl.l;
   const a = hsl.a;
   const hslLighters = [];
-  if(lighterQuantity > 0) {
+  const getLighterColor = (l) => {
     l = (l + 100) / 2;
+    return l;
+  };
+
+  if(lighterQuantity > 0) {
+    l = getLighterColor(l);
     hslLighters.push({ h, s, l, a });
     lighterQuantity--;
   }
 
+  if(lighterQuantity > (hslHarmonies.length + hslInverses.length + 1)) {
+    lighterQuantity = (hslHarmonies.length + hslInverses.length + 1);
+  }
+
+  while(lighterQuantity > 0) {
+    hslHarmonies.forEach(hslHarmony => {
+      h = hslHarmony.h;
+      l = getLighterColor(hslHarmony.l);
+      hslLighters.push({ h, s, l, a });
+      lighterQuantity--;
+    });
+  }
+  console.log('Lighter colors:');
+  console.log(hslLighters);
   return hslLighters;
+};
+
+export const getDarkers = (hsl, hslHarmonies, hslInverses, darkerQuantity) => {
+  let h = hsl.h;
+  const s = hsl.s;
+  let l = hsl.l;
+  const a = hsl.a;
+  const hslDarkers = [];
+  const getDarkerColor = (l) => {
+    l= (l / 2);
+    return l;
+  };
+
+  if(darkerQuantity > 0) {
+    l = getDarkerColor(l);
+    hslDarkers.push({ h, s, l, a });
+    darkerQuantity--;
+  }
+
+  if(darkerQuantity > (hslHarmonies.length + hslInverses.length + 1)) {
+    darkerQuantity = (hslHarmonies.length + hslInverses.length + 1);
+  }
+
+  while(darkerQuantity > 0) {
+    hslHarmonies.forEach(hslHarmony => {
+      h = hslHarmony.h;
+      l = getDarkerColor(hslHarmony.l);
+      hslDarkers.push({ h, s, l, a });
+      darkerQuantity--;
+    });
+  }
+  console.log('Darker colors:');
+  console.log(hslDarkers);
+  return hslDarkers;
 };
