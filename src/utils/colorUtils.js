@@ -18,8 +18,6 @@ export const getHarmonies = (hsl, harmonyQuantity) => {
     h = current;
     hslHarmonies.push({ h, s, l, a });
   }
-  console.log('Harmonic colors:');
-  console.log(hslHarmonies);
   return hslHarmonies;
 };
 
@@ -52,112 +50,80 @@ export const getInverses = (hsl, hslHarmonies, inverseQuantity) => {
       inverseQuantity--;
     });
   }
-  console.log('Inverse colors:');
-  console.log(hslInverses);
   return hslInverses;
 };
 
-export const getLighters = (hsl, hslHarmonies, hslInverses, lighterQuantity) => {
+export const getBaseHarmoniesAndInversesColorList = (hsl, hslHarmonies, hslInverses) => {
+  let hslColorList = [];
+  let h = hsl.h;
+  const s = hsl.s;
+  let l = hsl.l;
+  const a = hsl.a;
+
+  hslColorList.push({ h, s, l, a });
+
+  hslHarmonies.forEach(hslHarmony => {
+    h = hslHarmony.h;
+    l = hslHarmony.l;
+    hslColorList.push({ h, s, l, a });
+  });
+  hslInverses.forEach(hslInverse => {
+    h = hslInverse.h;
+    l = hslInverse.l;
+    hslColorList.push({ h, s, l, a });
+  });
+};
+
+export const getLighters = (baseHarmoniesAndInversesColorList, lighterQuantity) => {
   let h = hsl.h;
   const s = hsl.s;
   let l = hsl.l;
   const a = hsl.a;
   const hslLighters = [];
-  let hslColorList = [];
-
-  hslColorList.push({ h, s, l, a });
-
-  hslHarmonies.forEach(hslHarmony => {
-    h = hslHarmony.h;
-    l = hslHarmony.l;
-    hslColorList.push({ h, s, l, a });
-  });
-  hslInverses.forEach(hslInverse => {
-    h = hslInverse.h;
-    l = hslInverse.l;
-    hslColorList.push({ h, s, l, a });
-  });
-
-  console.log('Color List:');
-  console.log(hslColorList);
 
   const getLighterColor = (l) => {
-    l = (l + 100) / 2;
+    l = (Number(l) + 1.00) / 2;
     return l;
   };
 
-  if(lighterQuantity > 0) {
-    l = getLighterColor(l);
-    hslLighters.push({ h, s, l, a });
-    lighterQuantity--;
+  if(lighterQuantity > baseHarmoniesAndInversesColorList.length) {
+    lighterQuantity = baseHarmoniesAndInversesColorList.length;
   }
-
-
-
-  if(lighterQuantity > hslColorList.length) {
-    lighterQuantity = hslColorList.length;
-  }
-
 
   while(lighterQuantity > 0) {
-    hslColorList.forEach(hslColorList => {
-      h = hslColorList.h;
-      l = getLighterColor(hslColorList.l);
+    baseHarmoniesAndInversesColorList.forEach(hslColor => {
+      h = hslColor.h;
+      l = getLighterColor(hslColor.l);
       hslLighters.push({ h, s, l, a });
       lighterQuantity--;
     });
   }
-  console.log('Lighter colors:');
-  console.log(hslLighters);
   return hslLighters;
 };
 
-export const getDarkers = (hsl, hslHarmonies, hslInverses, darkerQuantity) => {
+export const getDarkers = (baseHarmoniesAndInversesColorList, darkerQuantity) => {
   let h = hsl.h;
   const s = hsl.s;
   let l = hsl.l;
   const a = hsl.a;
   const hslDarkers = [];
-  let hslColorList = [];
-
-  hslColorList.push({ h, s, l, a });
-
-  hslHarmonies.forEach(hslHarmony => {
-    h = hslHarmony.h;
-    l = hslHarmony.l;
-    hslColorList.push({ h, s, l, a });
-  });
-  
-  hslInverses.forEach(hslInverse => {
-    h = hslInverse.h;
-    l = hslInverse.l;
-    hslColorList.push({ h, s, l, a });
-  });
 
   const getDarkerColor = (l) => {
     l = (l / 2);
     return l;
   };
 
-  if(darkerQuantity > 0) {
-    l = getDarkerColor(l);
-    hslDarkers.push({ h, s, l, a });
-    darkerQuantity--;
-  }
-
-  if(darkerQuantity > hslColorList.length) {
-    darkerQuantity = hslColorList.length;
+  if(darkerQuantity > baseHarmoniesAndInversesColorList.length) {
+    darkerQuantity = baseHarmoniesAndInversesColorList.length;
   }
 
   while(darkerQuantity > 0) {
-    hslColorList.forEach(hslColor => {
+    baseHarmoniesAndInversesColorList.forEach(hslColor => {
       h = hslColor.h;
       l = getDarkerColor(hslColor.l);
       hslDarkers.push({ h, s, l, a });
       darkerQuantity--;
     });
   }
-  console.log('Darker colors:');
-  console.log(hslDarkers);
   return hslDarkers;
 };
