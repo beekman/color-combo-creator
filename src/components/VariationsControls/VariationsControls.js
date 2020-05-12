@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../VariationsControls/VariationsControls.css';
-import { getHarmonies, getInverses } from '../../utils/colorUtils';
+import { getHarmonies, getInverses, getLighters, getDarkers } from '../../utils/colorUtils';
 
 const VariationsControls = (color) => {
   const [harmonyQuantity, setHarmonyQuantity] = useState('2');
@@ -12,6 +12,8 @@ const VariationsControls = (color) => {
   useEffect(() => {
     const hslHarmonies = getHarmonies(color.hsl, harmonyQuantity);
     const hslInverses = getInverses(color.hsl, hslHarmonies, inverseQuantity);
+    const hslLighters = getLighters(color.hsl, hslHarmonies, hslInverses, lighterQuantity);
+    const hslDarkers = getLighters(color.hsl, hslHarmonies, hslInverses, darkerQuantity);
   });
 
   return (
