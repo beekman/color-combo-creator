@@ -33,20 +33,26 @@ export const getInverses = (hsl, hslHarmonies, inverseQuantity) => {
 
   const hslInverses = [];
 
+  if((inverseQuantity) > (hslHarmonies.length + 1)) {
+    inverseQuantity = (hslHarmonies.length + 1);
+  }
+
   if(inverseQuantity > 0) {
     h = getOppositeDegree(h);
     hslInverses.push({ h, s, l, a });
     inverseQuantity--;
   }
 
+
+
   while(inverseQuantity > 0) {
     hslHarmonies.forEach(hslHarmony => {
       h = getOppositeDegree(hslHarmony.h);
       hslInverses.push({ h, s, l, a });
+      inverseQuantity--;
     });
   }
+  console.log('Inverse colors:');
   console.log(hslInverses);
   return hslInverses;
 };
-
-export default getHarmonies;
