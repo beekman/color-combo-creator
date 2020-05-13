@@ -9,6 +9,8 @@ const VariationsControls = (color) => {
   const [lighterQuantity, setLighterQuantity] = useState('1');
   const [darkerQuantity, setDarkerQuantity] = useState('1');
 
+
+
   useEffect(() => {
     const hslHarmonies = getHarmonies(color.hsl, harmonyQuantity);
     console.log('Harmonic colors:');
@@ -26,10 +28,24 @@ const VariationsControls = (color) => {
     console.log('Lighter colors:');
     console.log(hslLighters);
 
+
+
     const hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
     console.log('Darker colors:');
     console.log(hslDarkers);
   });
+
+  const makeColorSwatches = (colorSet) => {
+    if(colorSet.length) {
+      return colorSet.map(color, i => {
+        return (
+          <div key={i} style={{ background: `linear-gradient(#cccccc, ${color})` }} className={styles.Swatch}>
+            Color
+          </div >
+        );
+      });
+    }
+  };
 
 
   return (
