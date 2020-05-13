@@ -102,28 +102,22 @@ export const getLighters = (baseHarmoniesAndInversesColorList, lighterQuantity) 
 export const getDarkers = (baseHarmoniesAndInversesColorList, darkerQuantity) => {
   const hslDarkers = [];
 
-  const getDarkerColor = (l, step = 1, steps = 1, multiplier = 0.5) => {
-    l = ((Number(l)) * multiplier);
-    return l;
-  };
-
-  let count = 1;
-  let steplength = (baseHarmoniesAndInversesColorList.length);
-  let steps = darkerQuantity;
-  let step = 0;
-  baseHarmoniesAndInversesColorList.map(hslColor => {
-    step = Math.floor((count / steplength) + 1);
-    console.log(step);
-    const h = hslColor.h;
-    const s = hslColor.s;
-    const distanceToBlack = (hslColor.l);
-    const stepDistance = (distanceToBlack / (1 + steps));
-    const l = hslColor.l - (stepDistance * step);
-    const a = hslColor.a;
-    hslDarkers.push({ h, s, l, a });
-    count++;
-    darkerQuantity--;
-  });
+  let stepLength = (baseHarmoniesAndInversesColorList.length);
+  console.log('stepLength: ' + stepLength);
+  for(let step = 1; (step < stepLength); step++) {
+    baseHarmoniesAndInversesColorList.map(hslColor => {
+      const h = hslColor.h;
+      const s = hslColor.s;
+      const distanceToBlack = (hslColor.l);
+      console.log('distanceToBlack: ' + distanceToBlack);
+      console.log('darkerQuantity: ' + darkerQuantity);
+      const stepDistance = (hslColor.l / (Number(darkerQuantity) + 1));
+      console.log('stepDistance:' + stepDistance);
+      const l = hslColor.l - (stepDistance * step);
+      const a = hslColor.a;
+      hslDarkers.push({ h, s, l, a });
+    });
+  }
   console.log(hslDarkers);
   return hslDarkers;
 };
