@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import styles from '../VariationsControls/VariationsControls.css';
+import styles from './VariationsControls.css';
 import { getHarmonies, getInverses, getBaseHarmoniesAndInversesColorList, getLighters, getDarkers } from '../../utils/colorUtils';
 
 const VariationsControls = (color) => {
@@ -33,13 +33,16 @@ const VariationsControls = (color) => {
     const hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
     console.log('Darker colors:');
     console.log(hslDarkers);
+    makeColorSwatches(hslDarkers);
   });
 
   const makeColorSwatches = (colorSet) => {
+
     if(colorSet.length) {
-      return colorSet.map(color, i => {
+      return colorSet.map(color => {
+        console.log(color);
         return (
-          <div key={i} style={{ background: `linear-gradient(#cccccc, ${color})` }} className={styles.Swatch}>
+          <div key={color.h} style={{ background: `linear-gradient(#cccccc, ${color})` }} className={styles.Swatch}>
             Color
           </div >
         );

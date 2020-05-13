@@ -7,3 +7,14 @@
     margin: 0 0.35rem 0 0;
   }
 }
+
+.ColorMatches {
+  background:black;
+  height: 200px;
+  width: 100%;
+  .Swatch{
+    height: 100px;
+    width: 100px;
+    background: white;
+  }
+}
