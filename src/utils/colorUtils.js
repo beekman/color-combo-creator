@@ -44,7 +44,7 @@ export const getInverses = (hsl, hslHarmonies, inverseQuantity) => {
   }
 
   while(inverseQuantity > 0) {
-    hslHarmonies.forEach(hslHarmony => {
+    hslHarmonies.map(hslHarmony => {
       h = getOppositeDegree(hslHarmony.h);
       hslInverses.push({ h, s, l, a });
       inverseQuantity--;
@@ -62,12 +62,12 @@ export const getBaseHarmoniesAndInversesColorList = (hsl, hslHarmonies, hslInver
 
   baseHarmoniesAndInversesColorList.push({ h, s, l, a });
 
-  hslHarmonies.forEach(hslHarmony => {
+  hslHarmonies.map(hslHarmony => {
     h = hslHarmony.h;
     l = hslHarmony.l;
     baseHarmoniesAndInversesColorList.push({ h, s, l, a });
   });
-  hslInverses.forEach(hslInverse => {
+  hslInverses.map(hslInverse => {
     h = hslInverse.h;
     l = hslInverse.l;
     baseHarmoniesAndInversesColorList.push({ h, s, l, a });
@@ -102,25 +102,28 @@ export const getLighters = (baseHarmoniesAndInversesColorList, lighterQuantity) 
 export const getDarkers = (baseHarmoniesAndInversesColorList, darkerQuantity) => {
   const hslDarkers = [];
 
-  const getDarkerColor = (l, step=1, multiplier = 0.5) => {
+  const getDarkerColor = (l, step = 1, steps = 1, multiplier = 0.5) => {
     l = ((Number(l)) * multiplier);
     return l;
   };
 
-  if(darkerQuantity > baseHarmoniesAndInversesColorList.length) {
-    darkerQuantity = baseHarmoniesAndInversesColorList.length;
-  }
-
-  let count = 0;
+  let count = 1;
+  let steplength = (baseHarmoniesAndInversesColorList.length);
+  let steps = darkerQuantity;
+  let step = 0;
   baseHarmoniesAndInversesColorList.map(hslColor => {
+    step = Math.floor((count / steplength) + 1);
+    console.log(step);
     const h = hslColor.h;
     const s = hslColor.s;
-    count++;
-    console.log(baseHarmoniesAndInversesColorList.length);
-    const l = getDarkerColor(hslColor.l, 0.5);
+    const distanceToBlack = (hslColor.l);
+    const stepDistance = (distanceToBlack / (1 + steps));
+    const l = hslColor.l - (stepDistance * step);
     const a = hslColor.a;
     hslDarkers.push({ h, s, l, a });
+    count++;
     darkerQuantity--;
   });
+  console.log(hslDarkers);
   return hslDarkers;
 };
