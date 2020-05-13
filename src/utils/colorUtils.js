@@ -78,27 +78,19 @@ export const getBaseHarmoniesAndInversesColorList = (hsl, hslHarmonies, hslInver
 export const getLighters = (baseHarmoniesAndInversesColorList, lighterQuantity) => {
 
   const hslLighters = [];
-
-  const getLighterColor = (l = 0.5, multiplier = 0.5) => {
-    l = (Number(l) + 1.00) * multiplier;
-    return l;
-  };
-
-  if(lighterQuantity > (baseHarmoniesAndInversesColorList.length)) {
-    lighterQuantity = (baseHarmoniesAndInversesColorList.length);
+  let stepLength = Number(lighterQuantity);
+  for(let step = 1; (step <= stepLength); step++) {
+    baseHarmoniesAndInversesColorList.map(hslColor => {
+      const h = hslColor.h;
+      const s = hslColor.s;
+      const stepDistance = ((1 - hslColor.l) / (Number(lighterQuantity) + 1));
+      let l = (hslColor.l + (stepDistance * step));
+      const a = hslColor.a;
+      hslLighters.push({ h, s, l, a });
+    });
   }
-
-  baseHarmoniesAndInversesColorList.map(hslColor => {
-    const h = hslColor.h;
-    const s = hslColor.s;
-    const l = getLighterColor(hslColor.l);
-    const a = hslColor.a;
-    hslLighters.push({ h, s, l, a });
-    lighterQuantity--;
-  });
   return hslLighters;
 };
-
 export const getDarkers = (baseHarmoniesAndInversesColorList, darkerQuantity) => {
   const hslDarkers = [];
   let stepLength = Number(darkerQuantity);

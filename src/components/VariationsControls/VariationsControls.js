@@ -15,18 +15,22 @@ const VariationsControls = (color) => {
     const hslHarmonies = getHarmonies(color.hsl, harmonyQuantity);
     console.log('Harmonic colors:');
     console.log(hslHarmonies);
+    makeColorSwatches(hslHarmonies);
 
     const hslInverses = getInverses(color.hsl, hslHarmonies, inverseQuantity);
     console.log('Inverse colors:');
     console.log(hslInverses);
+    makeColorSwatches(hslInverses);
 
     let baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.hsl, hslHarmonies, hslInverses);
     console.log('Base, Harmonies, and Inverses Color List:');
     console.log(baseHarmoniesAndInversesColorList);
 
+
     const hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
     console.log('Lighter colors:');
     console.log(hslLighters);
+    makeColorSwatches(hslLighters);
 
 
 
@@ -37,12 +41,11 @@ const VariationsControls = (color) => {
   });
 
   const makeColorSwatches = (colorSet) => {
-
     if(colorSet.length) {
       return colorSet.map(color => {
         console.log(color);
         return (
-          <div key={color.h} style={{ background: `linear-gradient(#cccccc, ${color})` }} className={styles.Swatch}>
+          <div key={color.h} style={{ background: `hsl(316, 93%, 76%)` }} className={styles.Swatch}>
             Color
           </div >
         );
