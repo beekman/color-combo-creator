@@ -1,5 +1,8 @@
-const { getHarmonies,
-  getInverses } = require('../utils/colorUtils');
+const {
+  getHarmonies,
+  getInverses,
+  getLighters,
+  getDarkers } = require('../utils/colorUtils');
 
 describe('tests for getHarmonies function', () => {
   it('should return an empty array for complements of 0', () => {
@@ -84,5 +87,18 @@ describe('tests for getInverses function', () => {
     const hslHarmonies = [];
     const inverseQuantity = 1;
     expect(getInverses(hsl, hslHarmonies, inverseQuantity)).toEqual([{ h: 0, s: 1, l: 0.5, a: 1 }]);
+  });
+});
+
+describe('tests for getDarkers function', () => {
+  it('should return an empty array for getDarkers with darkerQuantity: 0', () => {
+    const baseHarmoniesAndInversesColorList = [];
+    const darkerQuantity = 0;
+    expect(getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity)).toEqual([]);
+  });
+  it('should return a single color for getDarkers with darkerQuantity: 1 and a list of length 1', () => {
+    const baseHarmoniesAndInversesColorList = [{ h: 0, s: 1, l: 0.5, a: 1 }];
+    const darkerQuantity = 1;
+    expect(getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity)).toEqual([{"a":1,"h":0,"l":0.25,"s":1,}]);
   });
 });

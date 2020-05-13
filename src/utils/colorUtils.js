@@ -79,7 +79,7 @@ export const getLighters = (baseHarmoniesAndInversesColorList, lighterQuantity) 
 
   const hslLighters = [];
 
-  const getLighterColor = (l, multiplier = 0.5) => {
+  const getLighterColor = (l = 0.5, multiplier = 0.5) => {
     l = (Number(l) + 1.00) * multiplier;
     return l;
   };
@@ -102,8 +102,8 @@ export const getLighters = (baseHarmoniesAndInversesColorList, lighterQuantity) 
 export const getDarkers = (baseHarmoniesAndInversesColorList, darkerQuantity) => {
   const hslDarkers = [];
 
-  const getDarkerColor = (l, divisor = 2) => {
-    l = (l / divisor);
+  const getDarkerColor = (l, step=1, multiplier = 0.5) => {
+    l = ((Number(l)) * multiplier);
     return l;
   };
 
@@ -111,10 +111,13 @@ export const getDarkers = (baseHarmoniesAndInversesColorList, darkerQuantity) =>
     darkerQuantity = baseHarmoniesAndInversesColorList.length;
   }
 
+  let count = 0;
   baseHarmoniesAndInversesColorList.map(hslColor => {
     const h = hslColor.h;
     const s = hslColor.s;
-    const l = getDarkerColor(hslColor.l);
+    count++;
+    console.log(baseHarmoniesAndInversesColorList.length);
+    const l = getDarkerColor(hslColor.l, 0.5);
     const a = hslColor.a;
     hslDarkers.push({ h, s, l, a });
     darkerQuantity--;
