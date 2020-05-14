@@ -4,7 +4,7 @@ import styles from './Header.css';
 const Header = () => {
   return (
     <header className={styles.Header}>
-      <h1>Palette Picker</h1>
+      <h1>Palette Populator</h1>
     </header>
   );
 };

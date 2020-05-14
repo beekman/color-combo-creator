@@ -1,9 +1,9 @@
 import React from 'react';
-import PalettePicker from '../containers/PalettePicker';
+import PaletteGenerator from '../containers/PaletteGenerator';
 export default function App() {
   return (
     <>
-      <PalettePicker />
+      <PaletteGenerator />
     </>
   );
 }

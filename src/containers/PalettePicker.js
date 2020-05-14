@@ -39,6 +39,12 @@ class PalettePicker extends React.Component {
 
     const styles = reactCSS({
       'default': {
+        main: {
+          display: 'flex',
+        },
+        inline: {
+          display: i
+        }
         label: {
           position: 'absolute',
           fontSize: '0.666rem',
@@ -76,7 +82,7 @@ class PalettePicker extends React.Component {
     return (
       <>
         <Header />
-        <div>
+        <div style={styles.inline}>
           <div style={styles.swatch} onClick={this.handleClick}>
             <label htmlFor='baseColor' style={styles.label}>Base</label>
             <div id='baseColor' style={styles.color} />
@@ -85,8 +91,8 @@ class PalettePicker extends React.Component {
             <div style={styles.cover} onClick={this.handleClose} />
             <PhotoshopPicker color={this.state.color} onChange={this.handleChange} />
           </div> : null}
-
         </div>
+        <PhotoshopPicker color={this.state.color} onChange={this.handleChange} />
         <VariationsControls color={this.state.color} hsl={this.state.hsl} onChange={this.handleChange} />
         <Footer />
       </>

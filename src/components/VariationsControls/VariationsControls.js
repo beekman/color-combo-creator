@@ -60,13 +60,13 @@ const VariationsControls = (color) => {
 
   return (
     <>
-
-      <div className={styles.VariationsControls}>
+      <span className={styles.VariationsControls}>
         <label htmlFor="harmonyQuantity">Harmonies</label><input type="number" id="harmonyQuantity" value={harmonyQuantity} onChange={({ target }) => setHarmonyQuantity(target.value)} />
         <label htmlFor="inverseQuantity">Inverses</label><input type="number" id="inverseQuantity" value={inverseQuantity} onChange={({ target }) => setInverseQuantity(target.value)} />
         <label htmlFor="lighterQuantity">Lighter</label><input type="number" id="lighterQuantity" value={lighterQuantity} onChange={({ target }) => setLighterQuantity(target.value)} />
         <label htmlFor="darkerQuantity">Darker</label><input type="number" id="darkerQuantity" value={darkerQuantity} onChange={({ target }) => setDarkerQuantity(target.value)} />
-      </div >
+      </span>
+
       <section className={styles.ColorMatches}>
         {harmonySwatches}
         {inverseSwatches}
