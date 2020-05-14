@@ -9,12 +9,19 @@
 }
 
 .ColorMatches {
-  background:black;
-  height: 200px;
+  background:hsl(240, 50%, 50%);
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
   width: 100%;
   .Swatch{
-    height: 100px;
-    width: 100px;
-    background: white;
+    display: block;
+    height: 50px;
+    width: 50px;
+    font-size: 0.6rem;
+    p{
+      display:none;
+      visibility: hidden;
+    }
   }
 }

@@ -13,58 +13,69 @@ const VariationsControls = (color) => {
 
   useEffect(() => {
     const hslHarmonies = getHarmonies(color.hsl, harmonyQuantity);
-    console.log('Harmonic colors:');
-    console.log(hslHarmonies);
     makeColorSwatches(hslHarmonies);
 
     const hslInverses = getInverses(color.hsl, hslHarmonies, inverseQuantity);
-    console.log('Inverse colors:');
-    console.log(hslInverses);
     makeColorSwatches(hslInverses);
 
-    let baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.hsl, hslHarmonies, hslInverses);
-    console.log('Base, Harmonies, and Inverses Color List:');
-    console.log(baseHarmoniesAndInversesColorList);
+    baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.hsl, hslHarmonies, hslInverses);
 
 
-    const hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
+    hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
     console.log('Lighter colors:');
     console.log(hslLighters);
-    makeColorSwatches(hslLighters);
 
 
-
-    const hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
-    console.log('Darker colors:');
-    console.log(hslDarkers);
+    baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.hsl, hslHarmonies, hslInverses);
+    hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
     makeColorSwatches(hslDarkers);
   });
+
+  let hslHarmonies = getHarmonies(color.hsl, harmonyQuantity);
+  let hslInverses = getInverses(color.hsl, hslHarmonies, inverseQuantity);
+  let baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.hsl, hslHarmonies, hslInverses);
+  let hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
+  let hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
 
   const makeColorSwatches = (colorSet) => {
     if(colorSet.length) {
       return colorSet.map(color => {
         console.log(color);
         return (
-          <div key={color.h} style={{ background: `hsl(316, 93%, 76%)` }} className={styles.Swatch}>
-            Color
+          <div key={color.h} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }} className={styles.Swatch}>
+            <div className={styles.details}>
+              <p>
+                h:{color.h}<br />
+                s:{color.s}<br />
+                l:{color.l}
+              </p>
+            </div>
+
           </div >
         );
       });
     }
   };
-
+  const harmonySwatches = makeColorSwatches(hslHarmonies);
+  const inverseSwatches = makeColorSwatches(hslInverses);
+  const lighterSwatches = makeColorSwatches(hslLighters);
+  const darkerSwatches = makeColorSwatches(hslDarkers);
 
   return (
     <>
-      <section className={styles.ColorMatches}>
 
-      </section>
       <div className={styles.VariationsControls}>
         <label htmlFor="harmonyQuantity">Harmonies</label><input type="number" id="harmonyQuantity" value={harmonyQuantity} onChange={({ target }) => setHarmonyQuantity(target.value)} />
         <label htmlFor="inverseQuantity">Inverses</label><input type="number" id="inverseQuantity" value={inverseQuantity} onChange={({ target }) => setInverseQuantity(target.value)} />
         <label htmlFor="lighterQuantity">Lighter</label><input type="number" id="lighterQuantity" value={lighterQuantity} onChange={({ target }) => setLighterQuantity(target.value)} />
         <label htmlFor="darkerQuantity">Darker</label><input type="number" id="darkerQuantity" value={darkerQuantity} onChange={({ target }) => setDarkerQuantity(target.value)} />
       </div >
+      <section className={styles.ColorMatches}>
+        {harmonySwatches}
+        {inverseSwatches}
+        {lighterSwatches}
+        {darkerSwatches}
+      </section>
     </>
   );
 };
