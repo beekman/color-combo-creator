@@ -39,9 +39,15 @@ class PalettePicker extends React.Component {
 
     const styles = reactCSS({
       'default': {
+        label: {
+          position: 'absolute',
+          fontSize: '0.666rem',
+          paddingTop: '.25rem',
+          paddingLeft: '.25rem',
+        },
         color: {
-          width: '36px',
-          height: '14px',
+          width: '14rem',
+          height: '2rem',
           borderRadius: '2px',
           background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`,
         },
@@ -72,7 +78,8 @@ class PalettePicker extends React.Component {
         <Header />
         <div>
           <div style={styles.swatch} onClick={this.handleClick}>
-            <div style={styles.color} />
+            <label htmlFor='baseColor' style={styles.label}>Base</label>
+            <div id='baseColor' style={styles.color} />
           </div>
           {this.state.displayColorPicker ? <div style={styles.popover}>
             <div style={styles.cover} onClick={this.handleClose} />

@@ -22,9 +22,6 @@ const VariationsControls = (color) => {
 
 
     hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
-    console.log('Lighter colors:');
-    console.log(hslLighters);
-
 
     baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.hsl, hslHarmonies, hslInverses);
     hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
@@ -39,10 +36,10 @@ const VariationsControls = (color) => {
 
   const makeColorSwatches = (colorSet) => {
     if(colorSet.length) {
-      return colorSet.map(color => {
+      return colorSet.map((color, i) => {
         console.log(color);
         return (
-          <div key={color.h} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }} className={styles.Swatch}>
+          <div key={i} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }} className={styles.Swatch}>
             <div className={styles.details}>
               <p>
                 h:{color.h}<br />
