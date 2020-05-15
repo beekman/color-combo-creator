@@ -3,7 +3,7 @@ import reactCSS from 'reactcss';
 import Header from '../components//Header/Header';
 import VariationsControls from '../components/VariationsControls/VariationsControls';
 import Footer from '../components/Footer/Footer';
-import { PhotoshopPicker } from 'react-color';
+import { PhotoshopPicker, HuePicker } from 'react-color';
 
 class PalettePicker extends React.Component {
   state = {
@@ -43,8 +43,8 @@ class PalettePicker extends React.Component {
           display: 'flex',
         },
         inline: {
-          display: i
-        }
+          display: 'inline',
+        },
         label: {
           position: 'absolute',
           fontSize: '0.666rem',
@@ -92,7 +92,8 @@ class PalettePicker extends React.Component {
             <PhotoshopPicker color={this.state.color} onChange={this.handleChange} />
           </div> : null}
         </div>
-        <PhotoshopPicker color={this.state.color} onChange={this.handleChange} />
+
+        <HuePicker color={this.state.color} onChange={this.handleChange} />
         <VariationsControls color={this.state.color} hsl={this.state.hsl} onChange={this.handleChange} />
         <Footer />
       </>

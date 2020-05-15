@@ -4,12 +4,10 @@ import styles from './VariationsControls.css';
 import { getHarmonies, getInverses, getBaseHarmoniesAndInversesColorList, getLighters, getDarkers } from '../../utils/colorUtils';
 
 const VariationsControls = (color) => {
-  const [harmonyQuantity, setHarmonyQuantity] = useState('2');
+  const [harmonyQuantity, setHarmonyQuantity] = useState('0');
   const [inverseQuantity, setInverseQuantity] = useState('0');
-  const [lighterQuantity, setLighterQuantity] = useState('1');
-  const [darkerQuantity, setDarkerQuantity] = useState('1');
-
-
+  const [lighterQuantity, setLighterQuantity] = useState('0');
+  const [darkerQuantity, setDarkerQuantity] = useState('0');
 
   useEffect(() => {
     const hslHarmonies = getHarmonies(color.hsl, harmonyQuantity);
@@ -19,11 +17,8 @@ const VariationsControls = (color) => {
     makeColorSwatches(hslInverses);
 
     baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.hsl, hslHarmonies, hslInverses);
-
-
     hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
-
-    baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.hsl, hslHarmonies, hslInverses);
+    makeColorSwatches(hslLighters);
     hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
     makeColorSwatches(hslDarkers);
   });
