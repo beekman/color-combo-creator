@@ -5,7 +5,7 @@ A React color palette generator with a unique interface designed for efficient b
 <img width="700" alt="Screen Shot 2020-05-15 at 4 36 22 AM" src="https://user-images.githubusercontent.com/563233/82049100-a52b4e80-966a-11ea-9dd2-dd64c6fea709.png">
 
 ## Options:
- - Base Color: Pick a target color using the hue slider, or use the pop-over Photoshop-style picker to adjust the base saturation and lightness, then adjust the numeric variation inputs to set your palette's color scheme.
+ - Base Color: Pick a target color using the hue slider, or click anywhere in the header to open a Photoshop-style picker that allows adjustment of base saturation and lightness, then adjust the four numeric inputs to set your palette's color scheme.
  
  <img width="695" alt="Screen Shot 2020-05-15 at 4 37 36 AM" src="https://user-images.githubusercontent.com/563233/82049091-a2305e00-966a-11ea-98ea-54432668d636.png">
  
