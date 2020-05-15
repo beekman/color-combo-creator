@@ -1,9 +1,9 @@
 import React from 'react';
 import reactCSS from 'reactcss';
-import Header from '../components//Header/Header';
+import Header from '../components/Header/Header';
 import VariationsControls from '../components/VariationsControls/VariationsControls';
 import Footer from '../components/Footer/Footer';
-import { PhotoshopPicker } from 'react-color';
+import { PhotoshopPicker, HuePicker } from 'react-color';
 
 class PalettePicker extends React.Component {
   state = {
@@ -39,24 +39,43 @@ class PalettePicker extends React.Component {
 
     const styles = reactCSS({
       'default': {
+        wrapper: {
+          display: 'block',
+          background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`,
+        },
+        logo: {
+          textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
+          color: '#FFFFFF',
+          padding: '0.5rem 0 0 0.5rem',
+          margin: '0',
+          lineHeight: '1'
+        },
+        flex: {
+          display: 'flex',
+        },
+        hueBox: {
+          width: '100%',
+          height: '17px',
+          paddingTop: '3px',
+        },
         label: {
           position: 'absolute',
           fontSize: '0.666rem',
           paddingTop: '.25rem',
-          paddingLeft: '.25rem',
+          paddingLeft: '.5rem',
+          textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
+          color: '#FFFFFF',
+          cursor: 'pointer',
         },
         color: {
-          width: '14rem',
-          height: '2rem',
+          width: '6rem',
+          height: '1.5rem',
           borderRadius: '2px',
           background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`,
         },
         swatch: {
-          padding: '5px',
+          padding: '0px',
           background: '#fff',
-          borderRadius: '1px',
-          boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
-          display: 'inline-block',
           cursor: 'pointer',
         },
         popover: {
@@ -75,20 +94,28 @@ class PalettePicker extends React.Component {
 
     return (
       <>
-        <Header />
-        <div>
-          <div style={styles.swatch} onClick={this.handleClick}>
-            <label htmlFor='baseColor' style={styles.label}>Base</label>
-            <div id='baseColor' style={styles.color} />
-          </div>
-          {this.state.displayColorPicker ? <div style={styles.popover}>
-            <div style={styles.cover} onClick={this.handleClose} />
-            <PhotoshopPicker color={this.state.color} onChange={this.handleChange} />
-          </div> : null}
 
+        <div style={styles.wrapper}>
+          <header>
+            <h1 style={styles.logo}>Live Palette Populator</h1>
+          </header>
+          <div style={styles.flex}>
+            <div style={styles.swatch} onClick={this.handleClick}>
+              <label htmlFor='baseColor' style={styles.label}>Set Base Color</label>
+              <div id='baseColor' style={styles.color}>
+              </div>
+              {this.state.displayColorPicker ? <div style={styles.popover}>
+                <div style={styles.cover} onClick={this.handleClose} />
+                <PhotoshopPicker color={this.state.color} onChange={this.handleChange} />
+              </div> : null}
+            </div>
+            <div style={styles.hueBox}>
+              <HuePicker color={this.state.color} onChange={this.handleChange} height={'100%'} width={'100%'} /></div>
+          </div>
         </div>
         <VariationsControls color={this.state.color} hsl={this.state.hsl} onChange={this.handleChange} />
-        <Footer />
+
+        <Footer color={this.state.color} />
       </>
     );
   }
