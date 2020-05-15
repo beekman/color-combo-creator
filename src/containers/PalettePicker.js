@@ -1,6 +1,5 @@
 import React from 'react';
 import reactCSS from 'reactcss';
-import Header from '../components/Header/Header';
 import VariationsControls from '../components/VariationsControls/VariationsControls';
 import Footer from '../components/Footer/Footer';
 import { PhotoshopPicker, HuePicker } from 'react-color';
@@ -97,7 +96,7 @@ class PalettePicker extends React.Component {
 
         <div style={styles.wrapper}>
           <header>
-            <h1 style={styles.logo}>Live Palette Populator</h1>
+            <h1 style={styles.logo}>Color Combo Creator</h1>
           </header>
           <div style={styles.flex}>
             <div style={styles.swatch} onClick={this.handleClick}>
