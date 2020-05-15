@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import styles from './VariationsControls.css';
 import { getHarmonies, getInverses, getBaseHarmoniesAndInversesColorList, getLighters, getDarkers } from '../../utils/colorUtils';
 
@@ -48,6 +47,7 @@ const VariationsControls = (color) => {
       });
     }
   };
+  const baseSwatch= makeColorSwatches(color.hsl);
   const harmonySwatches = makeColorSwatches(hslHarmonies);
   const inverseSwatches = makeColorSwatches(hslInverses);
   const lighterSwatches = makeColorSwatches(hslLighters);
@@ -55,12 +55,12 @@ const VariationsControls = (color) => {
 
   return (
     <>
-      <span className={styles.VariationsControls}>
+      <div className={styles.VariationsControls} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }}>
         <label htmlFor="harmonyQuantity">Harmonies</label><input type="number" id="harmonyQuantity" value={harmonyQuantity} onChange={({ target }) => setHarmonyQuantity(target.value)} />
         <label htmlFor="inverseQuantity">Inverses</label><input type="number" id="inverseQuantity" value={inverseQuantity} onChange={({ target }) => setInverseQuantity(target.value)} />
         <label htmlFor="lighterQuantity">Lighter</label><input type="number" id="lighterQuantity" value={lighterQuantity} onChange={({ target }) => setLighterQuantity(target.value)} />
         <label htmlFor="darkerQuantity">Darker</label><input type="number" id="darkerQuantity" value={darkerQuantity} onChange={({ target }) => setDarkerQuantity(target.value)} />
-      </span>
+      </div>
 
       <section className={styles.ColorMatches}>
         {harmonySwatches}

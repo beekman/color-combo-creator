@@ -40,11 +40,20 @@ class PalettePicker extends React.Component {
     const styles = reactCSS({
       'default': {
         wrapper: {
-          display: 'flex',
+          display: 'block',
           background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`,
         },
+        logo: {
+          textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
+          color: '#FFFFFF',
+          padding: '0.5rem 0 0 0.5rem',
+          margin: '0',
+          lineHeight: '1'
+        },
+        flex: {
+          display: 'flex',
+        },
         hueBox: {
-          display: 'inline',
           width: '100%',
           height: '17px',
           paddingTop: '3px',
@@ -53,23 +62,20 @@ class PalettePicker extends React.Component {
           position: 'absolute',
           fontSize: '0.666rem',
           paddingTop: '.25rem',
-          paddingLeft: '.25rem',
+          paddingLeft: '.5rem',
           textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
           color: '#FFFFFF',
-
+          cursor: 'pointer',
         },
         color: {
-          width: '5rem',
-          height: '1rem',
+          width: '6rem',
+          height: '1.5rem',
           borderRadius: '2px',
           background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`,
         },
         swatch: {
           padding: '0px',
           background: '#fff',
-          borderRadius: '1px',
-          boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
-          display: 'inline-block',
           cursor: 'pointer',
         },
         popover: {
@@ -89,24 +95,27 @@ class PalettePicker extends React.Component {
     return (
       <>
 
-        <Header />
         <div style={styles.wrapper}>
-          <div style={styles.inline}>
+          <header>
+            <h1 style={styles.logo}>Live Palette Populator</h1>
+          </header>
+          <div style={styles.flex}>
             <div style={styles.swatch} onClick={this.handleClick}>
-              <label htmlFor='baseColor' style={styles.label}>Base Color</label>
-              <div id='baseColor' style={styles.color} />
+              <label htmlFor='baseColor' style={styles.label}>Set Base Color</label>
+              <div id='baseColor' style={styles.color}>
+              </div>
+              {this.state.displayColorPicker ? <div style={styles.popover}>
+                <div style={styles.cover} onClick={this.handleClose} />
+                <PhotoshopPicker color={this.state.color} onChange={this.handleChange} />
+              </div> : null}
             </div>
-            {this.state.displayColorPicker ? <div style={styles.popover}>
-              <div style={styles.cover} onClick={this.handleClose} />
-              <PhotoshopPicker color={this.state.color} onChange={this.handleChange} />
-            </div> : null}
+            <div style={styles.hueBox}>
+              <HuePicker color={this.state.color} onChange={this.handleChange} height={'100%'} width={'100%'} /></div>
           </div>
-          <div style={styles.hueBox}>
-            <HuePicker color={this.state.color} onChange={this.handleChange} height={'100%'} width={'100%'} /></div>
         </div>
         <VariationsControls color={this.state.color} hsl={this.state.hsl} onChange={this.handleChange} />
 
-        <Footer />
+        <Footer color={this.state.color} />
       </>
     );
   }

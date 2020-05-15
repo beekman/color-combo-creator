@@ -7,6 +7,7 @@ export const getHarmonies = (hsl, harmonyQuantity) => {
   let a = hsl.a;
   let current = hsl.h;
   let hslHarmonies = [];
+  hslHarmonies.push({ h, s, l, a });
   while((current - degreeShift) >= 0) {
     current = current - degreeShift;
     h = current;

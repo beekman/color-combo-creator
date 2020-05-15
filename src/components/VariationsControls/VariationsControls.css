@@ -1,11 +1,11 @@
 .VariationsControls {
-  display: inline;
+  display: flex;
   flex-wrap: wrap;
-  margin: 0 auto;
-
+  margin: 0.25rem auto;
+  
   input{
     width: 2rem;
-    margin: 0 0.35rem 0 0;
+    margin: 0 0.6rem 0 0.2rem;
   }
 }
 
