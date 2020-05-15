@@ -1,4 +1,4 @@
-# Color Combo Creator
+# Live Palette Populator
 
 A React color palette generator with a unique interface designed for efficient but highly customizable color palette creation with instant feedback.
 
