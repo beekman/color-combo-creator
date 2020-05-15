@@ -1,6 +1,9 @@
-# Color Combo Calculator
+# Color Combo Creator
 
-A React app to aid in efficient but highly customizable color palette generation with a live palette that provides feedback on every change.
+A React color palette generator with a unique interface designed for efficient but highly customizable color palette creation with instant feedback.
+
+<img width="695" alt="Screen Shot 2020-05-15 at 4 37 36 AM" src="https://user-images.githubusercontent.com/563233/82049091-a2305e00-966a-11ea-98ea-54432668d636.png">
+<img width="700" alt="Screen Shot 2020-05-15 at 4 36 22 AM" src="https://user-images.githubusercontent.com/563233/82049100-a52b4e80-966a-11ea-9dd2-dd64c6fea709.png">
 
 ## Options:
  - Base Color: Pick a target color using the hue slider, or use the pop-over Photoshop-style picker to adjust the base saturation and lightness, then adjust the numeric variation inputs to set your palette's color scheme.
