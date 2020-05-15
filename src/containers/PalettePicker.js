@@ -1,6 +1,6 @@
 import React from 'react';
 import reactCSS from 'reactcss';
-import Header from '../components//Header/Header';
+import Header from '../components/Header/Header';
 import VariationsControls from '../components/VariationsControls/VariationsControls';
 import Footer from '../components/Footer/Footer';
 import { PhotoshopPicker, HuePicker } from 'react-color';
@@ -39,26 +39,33 @@ class PalettePicker extends React.Component {
 
     const styles = reactCSS({
       'default': {
-        main: {
+        wrapper: {
           display: 'flex',
+          background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`,
         },
-        inline: {
+        hueBox: {
           display: 'inline',
+          width: '100%',
+          height: '17px',
+          paddingTop: '3px',
         },
         label: {
           position: 'absolute',
           fontSize: '0.666rem',
           paddingTop: '.25rem',
           paddingLeft: '.25rem',
+          textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
+          color: '#FFFFFF',
+
         },
         color: {
-          width: '14rem',
-          height: '2rem',
+          width: '5rem',
+          height: '1rem',
           borderRadius: '2px',
           background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`,
         },
         swatch: {
-          padding: '5px',
+          padding: '0px',
           background: '#fff',
           borderRadius: '1px',
           boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
@@ -81,20 +88,24 @@ class PalettePicker extends React.Component {
 
     return (
       <>
-        <Header />
-        <div style={styles.inline}>
-          <div style={styles.swatch} onClick={this.handleClick}>
-            <label htmlFor='baseColor' style={styles.label}>Base</label>
-            <div id='baseColor' style={styles.color} />
-          </div>
-          {this.state.displayColorPicker ? <div style={styles.popover}>
-            <div style={styles.cover} onClick={this.handleClose} />
-            <PhotoshopPicker color={this.state.color} onChange={this.handleChange} />
-          </div> : null}
-        </div>
 
-        <HuePicker color={this.state.color} onChange={this.handleChange} />
+        <Header />
+        <div style={styles.wrapper}>
+          <div style={styles.inline}>
+            <div style={styles.swatch} onClick={this.handleClick}>
+              <label htmlFor='baseColor' style={styles.label}>Base Color</label>
+              <div id='baseColor' style={styles.color} />
+            </div>
+            {this.state.displayColorPicker ? <div style={styles.popover}>
+              <div style={styles.cover} onClick={this.handleClose} />
+              <PhotoshopPicker color={this.state.color} onChange={this.handleChange} />
+            </div> : null}
+          </div>
+          <div style={styles.hueBox}>
+            <HuePicker color={this.state.color} onChange={this.handleChange} height={'100%'} width={'100%'} /></div>
+        </div>
         <VariationsControls color={this.state.color} hsl={this.state.hsl} onChange={this.handleChange} />
+
         <Footer />
       </>
     );
