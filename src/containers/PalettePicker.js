@@ -3,6 +3,7 @@ import reactCSS from 'reactcss';
 import VariationsControls from '../components/VariationsControls/VariationsControls';
 import Footer from '../components/Footer/Footer';
 import { PhotoshopPicker, HuePicker } from 'react-color';
+import { IoMdColorPalette } from 'react-icons/io';
 
 class PalettePicker extends React.Component {
   state = {
@@ -41,6 +42,9 @@ class PalettePicker extends React.Component {
         wrapper: {
           display: 'block',
           background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`,
+        },
+        header: {
+          cursor: 'pointer',
         },
         logo: {
           textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
@@ -95,8 +99,9 @@ class PalettePicker extends React.Component {
       <>
 
         <div style={styles.wrapper}>
-          <header>
-            <h1 style={styles.logo}>Color Combo Creator</h1>
+          <header onClick={this.handleClick} style={styles.header}>
+
+            <h1 style={styles.logo}> <IoMdColorPalette />Live Palette Populator</h1>
           </header>
           <div style={styles.flex}>
             <div style={styles.swatch} onClick={this.handleClick}>

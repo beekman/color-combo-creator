@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styles from './VariationsControls.css';
 import { getHarmonies, getInverses, getBaseHarmoniesAndInversesColorList, getLighters, getDarkers } from '../../utils/colorUtils';
+import { MdInvertColors, MdBrightnessLow } from 'react-icons/md';
+import { IoIosColorFilter } from 'react-icons/io';
+import { TiAdjustBrightness } from 'react-icons/ti';
 
 const VariationsControls = (color) => {
   const [harmonyQuantity, setHarmonyQuantity] = useState('0');
@@ -47,7 +50,7 @@ const VariationsControls = (color) => {
       });
     }
   };
-  const baseSwatch= makeColorSwatches(color.hsl);
+  const baseSwatch = makeColorSwatches(color.hsl);
   const harmonySwatches = makeColorSwatches(hslHarmonies);
   const inverseSwatches = makeColorSwatches(hslInverses);
   const lighterSwatches = makeColorSwatches(hslLighters);
@@ -56,10 +59,10 @@ const VariationsControls = (color) => {
   return (
     <>
       <div className={styles.VariationsControls} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }}>
-        <label htmlFor="harmonyQuantity">Harmonies</label><input type="number" id="harmonyQuantity" value={harmonyQuantity} onChange={({ target }) => setHarmonyQuantity(target.value)} />
-        <label htmlFor="inverseQuantity">Inverses</label><input type="number" id="inverseQuantity" value={inverseQuantity} onChange={({ target }) => setInverseQuantity(target.value)} />
-        <label htmlFor="lighterQuantity">Lighter</label><input type="number" id="lighterQuantity" value={lighterQuantity} onChange={({ target }) => setLighterQuantity(target.value)} />
-        <label htmlFor="darkerQuantity">Darker</label><input type="number" id="darkerQuantity" value={darkerQuantity} onChange={({ target }) => setDarkerQuantity(target.value)} />
+        <label htmlFor="harmonyQuantity" title="Complementary colors to generate, evenly spaced around the color wheel. Best results are found between 2 (for a triadic color scheme) and 5"><IoIosColorFilter />Harmonies</label><input type="number" id="harmonyQuantity" value={harmonyQuantity} onChange={({ target }) => setHarmonyQuantity(target.value)} />
+        <label htmlFor="inverseQuantity" title="Colors opposite from the base & harmonic colors on the color wheel"><MdInvertColors />Inverses</label><input type="number" id="inverseQuantity" value={inverseQuantity} onChange={({ target }) => setInverseQuantity(target.value)} />
+        <label htmlFor="lighterQuantity" title="Lighter color sets to generate from the base, harmonies, and inverses"><MdBrightnessLow />Lighter x</label><input type="number" id="lighterQuantity" value={lighterQuantity} onChange={({ target }) => setLighterQuantity(target.value)} />
+        <label htmlFor="darkerQuantity"><TiAdjustBrightness />Darker x</label><input type="number" id="darkerQuantity" value={darkerQuantity} onChange={({ target }) => setDarkerQuantity(target.value)} />
       </div>
 
       <section className={styles.ColorMatches}>
