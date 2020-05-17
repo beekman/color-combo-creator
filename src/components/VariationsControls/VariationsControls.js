@@ -3,6 +3,7 @@ import styles from './VariationsControls.css';
 import { getHarmonies, getInverses, getBaseHarmoniesAndInversesColorList, getLighters, getDarkers } from '../../utils/colorUtils';
 import { MdInvertColors, MdBrightnessLow } from 'react-icons/md';
 import { IoIosColorFilter } from 'react-icons/io';
+import { GiPaintRoller } from 'react-icons/gi';
 import { TiAdjustBrightness } from 'react-icons/ti';
 
 const VariationsControls = (color) => {
@@ -10,6 +11,7 @@ const VariationsControls = (color) => {
   const [inverseQuantity, setInverseQuantity] = useState('0');
   const [lighterQuantity, setLighterQuantity] = useState('0');
   const [darkerQuantity, setDarkerQuantity] = useState('0');
+  const [desaturatedQuantity, setDesaturatedQuantity] = useState('0');
 
   useEffect(() => {
     const hslHarmonies = getHarmonies(color.hsl, harmonyQuantity);
@@ -34,7 +36,6 @@ const VariationsControls = (color) => {
   const makeColorSwatches = (colorSet) => {
     if(colorSet.length) {
       return colorSet.map((color, i) => {
-        console.log(color);
         return (
           <div key={i} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }} className={styles.Swatch}>
             <div className={styles.details}>
@@ -44,13 +45,12 @@ const VariationsControls = (color) => {
                 l:{color.l}
               </p>
             </div>
-
           </div >
         );
       });
     }
   };
-  const baseSwatch = makeColorSwatches(color.hsl);
+
   const harmonySwatches = makeColorSwatches(hslHarmonies);
   const inverseSwatches = makeColorSwatches(hslInverses);
   const lighterSwatches = makeColorSwatches(hslLighters);
@@ -63,6 +63,7 @@ const VariationsControls = (color) => {
         <label htmlFor="inverseQuantity" title="Colors opposite from the base & harmonic colors on the color wheel"><MdInvertColors />Inverses</label><input type="number" id="inverseQuantity" value={inverseQuantity} onChange={({ target }) => setInverseQuantity(target.value)} />
         <label htmlFor="lighterQuantity" title="Lighter color sets to generate from the base, harmonies, and inverses"><MdBrightnessLow />Lighter x</label><input type="number" id="lighterQuantity" value={lighterQuantity} onChange={({ target }) => setLighterQuantity(target.value)} />
         <label htmlFor="darkerQuantity"><TiAdjustBrightness />Darker x</label><input type="number" id="darkerQuantity" value={darkerQuantity} onChange={({ target }) => setDarkerQuantity(target.value)} />
+        <label htmlFor="desaturatedQuantity"><GiPaintRoller />Desaturated x</label><input type="number" id="desaturatedQuantity" value={desaturatedQuantity} onChange={({ target }) => setDesaturatedQuantity(target.value)} />
       </div>
 
       <section className={styles.ColorMatches}>

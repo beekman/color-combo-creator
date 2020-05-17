@@ -107,3 +107,19 @@ export const getDarkers = (baseHarmoniesAndInversesColorList, darkerQuantity) =>
   }
   return hslDarkers;
 };
+
+export const getDesaturateds = (baseHarmoniesAndInversesColorList, desaturatedQuantity) => {
+  const hslDarkers = [];
+  let stepLength = Number(darkerQuantity);
+  for(let step = 1; (step <= stepLength); step++) {
+    baseHarmoniesAndInversesColorList.map(hslColor => {
+      const h = hslColor.h;
+      const s = hslColor.s;
+      const stepDistance = (hslColor.l / (Number(desaturatedQuantity) + 1));
+      let l = (hslColor.l - (stepDistance * step));
+      const a = hslColor.a;
+      hslDarkers.push({ h, s, l, a });
+    });
+  }
+  return hslDarkers;
+};
