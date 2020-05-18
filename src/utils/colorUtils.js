@@ -1,7 +1,7 @@
 export const getHarmonies = (color, harmonyQuantity) => {
   harmonyQuantity = parseFloat(harmonyQuantity) + 1;
   const degreeShift = 360 / harmonyQuantity;
-  let h = color.h;
+  let h = Number(color.h);
   let s = color.s;
   let l = color.l;
   let a = color.a;

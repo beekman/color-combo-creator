@@ -24,6 +24,10 @@
     width: 40px;
     font-size: 0.5rem;
     .details {
+      overflow: hidden;
+      position: absolute;
+    }
+    .hidden {
       display:none;
       visibility: hidden;
     }

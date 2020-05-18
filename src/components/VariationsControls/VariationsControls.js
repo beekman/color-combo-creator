@@ -3,16 +3,15 @@ import styles from './VariationsControls.css';
 import { getHarmonies, getInverses, getBaseHarmoniesAndInversesColorList, getLighters, getDarkers } from '../../utils/colorUtils';
 import { MdInvertColors, MdBrightnessLow, MdFormatColorReset } from 'react-icons/md';
 import { IoIosColorFilter } from 'react-icons/io';
-import { GiPaintRoller } from 'react-icons/gi';
 import { TiAdjustBrightness } from 'react-icons/ti';
 
 const VariationsControls = (color) => {
-  const [harmonyQuantity, setHarmonyQuantity] = useState('0');
+  const [harmonyQuantity, setHarmonyQuantity] = useState(0);
   const [inverseQuantity, setInverseQuantity] = useState(false);
   const [lighterQuantity, setLighterQuantity] = useState('0');
   const [darkerQuantity, setDarkerQuantity] = useState('0');
   const [desaturatedQuantity, setDesaturatedQuantity] = useState('0');
-  const [swatchToggled, setSwatchToggled] = useState(false);
+  const [swatchToggled, setSwatchToggled] = useState(true);
   const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
 
   useEffect(() => {
@@ -43,7 +42,7 @@ const VariationsControls = (color) => {
         return (
           <div key={i} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }} className={styles.Swatch} onClick={handleSwatchClick}>
 
-            <p className={`${styles.details} ${swatchToggled && styles.hidden}`}>
+            <p className={`${styles.details}${i} ${swatchToggled && styles.hidden}`}>
               h:{color.h}<br />
                 s:{color.s}<br />
                 l:{color.l}
@@ -61,9 +60,9 @@ const VariationsControls = (color) => {
 
   return (
     <>
-      <div className={styles.VariationsControls} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }}>
+      <div className={styles.VariationsControls} style={{ background: `hsl(${color.color.h}, ${color.color.s * 100}%, ${color.color.l * 100}%)` }}>
         <label htmlFor="harmonyQuantity" title="Complementary colors to generate, evenly spaced around the color wheel. Best results are found between 2 (for a triadic color scheme) and 5"><IoIosColorFilter />Harmonies</label><input type="number" id="harmonyQuantity" value={harmonyQuantity} min="0" max="10" onChange={({ target }) => setHarmonyQuantity(target.value)} />
-        <label htmlFor="inverseQuantity" title="Colors opposite from the base & harmonic colors on the color wheel"><MdInvertColors />Inverses</label><input type="checkbox" id="inverseQuantity" value={inverseQuantity} onChange={({ target }) => setInverseQuantity(target.value)} />
+        <label htmlFor="inverseQuantity" title="Colors opposite from the base & harmonic colors on the color wheel"><MdInvertColors />Inverses x</label><input type="number" id="inverseQuantity" min="0" max="1" value={inverseQuantity} onChange={({ target }) => setInverseQuantity(target.value)} />
         <label htmlFor="lighterQuantity" title="Lighter color sets to generate from the base, harmonies, and inverses"><MdBrightnessLow />Lighter x</label><input type="number" id="lighterQuantity" value={lighterQuantity} onChange={({ target }) => setLighterQuantity(target.value)} />
         <label htmlFor="darkerQuantity"><TiAdjustBrightness />Darker x</label><input type="number" id="darkerQuantity" min="0" max="25" value={darkerQuantity} onChange={({ target }) => setDarkerQuantity(target.value)} />
         <label htmlFor="desaturatedQuantity"><MdFormatColorReset />Desaturated x</label><input type="number" id="desaturatedQuantity" value={desaturatedQuantity} min="0" max="25" onChange={({ target }) => setDesaturatedQuantity(target.value)} />
