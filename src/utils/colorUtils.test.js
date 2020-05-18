@@ -142,7 +142,7 @@ describe('tests for getDesaturateds function', () => {
     const desaturatedQuantity = 0;
     expect(getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity)).toEqual([]);
   });
-  it('should return a single color for getDesaturateds with desaturatedsQuantity: 1 and a list of length 1', () => {
+  it('should return a single color for getDesaturateds with desaturatedQuantity: 1 and a list of length 1', () => {
     const baseHarmoniesAndInversesColorList = [{ h: 0, s: 1, l: 0.5, a: 1 }];
     const desaturatedQuantity = 1;
     expect(getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity)).toEqual([{ a: 1, h: 0, l: 0.5, s: 0.5, }]);

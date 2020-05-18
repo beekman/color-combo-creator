@@ -41,7 +41,7 @@ class PalettePicker extends React.Component {
       'default': {
         wrapper: {
           display: 'block',
-          background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`,
+          background: `hsl(${this.state.hsl.h}, ${this.state.hsl.s * 100}%, ${this.state.hsl.l * 100}%)`,
         },
         header: {
           cursor: 'pointer',
