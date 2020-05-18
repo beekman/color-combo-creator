@@ -4,8 +4,8 @@
   padding: 0.35rem;
 
   input{
-    width: 1.3rem;
-    margin: 0 0.6rem 0 0.2rem;
+    width: 2em;
+    margin: 0 1em 0 0.4em;
   }
 }
 
@@ -20,12 +20,17 @@
   .Swatch{
     display: block;
     margin: 0.125rem;
-    height: 40px;
-    width: 40px;
+    height: 3rem;
+    width: 3rem;
     font-size: 0.5rem;
     .details {
       overflow: hidden;
       position: absolute;
+      margin-top: .2rem;
+      margin-left: .2rem;
+      width: 2.6rem;
+      text-shadow: white .025rem 0, white 0 .025rem, white -.025rem 0, white 0 -.025rem;
+
     }
     .hidden {
       display:none;

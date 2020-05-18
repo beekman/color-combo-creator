@@ -26,6 +26,8 @@ const VariationsControls = (color) => {
     makeColorSwatches(hslLighters);
     hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
     makeColorSwatches(hslDarkers);
+    hslDesaturateds = getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity);
+    makeColorSwatches(hslDesaturateds);
   });
 
   let hslHarmonies = getHarmonies(color.color, harmonyQuantity);
@@ -39,16 +41,12 @@ const VariationsControls = (color) => {
   const makeColorSwatches = (colorSet) => {
     if(colorSet.length) {
       return colorSet.map((color, i) => {
-
         return (
           <div key={i} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }} className={styles.Swatch} onClick={handleSwatchClick}>
-
-            <p className={`${styles.details}${i} ${swatchToggled && styles.hidden}`}>
-              h:{color.h}<br />
-                s:{color.s}<br />
-                l:{color.l}
-            </p>
-          </div >
+            <aside className={`${styles.details} ${swatchToggled && styles.hidden}`}>
+              hsl({(color.h).toFixed(1)}, {(color.s * 100).toFixed(1)}%, {(color.l * 100).toFixed(1)}%)
+            </aside>
+          </div>
         );
       });
     }

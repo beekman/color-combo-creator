@@ -55,17 +55,17 @@ export const getBaseHarmoniesAndInversesColorList = (hsl, hslHarmonies, hslInver
   let l = hsl.l;
   const a = hsl.a;
 
-  baseHarmoniesAndInversesColorList.push({ h, s, l, a });
-
   hslHarmonies.map(hslHarmony => {
     h = hslHarmony.h;
     l = hslHarmony.l;
-    baseHarmoniesAndInversesColorList.push({ h, s, l, a });
+    const type = 'harmony';
+    baseHarmoniesAndInversesColorList.push({ h, s, l, a, type });
   });
   hslInverses.map(hslInverse => {
     h = hslInverse.h;
     l = hslInverse.l;
-    baseHarmoniesAndInversesColorList.push({ h, s, l, a });
+    const type = 'inverse';
+    baseHarmoniesAndInversesColorList.push({ h, s, l, a, type });
   });
   return baseHarmoniesAndInversesColorList;
 };
