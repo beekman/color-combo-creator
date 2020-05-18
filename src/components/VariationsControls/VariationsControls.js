@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './VariationsControls.css';
-import { getHarmonies, getInverses, getBaseHarmoniesAndInversesColorList, getLighters, getDarkers, getDesaturateds } from '../../utils/colorUtils';
+import { getHarmonies, getOppositeDegree, getInverses, getBaseHarmoniesAndInversesColorList, getLighters, getDarkers, getDesaturateds } from '../../utils/colorUtils';
 import { MdInvertColors, MdBrightnessLow, MdFormatColorReset } from 'react-icons/md';
 import { IoIosColorFilter } from 'react-icons/io';
 import { TiAdjustBrightness } from 'react-icons/ti';
@@ -62,7 +62,7 @@ const VariationsControls = (color) => {
 
   return (
     <>
-      <div className={styles.VariationsControls} style={{ background: `hsl(${color.color.h}, ${color.color.s * 100}%, ${color.color.l * 75}%)` }}>
+      <div className={styles.VariationsControls} style={{ background: `hsl(${(color.color.h)}, ${color.color.s * 100}%, ${color.color.l * 150}%)`, borderWidth: '2px', borderColor: `hsl(${(getOppositeDegree(color.color.h))}, ${color.color.s * 100}%, ${color.color.l * 100}%)`, borderStyle: 'solid' }}>
         <label htmlFor="harmonyQuantity" title="Complementary colors to generate, evenly spaced around the color wheel. Best results are found between 2 (for a triadic color scheme) and 5"><IoIosColorFilter />Harmonies</label><input type="number" id="harmonyQuantity" value={harmonyQuantity} min="0" max="9" onChange={({ target }) => setHarmonyQuantity(target.value)} />
         <label htmlFor="inverseQuantity" title="Colors opposite from the base & harmonic colors on the color wheel"><MdInvertColors />Inverses x</label><input type="number" id="inverseQuantity" min="0" max="1" value={inverseQuantity} onChange={({ target }) => setInverseQuantity(target.value)} />
         <label htmlFor="lighterQuantity" title="Lighter color sets to generate from the base, harmonies, and inverses"><MdBrightnessLow />Lighter x</label><input type="number" id="lighterQuantity" value={lighterQuantity} onChange={({ target }) => setLighterQuantity(target.value)} />

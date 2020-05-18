@@ -22,15 +22,16 @@ export const getHarmonies = (color, harmonyQuantity) => {
   return hslHarmonies;
 };
 
+export const getOppositeDegree = (h) => {
+  if(h < 180) return (h + 180);
+  else return (h - 180);
+};
 export const getInverses = (hsl, hslHarmonies, inverseQuantity) => {
   let h = hsl.h;
   const s = hsl.s;
   const l = hsl.l;
   const a = hsl.a;
-  const getOppositeDegree = (h) => {
-    if(h < 180) return (h + 180);
-    else return (h - 180);
-  };
+
 
   const hslInverses = [];
 
