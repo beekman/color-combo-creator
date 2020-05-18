@@ -1,11 +1,11 @@
-export const getHarmonies = (hsl, harmonyQuantity) => {
+export const getHarmonies = (color, harmonyQuantity) => {
   harmonyQuantity = parseFloat(harmonyQuantity) + 1;
   const degreeShift = 360 / harmonyQuantity;
-  let h = hsl.h;
-  let s = hsl.s;
-  let l = hsl.l;
-  let a = hsl.a;
-  let current = hsl.h;
+  let h = color.h;
+  let s = color.s;
+  let l = color.l;
+  let a = color.a;
+  let current = color.h;
   let hslHarmonies = [];
   hslHarmonies.push({ h, s, l, a });
   while((current - degreeShift) >= 0) {
@@ -13,7 +13,7 @@ export const getHarmonies = (hsl, harmonyQuantity) => {
     h = current;
     hslHarmonies.push({ h, s, l, a });
   }
-  current = hsl.h;
+  current = color.h;
   while((current + degreeShift) < 360) {
     current = current + degreeShift;
     h = current;

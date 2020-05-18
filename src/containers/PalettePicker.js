@@ -9,12 +9,6 @@ class PalettePicker extends React.Component {
   state = {
     displayColorPicker: false,
     color: {
-      r: '255',
-      g: '0',
-      b: '0',
-      a: '1',
-    },
-    hsl: {
       h: '0',
       s: '1',
       l: '.5',
@@ -31,8 +25,7 @@ class PalettePicker extends React.Component {
   };
 
   handleChange = (color) => {
-    this.setState({ color: color.rgb });
-    this.setState({ hsl: color.hsl });
+    this.setState({ color: color.hsl });
   };
 
   render() {
@@ -41,7 +34,7 @@ class PalettePicker extends React.Component {
       'default': {
         wrapper: {
           display: 'block',
-          background: `hsl(${this.state.hsl.h}, ${this.state.hsl.s * 100}%, ${this.state.hsl.l * 100}%)`,
+          background: `hsl(${this.state.color.h}, ${this.state.color.s * 100}%, ${this.state.color.l * 100}%)`,
         },
         header: {
           cursor: 'pointer',
@@ -74,7 +67,7 @@ class PalettePicker extends React.Component {
           width: '6rem',
           height: '1.5rem',
           borderRadius: '2px',
-          background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`,
+          background: `hsl(${this.state.color.h}, ${this.state.color.s * 100}%, ${this.state.color.l * 100}%)`,
         },
         swatch: {
           padding: '0px',
@@ -117,7 +110,7 @@ class PalettePicker extends React.Component {
               <HuePicker color={this.state.color} onChange={this.handleChange} height={'100%'} width={'100%'} /></div>
           </div>
         </div>
-        <VariationsControls color={this.state.color} hsl={this.state.hsl} onChange={this.handleChange} />
+        <VariationsControls color={this.state.color} onChange={this.handleChange} />
 
         <Footer color={this.state.color} />
       </>
