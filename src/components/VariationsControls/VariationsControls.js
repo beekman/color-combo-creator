@@ -81,7 +81,7 @@ const VariationsControls = (color) => {
     <>
       <div className={styles.VariationsControls} style={{ background: `hsl(${(color.color.h)}, ${color.color.s * 100}%, ${color.color.l * 150}%)`, borderWidth: '2px', borderColor: `hsl(${(getOppositeDegree(color.color.h))}, ${color.color.s * 100}%, ${color.color.l * 100}%)`, borderStyle: 'solid' }}>
         <label htmlFor="harmonyQuantity" title="Complementary colors to generate, evenly spaced around the color wheel. Best results are found between 2 (for a triadic color scheme) and 5"><IoIosColorFilter />Harmonies</label><input type="number" id="harmonyQuantity" value={harmonyQuantity} min="0" max="9" onChange={({ target }) => setHarmonyQuantity(target.value)} />
-        <label htmlFor="inverseQuantity" title="Colors opposite from the base & harmonic colors on the color wheel"><MdInvertColors />Inverses &times;</label><input type="number" id="inverseQuantity" min="0" max="1" value={inverseQuantity} onChange={({ target }) => setInverseQuantity(target.value)} />
+        <label htmlFor="inverseQuantity" title="Colors opposite from the base & harmonic colors on the color wheel"><MdInvertColors />Inverses &times;</label><input type="number" id="inverseQuantity" min="0" max={({ harmonyQuantity } + 1)} value={inverseQuantity} onChange={({ target }) => setInverseQuantity(target.value)} />
         <label htmlFor="lighterQuantity" title="Lighter color sets to generate from the base, harmonies, and inverses"><MdBrightnessLow /> &times;</label><input type="number" id="lighterQuantity" value={lighterQuantity} onChange={({ target }) => setLighterQuantity(target.value)} />
         <label htmlFor="darkerQuantity"><TiAdjustBrightness />Darker &times;</label><input type="number" id="darkerQuantity" min="0" max="9" value={darkerQuantity} onChange={({ target }) => setDarkerQuantity(target.value)} />
         <label htmlFor="desaturatedQuantity"><MdFormatColorReset />Desaturated &times;</label><input type="number" id="desaturatedQuantity" value={desaturatedQuantity} min="0" max="9" onChange={({ target }) => setDesaturatedQuantity(target.value)} />
@@ -95,9 +95,7 @@ const VariationsControls = (color) => {
         {desaturatedSwatches}
       </section>
       <section className={styles.export}>
-        <textarea className={styles.cssOutputText}>
-          test test test
-        </textarea>
+        <textarea className={styles.cssOutputText} />
       </section>
     </>
   );
