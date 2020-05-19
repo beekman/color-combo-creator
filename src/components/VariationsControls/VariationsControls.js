@@ -8,6 +8,7 @@ import { TiAdjustBrightness } from 'react-icons/ti';
 const VariationsControls = (color) => {
   const [harmonyQuantity, setHarmonyQuantity] = useState('0');
   const [inverseQuantity, setInverseQuantity] = useState('0');
+  const [inverseMax, setInverseMax] = useState('1');
   const [lighterQuantity, setLighterQuantity] = useState('0');
   const [darkerQuantity, setDarkerQuantity] = useState('0');
   const [desaturatedQuantity, setDesaturatedQuantity] = useState('0');
@@ -15,6 +16,7 @@ const VariationsControls = (color) => {
   const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
 
   useEffect(() => {
+    setInverseMax(harmonyQuantity+ 1);
     const hslHarmonies = getHarmonies(color.color, harmonyQuantity);
     makeColorSwatches(hslHarmonies);
 
@@ -81,7 +83,7 @@ const VariationsControls = (color) => {
     <>
       <div className={styles.VariationsControls} style={{ background: `hsl(${(color.color.h)}, ${color.color.s * 100}%, ${color.color.l * 150}%)`, borderWidth: '2px', borderColor: `hsl(${(getOppositeDegree(color.color.h))}, ${color.color.s * 100}%, ${color.color.l * 100}%)`, borderStyle: 'solid' }}>
         <label htmlFor="harmonyQuantity" title="Complementary colors to generate, evenly spaced around the color wheel. 2 will give you a split complementary triad scheme, 3 will return a color from each quarter of the color wheel."><IoIosColorFilter />Harmonies</label><input type="number" id="harmonyQuantity" value={harmonyQuantity} min="0" max="9" onChange={({ target }) => setHarmonyQuantity(target.value)} />
-        <label htmlFor="inverseQuantity" title="Colors opposite from the base & harmonic colors on the color wheel. First color is inverted base, subsequent colors are inverted harmonies."><MdInvertColors />Inverses</label><input type="number" id="inverseQuantity" min="0" max={harmonyQuantity} value={inverseQuantity} onChange={({ target }) => setInverseQuantity(target.value)} />
+        <label htmlFor="inverseQuantity" title="Colors opposite from the base & harmonic colors on the color wheel. First color is inverted base, subsequent colors are inverted harmonies."><MdInvertColors />Inverses</label><input type="number" id="inverseQuantity" min="0" max={inverseMax} value={inverseQuantity} onChange={({ target }) => setInverseQuantity(target.value)} />
         <label htmlFor="lighterQuantity" title="Lighter color sets to generate from the base, harmonies, and inverses, with each increment stepping closer to white."><MdBrightnessLow />Brighter &times;<input type="number" id="lighterQuantity" value={lighterQuantity} onChange={({ target }) => setLighterQuantity(target.value)} /></label>
         <label htmlFor="darkerQuantity" title="Darker color sets to generate from the base, harmonies, and inverses,with each increment stepping closer to black."> <TiAdjustBrightness />Darker &times;<input type="number" id="darkerQuantity" min="0" max="9" value={darkerQuantity} onChange={({ target }) => setDarkerQuantity(target.value)} /></label>
         <label htmlFor="desaturatedQuantity" title="Less saturated color sets to generate from the base, harmonies, and inverses, with each increment stepping closer to grayscale."><MdFormatColorReset />Desaturated &times;<input type="number" id="desaturatedQuantity" value={desaturatedQuantity} min="0" max="9" onChange={({ target }) => setDesaturatedQuantity(target.value)} /></label>
