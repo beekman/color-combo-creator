@@ -105,21 +105,21 @@ describe('tests for getLighters function', () => {
     expect(getLighters(baseHarmoniesAndInversesColorList, lighterQuantity)).toEqual([]);
   });
   it('should return 1 color for getLighters with darkerQuantity: 1 and a list of length 1', () => {
-    const baseHarmoniesAndInversesColorList = [{ h: 0, s: 1, l: 0.5, a: 1 }];
+    const baseHarmoniesAndInversesColorList = [{ h: 0, s: 1, l: 0.5, a: 1, step: 1 }];
     const lighterQuantity = 1;
-    expect(getLighters(baseHarmoniesAndInversesColorList, lighterQuantity)).toEqual([{ a: 1, h: 0, l: 0.75, s: 1, matchType: 'lighter' }]);
+    expect(getLighters(baseHarmoniesAndInversesColorList, lighterQuantity)).toEqual([{ a: 1, h: 0, l: 0.75, s: 1, matchType: 'lighter', step: 1 }]);
   });
 
   it('should return 2 colors for getLighters with darkerQuantity: 1 and a list of length 2', () => {
     const baseHarmoniesAndInversesColorList = [{ h: 60, s: 1, l: 0.5, a: 1 }, { h: 300, s: 1, l: 0.5, a: 1, matchType: 'lighter' }];
     const lighterQuantity = 1;
-    expect(getLighters(baseHarmoniesAndInversesColorList, lighterQuantity)).toEqual([{ a: 1, h: 60, l: 0.75, s: 1, matchType: 'lighter' }, { h: 300, s: 1, l: 0.75, a: 1, matchType: 'lighter' }]);
+    expect(getLighters(baseHarmoniesAndInversesColorList, lighterQuantity)).toEqual([{ a: 1, h: 60, l: 0.75, s: 1, matchType: 'lighter', step: 1 }, { h: 300, s: 1, l: 0.75, a: 1, matchType: 'lighter', step: 1 }]);
   });
 
   it('should return 2 colors for getLighters with darkerQuantity: 1 and a list of length 2', () => {
     const baseHarmoniesAndInversesColorList = [{ h: 0, s: 1, l: 0.5, a: 1 }];
     const lighterQuantity = 1;
-    expect(getLighters(baseHarmoniesAndInversesColorList, lighterQuantity)).toEqual([{ a: 1, h: 0, l: 0.75, s: 1, }]);
+    expect(getLighters(baseHarmoniesAndInversesColorList, lighterQuantity)).toEqual([{ a: 1, h: 0, l: 0.75, s: 1, matchType: 'lighter', step: 1 }]);
   });
 });
 
@@ -132,7 +132,7 @@ describe('tests for getDarkers function', () => {
   it('should return a single color for getDarkers with darkerQuantity: 1 and a list of length 1', () => {
     const baseHarmoniesAndInversesColorList = [{ h: 0, s: 1, l: 0.5, a: 1 }];
     const darkerQuantity = 1;
-    expect(getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity)).toEqual([{ a: 1, h: 0, l: 0.25, s: 1, matchType: 'darker' }]);
+    expect(getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity)).toEqual([{ a: 1, h: 0, l: 0.25, s: 1, matchType: 'darker', step: 1 }]);
   });
 });
 
@@ -145,6 +145,6 @@ describe('tests for getDesaturateds function', () => {
   it('should return a single color for getDesaturateds with desaturatedQuantity: 1 and a list of length 1', () => {
     const baseHarmoniesAndInversesColorList = [{ h: 0, s: 1, l: 0.5, a: 1 }];
     const desaturatedQuantity = 1;
-    expect(getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity)).toEqual([{ a: 1, h: 0, l: 0.5, s: 0.5, matchType: 'desaturated' }]);
+    expect(getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity)).toEqual([{ a: 1, h: 0, l: 0.5, s: 0.5, matchType: 'desaturated', step: 1 }]);
   });
 });

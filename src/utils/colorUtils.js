@@ -14,7 +14,7 @@ export const getHarmonies = (color, harmonyQuantity) => {
   while((current - degreeShift) >= 0) {
     current = current - degreeShift;
     h = current;
-    hslHarmonies.push({ h, s, l, a });
+    hslHarmonies.push({ h, s, l, a, matchType });
   }
   current = color.h;
   while((current + degreeShift) < 360) {
