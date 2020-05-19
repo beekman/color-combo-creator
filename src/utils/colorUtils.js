@@ -2,11 +2,12 @@ export const getHarmonies = (color, harmonyQuantity) => {
   harmonyQuantity = parseFloat(harmonyQuantity) + 1;
   const degreeShift = 360 / harmonyQuantity;
   let h = Number(color.h);
-  let s = color.s;
-  let l = color.l;
-  let a = color.a;
-  const matchType = 'harmony';
   let current = color.h;
+  const s = color.s;
+  const l = color.l;
+  const a = color.a;
+  const matchType = 'harmony';
+
   let hslHarmonies = [];
 
   hslHarmonies.push({ h, s, l, a, matchType });
@@ -29,7 +30,6 @@ export const getOppositeDegree = (h) => {
   else return (h - 180);
 };
 export const getInverses = (hsl, hslHarmonies, inverseQuantity) => {
-  console.log(hslHarmonies);
   const s = hsl.s;
   const l = hsl.l;
   const a = hsl.a;
@@ -63,7 +63,7 @@ export const getBaseHarmoniesAndInversesColorList = (hsl, hslHarmonies, hslInver
   hslInverses.map(hslInverse => {
     h = hslInverse.h;
     l = hslInverse.l;
-    const matchType = 'inverse';
+    const matchType = hslInverse.matchType
     baseHarmoniesAndInversesColorList.push({ h, s, l, a, matchType });
   });
   return baseHarmoniesAndInversesColorList;
