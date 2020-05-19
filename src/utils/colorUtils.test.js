@@ -88,7 +88,7 @@ describe('tests for getInverses function', () => {
     const hsl = { h: 180, s: 1, l: 0.5, a: 1 };
     const hslHarmonies = [{ h: 180, s: 1, l: 0.5, a: 1 }, { h: 60, s: 1, l: 0.5, a: 1 }, { h: 300, s: 1, l: 0.5, a: 1 }];
     const inverseQuantity = 2;
-    expect(getInverses(hsl, hslHarmonies, inverseQuantity)).toEqual([{ h: 180, s: 1, l: 0.5, a: 1 }, { h: 60, s: 1, l: 0.5, a: 1 }, { h: 240, s: 1, l: 0.5, a: 1 }]);
+    expect(getInverses(hsl, hslHarmonies, inverseQuantity)).toEqual([{ h: 0, s: 1, l: 0.5, a: 1 }, { h: 240, s: 1, l: 0.5, a: 1 }]);
   });
   it('should return three colors for a base color with h:180, harmonies:2, and inverseQuantity: 3', () => {
     const hsl = { h: 180, s: 1, l: 0.5, a: 1 };

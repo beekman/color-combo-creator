@@ -31,17 +31,13 @@ export const getInverses = (hsl, hslHarmonies, inverseQuantity) => {
   const s = hsl.s;
   const l = hsl.l;
   const a = hsl.a;
-
   const hslInverses = [];
 
   if(inverseQuantity > 0) {
     let count = 0;
-    let inversesRemaining = inverseQuantity;
     while(inverseQuantity > count) {
       let currentColor = hslHarmonies[count];
       const h = getOppositeDegree(currentColor.h);
-      console.log(currentColor);
-      console.log(currentColor[count]);
       hslInverses.push({ h, s, l, a });
       count++;
     }
