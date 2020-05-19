@@ -27,21 +27,17 @@ export const getOppositeDegree = (h) => {
   else return (h - 180);
 };
 export const getInverses = (hsl, hslHarmonies, inverseQuantity) => {
-  let h = hsl.h;
-  const s = hsl.s;
-  const l = hsl.l;
-  const a = hsl.a;
 
 
   const hslInverses = [];
-
   if(inverseQuantity > 0) {
-    let inversesRemaining = inverseQuantity;
-    while(inversesRemaining > 0) {
+    for(let i = 0; (i <= hslHarmonies.length); i++) {
       hslHarmonies.map(hslHarmony => {
-        h = getOppositeDegree(hslHarmony.h);
+        const h = getOppositeDegree(hslHarmony[i].h);
+        const s = hslHarmony[i].s;
+        const l = hslHarmony[i].l;
+        const a = hslHarmony[i].a;
         hslInverses.push({ h, s, l, a });
-        inversesRemaining--;
       });
     }
   }

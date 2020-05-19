@@ -36,9 +36,20 @@
       display:none;
       visibility: hidden;
     }
+  }
+}
 
-    p{
-
-    }
+.export {
+  .cssOutputText {
+    width: 98%;
+    height: auto;
+    font: 11px monospace;
+    padding: .5em 0 .5em 0;
+    text-indent: 1em;
+    border: 1px #ddd solid;
+    margin: 7px;
+    max-height: 350px;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }

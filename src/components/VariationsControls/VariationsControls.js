@@ -52,6 +52,25 @@ const VariationsControls = (color) => {
     }
   };
 
+  const makePostcssValuesVariables = (colorSet) => {
+
+    if(colorSet.length) {
+      return colorSet.map((color, i) => {
+        return (
+          <div key={i} style={{
+
+
+            background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)`
+          }} className={styles.Swatch} onClick={handleSwatchClick}>
+            <aside className={`${styles.details} ${swatchToggled && styles.hidden}`}>
+              hsl({(color.h).toFixed(0)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)
+            </aside>
+          </div>
+        );
+      });
+    }
+  };
+
   let harmonySwatches = makeColorSwatches(hslHarmonies);
   let inverseSwatches = makeColorSwatches(hslInverses);
   let lighterSwatches = makeColorSwatches(hslLighters);
@@ -74,6 +93,11 @@ const VariationsControls = (color) => {
         {lighterSwatches}
         {darkerSwatches}
         {desaturatedSwatches}
+      </section>
+      <section className={styles.export}>
+        <textarea className={styles.cssOutputText}>
+          test test test
+        </textarea>
       </section>
     </>
   );
