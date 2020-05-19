@@ -27,7 +27,7 @@ describe('tests for getHarmonies function', () => {
   it('should return 4 colors with equidistant hues for color with h:180 and 3 harmonies', () => {
     const hsl = { h: 180, s: 1, l: 0.5, a: 1 };
     const harmonyQuantity = 3;
-    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 180, s: 1, l: 0.5, a: 1 }, { h: 90, s: 1, l: 0.5, a: 1 }, { h: 0, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { h: 270, s: 1, l: 0.5, a: 1, matchType: 'harmony' }]);
+    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 180, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { h: 90, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { h: 0, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { h: 270, s: 1, l: 0.5, a: 1, matchType: 'harmony' }]);
   });
 
 
