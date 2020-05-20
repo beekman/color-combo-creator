@@ -9,10 +9,10 @@ class PalettePicker extends React.Component {
   state = {
     displayColorPicker: false,
     color: {
-      h: '0',
-      s: '1',
-      l: '.5',
-      a: '1',
+      h: 0,
+      s: 1,
+      l: .5,
+      a: 1,
     },
   };
 

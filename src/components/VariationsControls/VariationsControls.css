@@ -10,18 +10,19 @@
 }
 
 .ColorMatches {
-  background:hsl(0, 0%, 94%);
+  background:hsla(0, 0%, 30%, 0.75);
   padding: 0.25rem;
   height: auto;
   display: flex;
   flex-wrap: wrap;
   margin: 0.5rem auto;
+  align-items: center;
 
   .Swatch{
     display: block;
     margin: 0.125rem;
-    height: 3rem;
-    width: 3rem;
+    height: 4rem;
+    width: 4rem;
     font-size: 0.5rem;
     .details {
       overflow: hidden;
@@ -29,7 +30,7 @@
       margin-top: .2rem;
       margin-left: .2rem;
       width: 2.6rem;
-      text-shadow: white .025rem 0, white 0 .025rem, white -.025rem 0, white 0 -.025rem;
+      text-shadow: white .075rem 0, white 0 .075rem, white -.075rem 0, white 0 -.075rem;
 
     }
     .hidden {

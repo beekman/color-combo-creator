@@ -16,7 +16,7 @@ const VariationsControls = (color) => {
   const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
 
   useEffect(() => {
-    setInverseMax(harmonyQuantity+ 1);
+    setInverseMax(harmonyQuantity + 1);
     const hslHarmonies = getHarmonies(color.color, harmonyQuantity);
     makeColorSwatches(hslHarmonies);
 
@@ -55,22 +55,17 @@ const VariationsControls = (color) => {
   };
 
   const makePostcssValuesVariables = (colorSet) => {
-
-    if(colorSet.length) {
+    if(colorSet.length > 0) {
       return colorSet.map((color, i) => {
         return (
-          <div key={i} style={{
-
-
-            background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)`
-          }} className={styles.Swatch} onClick={handleSwatchClick}>
-            <aside className={`${styles.details} ${swatchToggled && styles.hidden}`}>
-              hsl({(color.h).toFixed(0)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)
-            </aside>
-          </div>
+          <p key={i}>
+            `${color.matchType}-${i}${color.step}: hsl({(color.h).toFixed(0)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)
+          </p>
         );
       });
     }
+    console.log(colorset);
+    return colorSet;
   };
 
   let harmonySwatches = makeColorSwatches(hslHarmonies);
