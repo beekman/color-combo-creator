@@ -28,6 +28,7 @@ class PalettePicker extends React.Component {
     this.setState({ color: color.hsl });
   };
 
+
   render() {
 
     const styles = reactCSS({
@@ -87,6 +88,8 @@ class PalettePicker extends React.Component {
         },
       },
     });
+
+    document.body.style.backgroundColor = 'black';
 
     return (
       <>

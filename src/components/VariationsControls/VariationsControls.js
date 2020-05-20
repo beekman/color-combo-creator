@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import styles from './VariationsControls.css';
-import { getHarmonies, getOppositeDegree, getInverses, getBaseHarmoniesAndInversesColorList, getLighters, getDarkers, getDesaturateds } from '../../utils/colorUtils';
+import { getHarmonies, getOppositeDegree, getInverses, getBaseHarmoniesAndInversesColorList, getLighters, getDarkers, getDesaturateds, hslToRgb } from '../../utils/colorUtils';
 import { MdInvertColors, MdBrightnessLow, MdFormatColorReset } from 'react-icons/md';
 import { IoIosColorFilter } from 'react-icons/io';
 import { TiAdjustBrightness } from 'react-icons/ti';
 
 const VariationsControls = (color) => {
+
   const [harmonyQuantity, setHarmonyQuantity] = useState('0');
   const [inverseQuantity, setInverseQuantity] = useState('0');
   const [inverseMax, setInverseMax] = useState('1');
   const [lighterQuantity, setLighterQuantity] = useState('0');
   const [darkerQuantity, setDarkerQuantity] = useState('0');
   const [desaturatedQuantity, setDesaturatedQuantity] = useState('0');
+  const [darkMode, setDarkMode] = useState(true);
   const [swatchToggled, setSwatchToggled] = useState(true);
   const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
+
 
   useEffect(() => {
     setInverseMax(harmonyQuantity + 1);
     const hslHarmonies = getHarmonies(color.color, harmonyQuantity);
     makeColorSwatches(hslHarmonies);
-
+    let postcssHarmonies = makePostcssValuesVariables(hslHarmonies);
+    console.log(postcssHarmonies);
     const hslInverses = getInverses(color.color, hslHarmonies, inverseQuantity);
     makeColorSwatches(hslInverses);
 
@@ -33,6 +37,7 @@ const VariationsControls = (color) => {
   });
 
   let hslHarmonies = getHarmonies(color.color, harmonyQuantity);
+
   let hslInverses = getInverses(color.color, hslHarmonies, inverseQuantity);
   let baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.color, hslHarmonies, hslInverses);
   let hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
@@ -43,8 +48,9 @@ const VariationsControls = (color) => {
   const makeColorSwatches = (colorSet) => {
     if(colorSet.length) {
       return colorSet.map((color, i) => {
+        let key = (color.matchType + (Number(i) + 1));
         return (
-          <div key={i} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }} className={styles.Swatch} onClick={handleSwatchClick}>
+          <div key={key} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }} className={styles.Swatch} onClick={handleSwatchClick}>
             <aside className={`${styles.details} ${swatchToggled && styles.hidden}`}>
               hsl({(color.h).toFixed(0)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)
             </aside>
@@ -55,17 +61,16 @@ const VariationsControls = (color) => {
   };
 
   const makePostcssValuesVariables = (colorSet) => {
+    let postCSSstyles = '';
     if(colorSet.length > 0) {
-      return colorSet.map((color, i) => {
-        return (
-          <p key={i}>
-            `${color.matchType}-${i}${color.step}: hsl({(color.h).toFixed(0)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)
-          </p>
-        );
+      colorSet.map((color, i) => {
+        let colorLabel = (color.matchType + (Number(i) + 1));
+        let line = `${colorLabel}: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%)`;
+        postCSSstyles.concat(line);
       });
     }
-    console.log(colorset);
-    return colorSet;
+    console.log(postCSSstyles);
+    return postCSSstyles;
   };
 
   let harmonySwatches = makeColorSwatches(hslHarmonies);
