@@ -56,13 +56,13 @@
     height: auto;
     font: 11px monospace;
     padding: .5em 0 .5em 0;
-    text-indent: 1em;
+    text-indent: 0;
     border: 1px #ddd solid;
     margin: 7px;
     overflow-y: auto;
     overflow-x: hidden;
     background-color: #101;
-    color: white;
+    color: whitesmoke;
     border: none;
     height: 50vh;
   }
