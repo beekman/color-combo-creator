@@ -1,3 +1,5 @@
+export const isGrayscale = ({ saturation }) => saturation === 0;
+export const isDark = ({ l }) => l < .5;
 export const getHarmonies = (color, harmonyQuantity) => {
   harmonyQuantity = parseFloat(harmonyQuantity) + 1;
   const degreeShift = 360 / harmonyQuantity;
@@ -63,7 +65,7 @@ export const getBaseHarmoniesAndInversesColorList = (hsl, hslHarmonies, hslInver
   hslInverses.map(hslInverse => {
     h = hslInverse.h;
     l = hslInverse.l;
-    const matchType = hslInverse.matchType
+    const matchType = hslInverse.matchType;
     baseHarmoniesAndInversesColorList.push({ h, s, l, a, matchType });
   });
   return baseHarmoniesAndInversesColorList;

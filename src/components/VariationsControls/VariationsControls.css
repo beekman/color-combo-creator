@@ -3,9 +3,14 @@
   flex-wrap: wrap;
   padding: 0.35rem;
 
+  .textLabel{
+    display: inline;
+    visibility: visible;
+  }
+  
   input{
-    width: 2em;
-    margin: 0 1em 0 0.4em;
+    width: 3.5em;
+    margin: 0 1.25em 0 0.4em;
   }
 }
 
@@ -52,5 +57,14 @@
     max-height: 350px;
     overflow-y: auto;
     overflow-x: hidden;
+  }
+}
+
+@media screen and (max-width: 840px){
+  .VariationsControls {
+    .textLabel{
+      display: none;
+      visibility: hidden;
+    }
   }
 }
