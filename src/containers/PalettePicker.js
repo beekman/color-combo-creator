@@ -6,8 +6,6 @@ import { PhotoshopPicker, HuePicker } from 'react-color';
 import { IoMdColorPalette } from 'react-icons/io';
 import { DarkModeToggle } from '../components/DarkModeToggle';
 
-
-
 class PalettePicker extends React.Component {
   state = {
     displayColorPicker: false,

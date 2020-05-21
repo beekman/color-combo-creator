@@ -7,7 +7,7 @@
     display: inline;
     visibility: visible;
   }
-  
+
   input{
     width: 3.5em;
     margin: 0 1.25em 0 0.4em;
@@ -46,7 +46,12 @@
 }
 
 .export {
-  .cssOutputText {
+  h3{
+    color: white;
+    padding: 0 1rem;
+    margin: 1rem 0 0;
+  }
+  textarea.cssOutputText  {
     width: 98%;
     height: auto;
     font: 11px monospace;
@@ -54,9 +59,12 @@
     text-indent: 1em;
     border: 1px #ddd solid;
     margin: 7px;
-    max-height: 350px;
     overflow-y: auto;
     overflow-x: hidden;
+    background-color: #101;
+    color: white;
+    border: none;
+    height: 50vh;
   }
 }
 
