@@ -4,6 +4,9 @@ import VariationsControls from '../components/VariationsControls/VariationsContr
 import Footer from '../components/Footer/Footer';
 import { PhotoshopPicker, HuePicker } from 'react-color';
 import { IoMdColorPalette } from 'react-icons/io';
+import { DarkModeToggle } from '../components/DarkModeToggle';
+
+
 
 class PalettePicker extends React.Component {
   state = {
@@ -27,7 +30,6 @@ class PalettePicker extends React.Component {
   handleChange = (color) => {
     this.setState({ color: color.hsl });
   };
-
 
   render() {
 
