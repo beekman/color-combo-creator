@@ -8,10 +8,12 @@ import {
 } from '../../utils/colorUtils';
 import { getPostcssValuesVariables } from '../../utils/styleExporters';
 import { hslToRgb, hslToObject } from '../../utils/colorConverters';
+import { createPopper } from '@popperjs/core';
 
 import { MdInvertColors, MdBrightnessLow, MdFormatColorReset } from 'react-icons/md';
 import { IoIosColorFilter } from 'react-icons/io';
 import { TiAdjustBrightness } from 'react-icons/ti';
+
 
 const VariationsControls = (color) => {
 
@@ -24,7 +26,7 @@ const VariationsControls = (color) => {
   const [darkMode, setDarkMode] = useState(true);
   const [swatchToggled, setSwatchToggled] = useState(true);
   const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
-
+  const [styleExportText, setStyleExportText] = useState('base: hsl(0, 100%, 50%);');
 
   useEffect(() => {
     setInverseMax(harmonyQuantity + 1);
@@ -44,6 +46,8 @@ const VariationsControls = (color) => {
     makeColorSwatches(hslDesaturateds);
     postcssHarmonies = getPostcssValuesVariables(baseHarmoniesAndInversesColorList);
     console.log(postcssHarmonies);
+    setStyleExportText(postcssHarmonies);
+
   });
 
   let hslHarmonies = getHarmonies(color.color, harmonyQuantity);
@@ -53,7 +57,7 @@ const VariationsControls = (color) => {
   let hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
   let hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
   let hslDesaturateds = getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity);
-  let postcssHarmonies = [];
+  let postcssHarmonies = getPostcssValuesVariables(baseHarmoniesAndInversesColorList);
 
 
 
@@ -74,7 +78,6 @@ const VariationsControls = (color) => {
   };
 
 
-
   let harmonySwatches = makeColorSwatches(hslHarmonies);
   let inverseSwatches = makeColorSwatches(hslInverses);
   let lighterSwatches = makeColorSwatches(hslLighters);
@@ -84,6 +87,7 @@ const VariationsControls = (color) => {
   return (
     <>
       <div className={styles.VariationsControls} style={{ background: `hsl(${(color.color.h)}, ${color.color.s * 100}%, ${color.color.l * 150}%)`, borderWidth: '2px', borderColor: `hsl(${(getOppositeDegree(color.color.h))}, ${color.color.s * 100}%, ${color.color.l * 100}%)`, borderStyle: 'solid' }}>
+
         <label htmlFor="harmonyQuantity" title="Complementary colors to generate, evenly spaced around the color wheel. 2 will give you a split complementary triad scheme, 3 will return a color from each quarter of the color wheel."><IoIosColorFilter /><span className={styles.textLabel}>Harmonies</span></label><input type="number" id="harmonyQuantity" value={harmonyQuantity} min="0" max="36" onChange={({ target }) => setHarmonyQuantity(target.value)} />
         <label htmlFor="inverseQuantity" title="Colors opposite from the base & harmonic colors on the color wheel. First color is inverted base, subsequent colors are inverted harmonies."><MdInvertColors /><span className={styles.textLabel}>Inverses</span></label><input type="number" id="inverseQuantity" min="0" max={inverseMax} value={inverseQuantity} onChange={({ target }) => setInverseQuantity(target.value)} />
         <label htmlFor="lighterQuantity" title="Lighter color sets to generate from the base, harmonies, and inverses, with each increment stepping closer to white."><MdBrightnessLow /><span className={styles.textLabel}>Lighter</span> &times;<input type="number" id="lighterQuantity" value={lighterQuantity} min="0" max="20" onChange={({ target }) => setLighterQuantity(target.value)} /></label>
@@ -100,9 +104,7 @@ const VariationsControls = (color) => {
       </section>
       {postcssHarmonies}
       <section className={styles.export}>
-
-
-        <textarea className={styles.cssOutputText} />
+        <textarea className={styles.cssOutputText} value={styleExportText} onChange={({ postcssHarmonies }) => setStyleExportText(postcssHarmonies)} />
       </section>
     </>
   );
