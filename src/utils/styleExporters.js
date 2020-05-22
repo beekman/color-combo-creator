@@ -2,8 +2,8 @@ export const getPostcssValuesVariables = (colorSet) => {
   let postCSSVariables = '';
   if(colorSet.length > 0) {
     colorSet.map((color, i) => {
-      let key = (color.matchType);
-      let line = `@value ${key}: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%);\n`;
+      const key = (color.matchType);
+      const line = `@value ${key}: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%);\n`;
       postCSSVariables += line;
     });
   }
