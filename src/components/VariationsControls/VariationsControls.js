@@ -6,7 +6,7 @@ import {
   getInverses, getBaseHarmoniesAndInversesColorList,
   getLighters, getDarkers, getDesaturateds
 } from '../../utils/colorUtils';
-import { getPostcssValuesVariables } from '../../utils/styleExporters';
+import { getPostcssValuesVariables, getCssClasses } from '../../utils/styleExporters';
 import { hslToRgb, hslToObject } from '../../utils/colorConverters';
 import { createPopper } from '@popperjs/core';
 
@@ -26,7 +26,8 @@ const VariationsControls = (color) => {
   const [darkMode, setDarkMode] = useState(true);
   const [swatchToggled, setSwatchToggled] = useState(true);
   const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
-  const [styleExportText, setStyleExportText] = useState('base: hsl(0, 100%, 50%);');
+  const [postcssExportText, setPostcssExportText] = useState('base: hsl(0, 100%, 50%);');
+  const [cssExportText, setCssExportText] = useState('base: hsl(0, 100%, 50%);');
 
   useEffect(() => {
     setInverseMax(harmonyQuantity + 1);
@@ -37,13 +38,16 @@ const VariationsControls = (color) => {
     hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
     hslDesaturateds = getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity);
     const postcssValuesVariables = (getPostcssValuesVariables(hslHarmonies)) + (getPostcssValuesVariables(hslInverses)) + (getPostcssValuesVariables(hslLighters)) + (getPostcssValuesVariables(hslDarkers)) + (getPostcssValuesVariables(hslDesaturateds));
+    const cssClasses = (getCssClasses(color.color)) + (getCssClasses(hslHarmonies)) + (getCssClasses(hslInverses)) + (getCssClasses(hslLighters)) + (getCssClasses(hslDarkers)) + (getCssClasses(hslDesaturateds));
+    console.log(cssClasses);
 
     makeColorSwatches(hslHarmonies);
     makeColorSwatches(hslInverses);
     makeColorSwatches(hslLighters);
     makeColorSwatches(hslDarkers);
     makeColorSwatches(hslDesaturateds);
-    setStyleExportText(postcssValuesVariables);
+    setPostcssExportText(postcssValuesVariables);
+    setCssExportText(cssClasses);
   });
 
   let hslHarmonies = getHarmonies(color.color, harmonyQuantity);
@@ -52,9 +56,6 @@ const VariationsControls = (color) => {
   let hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
   let hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
   let hslDesaturateds = getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity);
-
-
-
 
   const makeColorSwatches = (colorSet) => {
     if(colorSet.length) {
@@ -96,8 +97,11 @@ const VariationsControls = (color) => {
         {desaturatedSwatches}
       </section>
       <section className={styles.export}>
-        <h3>PostCSS Values Variables color list</h3>
-        <textarea className={styles.cssOutputText} value={styleExportText} onChange={({ postcssValuesVariables }) => setStyleExportText(postcssValuesVariables)} />
+        <h2>Palette Export Options</h2>
+        <h3><a href="https://github.com/css-modules/css-modules/blob/master/docs/values-variables.md" target="_blank">PostCSS Values Variables</a> color list</h3>
+        <textarea className={styles.cssOutputText} value={postcssExportText} onChange={({ postcssValuesVariables }) => setPostcssExportText(postcssValuesVariables)} />
+        <h3>CSS stylesheet</h3>
+        <textarea className={styles.cssOutputText} value={cssExportText} onChange={({ cssClasses }) => setCssExportText(cssClasses)} />
       </section>
     </>
   );
