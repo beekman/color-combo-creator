@@ -12,12 +12,12 @@ export const getHarmonies = (color, harmonyQuantity) => {
   const step = '';
   let hslHarmonies = [];
   hslHarmonies.push({ h, s, l, a, matchType });
-  let count = 1;
+  let count = 0;
   while((current - degreeShift) >= 0) {
     current = current - degreeShift;
     h = current;
     const matchType = 'harmony' + count;
-    hslHarmonies.push({ h, s, l, a, matchType });
+    hslHarmonies.push({ h, s, l, a, matchType, step });
     count++;
   }
   current = color.h;
@@ -42,13 +42,13 @@ export const getInverses = (hsl, hslHarmonies, inverseQuantity) => {
   const hslInverses = [];
   const step = '';
   if(inverseQuantity > 0) {
-    let count = 0;
+    let count = 1;
     while(inverseQuantity > count) {
       let currentColor = hslHarmonies[count];
       const h = getOppositeDegree(currentColor.h);
       const matchType = 'inverse' + count;
-      count++;
       hslInverses.push({ h, s, l, a, matchType, step });
+      count++;
     }
   }
   return hslInverses;
@@ -87,8 +87,11 @@ export const getLighters = (baseHarmoniesAndInversesColorList, lighterQuantity) 
       const stepDistance = ((1 - hslColor.l) / (Number(lighterQuantity) + 1));
       let l = (hslColor.l + (stepDistance * step));
       const a = hslColor.a;
-      const key = (hslColor.matchType + (Number(i) + 1));
-      const matchType = 'lighter-' + key; + 'step' + step;
+      let key = (hslColor.matchType);
+      if(key === 'base0') {
+        key = 'base';
+      }
+      const matchType = 'lighter-' + key + '-step' + step;
       hslLighters.push({ h, s, l, a, matchType, step });
     });
   }
@@ -104,16 +107,20 @@ export const getDarkers = (baseHarmoniesAndInversesColorList, darkerQuantity) =>
       const stepDistance = (hslColor.l / (Number(darkerQuantity) + 1));
       let l = (hslColor.l - (stepDistance * step));
       const a = hslColor.a;
-      const key = (hslColor.matchType + (Number(i) + 1));
-      const matchType = 'darker-' + 'step' + step + '-' + key;
+      let key = (hslColor.matchType);
+      if(key === 'base0') {
+        key = 'base';
+      }
+      const matchType = 'darker-' + key + '-step' + step;
       hslDarkers.push({ h, s, l, a, matchType, step });
+
     });
   }
   return hslDarkers;
 };
 
 export const getDesaturateds = (baseHarmoniesAndInversesColorList, desaturatedQuantity) => {
-  const hslDarkers = [];
+  const hslDesaturateds = [];
   let stepLength = Number(desaturatedQuantity);
   for(let step = 1; (step <= stepLength); step++) {
     baseHarmoniesAndInversesColorList.map((hslColor, i) => {
@@ -122,10 +129,13 @@ export const getDesaturateds = (baseHarmoniesAndInversesColorList, desaturatedQu
       let s = hslColor.s - (stepDistance * step);
       const l = (hslColor.l);
       const a = hslColor.a;
-      const key = (hslColor.matchType + (Number(i) + 1));
-      const matchType = 'desaturated-' + 'step' + step + '-' + key;
-      hslDarkers.push({ h, s, l, a, matchType, step });
+      let key = (hslColor.matchType);
+      if(key === 'base0') {
+        key = 'base';
+      }
+      const matchType = 'desaturated-' + key + '-step' + step;
+      hslDesaturateds.push({ h, s, l, a, matchType, step });
     });
   }
-  return hslDarkers;
+  return hslDesaturateds;
 };

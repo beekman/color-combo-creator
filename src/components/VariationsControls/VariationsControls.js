@@ -27,7 +27,7 @@ const VariationsControls = (color) => {
   const [swatchToggled, setSwatchToggled] = useState(true);
   const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
   const [postcssExportText, setPostcssExportText] = useState('base: hsl(0, 100%, 50%);');
-  const [cssExportText, setCssExportText] = useState('base{\nhsl(0, 100%, 50%);\n}');
+  const [cssExportText, setCssExportText] = useState('.base{\nhsl(0, 100%, 50%);\n}');
 
   useEffect(() => {
     setInverseMax(Number(harmonyQuantity) + 1);
