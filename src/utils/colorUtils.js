@@ -125,7 +125,7 @@ export const getDesaturateds = (baseHarmoniesAndInversesColorList, desaturatedQu
   for(let step = 1; (step <= stepLength); step++) {
     baseHarmoniesAndInversesColorList.map((hslColor, i) => {
       const h = hslColor.h;
-      const stepDistance = (hslColor.s / (Number(desaturatedQuantity) + 1));
+      const stepDistance = (hslColor.s / (Number(desaturatedQuantity)));
       let s = hslColor.s - (stepDistance * step);
       const l = (hslColor.l);
       const a = hslColor.a;
