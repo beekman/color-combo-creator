@@ -97,7 +97,8 @@ const VariationsControls = (color) => {
         {desaturatedSwatches}
       </section>
       <section className={styles.export}>
-        <h3>PostCSS Values Variables color list</h3>
+        <h2>Palette Export Options</h2>
+        <h3><a href="https://github.com/css-modules/css-modules/blob/master/docs/values-variables.md" target="_blank">PostCSS Values Variables</a> color list</h3>
         <textarea className={styles.cssOutputText} value={postcssExportText} onChange={({ postcssValuesVariables }) => setPostcssExportText(postcssValuesVariables)} />
         <h3>CSS stylesheet</h3>
         <textarea className={styles.cssOutputText} value={cssExportText} onChange={({ cssClasses }) => setCssExportText(cssClasses)} />

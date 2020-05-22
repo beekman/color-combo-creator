@@ -3,7 +3,7 @@ export const getPostcssValuesVariables = (colorSet) => {
   if(colorSet.length > 0) {
     colorSet.map((color, i) => {
       let key = (color.matchType);
-      let line = `${key}: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%);\n`;
+      let line = `@value ${key}: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%);\n`;
       postCSSVariables += line;
     });
   }
@@ -15,7 +15,9 @@ export const getCssClasses = (colorSet) => {
   if(colorSet.length > 0) {
     colorSet.map((color, i) => {
       let key = color.matchType;
-      let line = `${key} {\ncolor: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%);\n}\n`;
+      let line = `.${key}-color {\ncolor: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%);\n}\n`;
+      line = line + `.${key}-bg {\nbackground-color: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%);\n}\n`;
+      line = line + `.${key}-border {\nborder-color: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%);\n}\n`;
       styles += line;
     });
   }
