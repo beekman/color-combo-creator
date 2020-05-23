@@ -11,7 +11,7 @@ export const getHarmonies = (color, harmonyQuantity) => {
   let matchType = 'base';
   const step = '';
   let hslHarmonies = [];
-  hslHarmonies.push({ h, s, l, a, matchType });
+  hslHarmonies.push({ h, s, l, a, matchType, step });
   let count = 1;
   while((current - degreeShift) >= 0) {
     current = current - degreeShift;
@@ -42,11 +42,13 @@ export const getInverses = (hsl, hslHarmonies, inverseQuantity) => {
   const hslInverses = [];
   const step = '';
   if(inverseQuantity > 0) {
-    let count = 1;
+    let count = 0;
     while(inverseQuantity > count) {
       let currentColor = hslHarmonies[count];
       const h = getOppositeDegree(currentColor.h);
-      const matchType = 'inverse' + count;
+      let type = (currentColor.matchType);
+      if(!type) { type = 'base'; }
+      const matchType = 'inverse-of-' + type;
       hslInverses.push({ h, s, l, a, matchType, step });
       count++;
     }
