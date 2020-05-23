@@ -12,7 +12,7 @@ export const getHarmonies = (color, harmonyQuantity) => {
   const step = '';
   let hslHarmonies = [];
   hslHarmonies.push({ h, s, l, a, matchType });
-  let count = 0;
+  let count = 1;
   while((current - degreeShift) >= 0) {
     current = current - degreeShift;
     h = current;
@@ -24,9 +24,9 @@ export const getHarmonies = (color, harmonyQuantity) => {
   while((current + degreeShift) < 360) {
     current = current + degreeShift;
     h = current;
-    count++;
     const matchType = 'harmony' + count;
-    hslHarmonies.push({ h, s, l, a, matchType });
+    hslHarmonies.push({ h, s, l, a, matchType, step });
+    count++;
   }
   return hslHarmonies;
 };

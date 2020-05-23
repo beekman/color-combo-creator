@@ -10,57 +10,57 @@ describe('tests for getHarmonies function', () => {
   it('should return a single color for complements of 0', () => {
     const hsl = { h: 180, s: 1, l: 0.5, a: 1 };
     const harmonyQuantity = 0;
-    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 180, s: 1, l: 0.5, a: 1, matchType: 'harmony' }]);
+    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 180, s: 1, l: 0.5, a: 1, matchType: 'base' }]);
   });
 
   it('should return base plus 1 color with hue of 0 for 1 harmonyQuantity and base color with h:180', () => {
     const hsl = { h: 180, s: 1, l: 0.5, a: 1 };
     const harmonyQuantity = 1;
-    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 180, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { h: 0, s: 1, l: 0.5, a: 1, matchType: 'harmony' }]);
+    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 180, s: 1, l: 0.5, a: 1, matchType: 'base' }, { h: 0, s: 1, l: 0.5, a: 1, matchType: 'harmony1', step: '' }]);
   });
 
   it('should return 3 colors with equidistant hues above and below for 2 harmonies and color with h:180', () => {
     const hsl = { h: 180, s: 1, l: 0.5, a: 1 };
     const harmonyQuantity = 2;
-    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 180, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { h: 60, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { h: 300, s: 1, l: 0.5, a: 1, matchType: 'harmony' }]);
+    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 180, s: 1, l: 0.5, a: 1, matchType: 'base' }, { h: 60, s: 1, l: 0.5, a: 1, matchType: 'harmony1', step: '' }, { h: 300, s: 1, l: 0.5, a: 1, matchType: 'harmony2', step: '' }]);
   });
   it('should return 4 colors with equidistant hues for color with h:180 and 3 harmonies', () => {
     const hsl = { h: 180, s: 1, l: 0.5, a: 1 };
     const harmonyQuantity = 3;
-    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 180, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { h: 90, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { h: 0, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { h: 270, s: 1, l: 0.5, a: 1, matchType: 'harmony' }]);
+    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 180, s: 1, l: 0.5, a: 1, matchType: 'base' }, { h: 90, s: 1, l: 0.5, a: 1, matchType: 'harmony1', step: '' }, { h: 0, s: 1, l: 0.5, a: 1, matchType: 'harmony2', step: '' }, { h: 270, s: 1, l: 0.5, a: 1, matchType: 'harmony3', step: '' }]);
   });
 
 
   it('should return base + color of hue 180 for 1 harmonyQuantity and a base color with h:0', () => {
     const hsl = { h: 0, s: 1, l: 0.5, a: 1 };
     const harmonyQuantity = 1;
-    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 0, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { a: 1, h: 180, l: 0.5, s: 1, matchType: 'harmony' }]);
+    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 0, s: 1, l: 0.5, a: 1, matchType: 'base' }, { a: 1, h: 180, l: 0.5, s: 1, matchType: 'harmony1', step: '' }]);
   });
   it('should return base + 2 colors with hues above 0 for 2 harmonies and base color with h:0', () => {
     const hsl = { h: 0, s: 1, l: 0.5, a: 1 };
     const harmonyQuantity = 2;
-    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 0, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { h: 120, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { h: 240, s: 1, l: 0.5, a: 1, matchType: 'harmony' }]);
+    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 0, s: 1, l: 0.5, a: 1, matchType: 'base' }, { h: 120, s: 1, l: 0.5, a: 1, matchType: 'harmony1', step: '' }, { h: 240, s: 1, l: 0.5, a: 1, matchType: 'harmony2', step: '' }]);
   });
   it('should return base + 3 colors with hues above 0 for 3 harmonies and base color with h:0', () => {
     const hsl = { h: 0, s: 1, l: 0.5, a: 1 };
     const harmonyQuantity = 3;
-    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 0, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { h: 90, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { h: 180, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { h: 270, s: 1, l: 0.5, a: 1, matchType: 'harmony' }]);
+    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 0, s: 1, l: 0.5, a: 1, matchType: 'base' }, { h: 90, s: 1, l: 0.5, a: 1, matchType: 'harmony1', step: '' }, { h: 180, s: 1, l: 0.5, a: 1, matchType: 'harmony2', step: '' }, { h: 270, s: 1, l: 0.5, a: 1, matchType: 'harmony3', step: '' }]);
   });
 
   it('should return base + color with hue 179 for 1 harmonyQuantity and base color with h:359', () => {
     const hsl = { h: 359, s: 1, l: 0.5, a: 1 };
     const harmonyQuantity = 1;
-    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 359, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { a: 1, h: 179, l: 0.5, s: 1, matchType: 'harmony' }]);
+    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 359, s: 1, l: 0.5, a: 1, matchType: 'base' }, { a: 1, h: 179, l: 0.5, s: 1, matchType: 'harmony1', step: '' }]);
   });
   it('should return base + colors of hues 119 and 239 for 2 harmonies and base color with h:359', () => {
     const hsl = { h: 359, s: 1, l: 0.5, a: 1 };
     const harmonyQuantity = 2;
-    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 359, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { h: 239, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { h: 119, s: 1, l: 0.5, a: 1, matchType: 'harmony' }]);
+    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 359, s: 1, l: 0.5, a: 1, matchType: 'base' }, { h: 239, s: 1, l: 0.5, a: 1, matchType: 'harmony1', step: '' }, { h: 119, s: 1, l: 0.5, a: 1, matchType: 'harmony2', step: '' }]);
   });
   it('should return three colors with hues below 359 for 3 harmonies and base color with h:359', () => {
     const hsl = { h: 359, s: 1, l: 0.5, a: 1 };
     const harmonyQuantity = 3;
-    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 359, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { h: 269, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { h: 179, s: 1, l: 0.5, a: 1, matchType: 'harmony' }, { h: 89, s: 1, l: 0.5, a: 1, matchType: 'harmony' }]);
+    expect(getHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 359, s: 1, l: 0.5, a: 1, matchType: 'base' }, { h: 269, s: 1, l: 0.5, a: 1, matchType: 'harmony1', step: '' }, { h: 179, s: 1, l: 0.5, a: 1, matchType: 'harmony2', step: '' }, { h: 89, s: 1, l: 0.5, a: 1, matchType: 'harmony3', step: '' }]);
   });
 });
 
@@ -143,7 +143,7 @@ describe('tests for getDesaturateds function', () => {
     expect(getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity)).toEqual([]);
   });
   it('should return a single color for getDesaturateds with desaturatedQuantity: 1 and a list of length 1', () => {
-    const baseHarmoniesAndInversesColorList = [{ h: 0, s: 1, l: 0.5, a: 1 }];
+    const baseHarmoniesAndInversesColorList = [{ h: 0, s: 1, l: 0.5, a: 1, matchType: 'desaturated' }];
     const desaturatedQuantity = 1;
     expect(getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity)).toEqual([{ a: 1, h: 0, l: 0.5, s: 0.5, matchType: 'desaturated', step: 1 }]);
   });
