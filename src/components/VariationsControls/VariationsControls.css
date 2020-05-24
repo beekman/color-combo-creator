@@ -26,15 +26,16 @@
   .Swatch{
     display: block;
     margin: 0.125rem;
-    height: 4rem;
-    width: 4rem;
-    font-size: 0.5rem;
+    height: 5rem;
+    width: 5rem;
+    font-size: 0.625rem;
     .details {
       overflow: hidden;
       position: absolute;
       margin-top: .2rem;
-      margin-left: .2rem;
-      width: 2.6rem;
+      margin-left: .1rem;
+      padding-left: .1rem;
+      width: 4.6rem;
       text-shadow: white .075rem 0, white 0 .075rem, white -.075rem 0, white 0 -.075rem;
 
     }

@@ -11,8 +11,8 @@ export const getHarmonies = (color, harmonyQuantity) => {
   let matchType = 'base';
   const step = '';
   let hslHarmonies = [];
-  hslHarmonies.push({ h, s, l, a, matchType });
-  let count = 0;
+  hslHarmonies.push({ h, s, l, a, matchType, step });
+  let count = 1;
   while((current - degreeShift) >= 0) {
     current = current - degreeShift;
     h = current;
@@ -24,9 +24,9 @@ export const getHarmonies = (color, harmonyQuantity) => {
   while((current + degreeShift) < 360) {
     current = current + degreeShift;
     h = current;
-    count++;
     const matchType = 'harmony' + count;
-    hslHarmonies.push({ h, s, l, a, matchType });
+    hslHarmonies.push({ h, s, l, a, matchType, step });
+    count++;
   }
   return hslHarmonies;
 };
@@ -42,11 +42,13 @@ export const getInverses = (hsl, hslHarmonies, inverseQuantity) => {
   const hslInverses = [];
   const step = '';
   if(inverseQuantity > 0) {
-    let count = 1;
+    let count = 0;
     while(inverseQuantity > count) {
       let currentColor = hslHarmonies[count];
       const h = getOppositeDegree(currentColor.h);
-      const matchType = 'inverse' + count;
+      let type = (currentColor.matchType);
+      if(!type) { type = 'base'; }
+      const matchType = 'inverse-of-' + type;
       hslInverses.push({ h, s, l, a, matchType, step });
       count++;
     }
@@ -125,7 +127,7 @@ export const getDesaturateds = (baseHarmoniesAndInversesColorList, desaturatedQu
   for(let step = 1; (step <= stepLength); step++) {
     baseHarmoniesAndInversesColorList.map((hslColor, i) => {
       const h = hslColor.h;
-      const stepDistance = (hslColor.s / (Number(desaturatedQuantity) + 1));
+      const stepDistance = (hslColor.s / (Number(desaturatedQuantity)));
       let s = hslColor.s - (stepDistance * step);
       const l = (hslColor.l);
       const a = hslColor.a;
