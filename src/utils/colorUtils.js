@@ -55,7 +55,6 @@ export const getInverses = (hsl, hslHarmonies, inverseQuantity) => {
   }
   return hslInverses;
 };
-
 export const getBaseHarmoniesAndInversesColorList = (hsl, hslHarmonies, hslInverses) => {
   let baseHarmoniesAndInversesColorList = [];
   let h = hsl.h;

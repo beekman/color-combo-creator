@@ -17,12 +17,12 @@ import { TiAdjustBrightness } from 'react-icons/ti';
 
 const VariationsControls = (color) => {
 
-  const [harmonyQuantity, setHarmonyQuantity] = useState('0');
-  const [inverseQuantity, setInverseQuantity] = useState('0');
-  const [inverseMax, setInverseMax] = useState('1');
-  const [lighterQuantity, setLighterQuantity] = useState('0');
-  const [darkerQuantity, setDarkerQuantity] = useState('0');
-  const [desaturatedQuantity, setDesaturatedQuantity] = useState('0');
+  const [harmonyQuantity, setHarmonyQuantity] = useState(0);
+  const [inverseQuantity, setInverseQuantity] = useState(0);
+  const [inverseMax, setInverseMax] = useState(1);
+  const [lighterQuantity, setLighterQuantity] = useState(0);
+  const [darkerQuantity, setDarkerQuantity] = useState(0);
+  const [desaturatedQuantity, setDesaturatedQuantity] = useState(0);
   const [darkMode, setDarkMode] = useState(true);
   const [swatchToggled, setSwatchToggled] = useState(true);
   const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);

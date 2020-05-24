@@ -9,12 +9,12 @@ import { DarkModeToggle } from '../components/DarkModeToggle';
 class PalettePicker extends React.Component {
   state = {
     displayColorPicker: false,
-    color: {
+   color: {
       h: 0,
       s: 1,
       l: .5,
       a: 1,
-    },
+    }, 
   };
 
   handleClick = () => {
