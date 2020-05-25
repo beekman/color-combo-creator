@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './VariationsControls.css';
+import { makeColorSwatches } from '../../utils/colorSwatches';
 import {
   isGrayscale, isDark,
   getHarmonies, getOppositeDegree,
@@ -7,59 +8,31 @@ import {
   getLighters, getDarkers, getDesaturateds
 } from '../../utils/colorUtils';
 import { getPostcssValuesVariables, getCssClasses } from '../../utils/styleExporters';
-import { hslToRgb, hslToObject } from '../../utils/colorConverters';
-import { createPopper } from '@popperjs/core';
-
 import { MdInvertColors, MdBrightnessLow, MdFormatColorReset } from 'react-icons/md';
 import { IoIosColorFilter } from 'react-icons/io';
 import { TiAdjustBrightness } from 'react-icons/ti';
 
 
-const VariationsControls = (color, harmonyQuantity, inverseQuantity, lighterQuantity, darkerQuantity, desaturatedQuantity, postcssExportText, cssExportText, handleSwatchClick) => {
 
-  useEffect(() => {
-    setInverseMax(Number(harmonyQuantity) + 1);
-    const hslHarmonies = getHarmonies(color.color, harmonyQuantity);
-    const hslInverses = getInverses(color.color, hslHarmonies, inverseQuantity);
-    baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.color, hslHarmonies, hslInverses);
-    hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
-    hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
-    hslDesaturateds = getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity);
-    const postcssValuesVariables = (getPostcssValuesVariables(hslHarmonies)) + (getPostcssValuesVariables(hslInverses)) + (getPostcssValuesVariables(hslLighters)) + (getPostcssValuesVariables(hslDarkers)) + (getPostcssValuesVariables(hslDesaturateds));
-    const cssClasses = (getCssClasses(color.color)) + (getCssClasses(hslHarmonies)) + (getCssClasses(hslInverses)) + (getCssClasses(hslLighters)) + (getCssClasses(hslDarkers)) + (getCssClasses(hslDesaturateds));
-    console.log(cssClasses);
+const VariationsControls = (props) => {
+  const [color, setColor] = useState(props.color);
+  const [harmonyQuantity, setHarmonyQuantity] = useState(props.harmonyQuantity);
+  const [inverseQuantity, setInverseQuantity] = useState(props.inverseQuantity);
+  const [inverseMax, setInverseMax] = useState(props.inverseMax);
+  const [lighterQuantity, setLighterQuantity] = useState(props.lighterQuantity);
+  const [darkerQuantity, setDarkerQuantity] = useState(darkerQuantity);
+  const [desaturatedQuantity, setDesaturatedQuantity] = useState(desaturatedQuantity);
+  const [postcssExportText, setPostcssExportText] = useState(props.postcssExportText);
+  const [cssExportText, setCssExportText] = useState(props.cssExportText);
+  const [swatchToggled, setSwatchToggled] = useState(props.swatchToggled);
+  const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
 
-    makeColorSwatches(hslHarmonies);
-    makeColorSwatches(hslInverses);
-    makeColorSwatches(hslLighters);
-    makeColorSwatches(hslDarkers);
-    makeColorSwatches(hslDesaturateds);
-    setPostcssExportText(postcssValuesVariables);
-    setCssExportText(cssClasses);
-  });
-
-  let hslHarmonies = getHarmonies(color.color, harmonyQuantity);
-  let hslInverses = getInverses(color.color, hslHarmonies, inverseQuantity);
-  let baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.color, hslHarmonies, hslInverses);
+  let hslHarmonies = getHarmonies(color, harmonyQuantity);
+  let hslInverses = getInverses(color, hslHarmonies, inverseQuantity);
+  let baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color, hslHarmonies, hslInverses);
   let hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
   let hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
   let hslDesaturateds = getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity);
-
-  const makeColorSwatches = (colorSet) => {
-    if(colorSet.length) {
-      return colorSet.map((color, i) => {
-        let key = (color.matchType + (Number(i) + 1));
-        return (
-          <div key={key} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }} className={styles.Swatch} onClick={handleSwatchClick}>
-            <aside className={`${styles.details} ${swatchToggled && styles.hidden}`}>
-              <strong>{(color.matchType)}</strong> hsl({(color.h).toFixed(0)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)
-            </aside>
-          </div>
-        );
-      });
-    }
-  };
-
 
   let harmonySwatches = makeColorSwatches(hslHarmonies);
   let inverseSwatches = makeColorSwatches(hslInverses);
@@ -67,9 +40,31 @@ const VariationsControls = (color, harmonyQuantity, inverseQuantity, lighterQuan
   let darkerSwatches = makeColorSwatches(hslDarkers);
   let desaturatedSwatches = makeColorSwatches(hslDesaturateds);
 
+
+
+  useEffect(() => {
+    setInverseMax(Number(harmonyQuantity) + 1);
+    const hslHarmonies = getHarmonies(color, harmonyQuantity);
+    const hslInverses = getInverses(color, hslHarmonies, inverseQuantity);
+    baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color, hslHarmonies, hslInverses);
+    hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
+    hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
+    hslDesaturateds = getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity);
+    makeColorSwatches(hslHarmonies);
+    makeColorSwatches(hslInverses);
+    makeColorSwatches(hslLighters);
+    makeColorSwatches(hslDarkers);
+    makeColorSwatches(hslDesaturateds);
+    const postcssValuesVariables = (getPostcssValuesVariables(hslHarmonies)) + (getPostcssValuesVariables(hslInverses)) + (getPostcssValuesVariables(hslLighters)) + (getPostcssValuesVariables(hslDarkers)) + (getPostcssValuesVariables(hslDesaturateds));
+    const cssClasses = (getCssClasses(color)) + (getCssClasses(hslHarmonies)) + (getCssClasses(hslInverses)) + (getCssClasses(hslLighters)) + (getCssClasses(hslDarkers)) + (getCssClasses(hslDesaturateds));
+    setPostcssExportText(postcssValuesVariables);
+    setCssExportText(cssClasses);
+    console.log(cssClasses);
+  });
+
   return (
     <>
-      <div className={styles.VariationsControls} style={{ background: `hsl(${(color.color.h)}, ${color.color.s * 100}%, ${color.color.l * 150}%)`, borderWidth: '2px', borderColor: `hsl(${(getOppositeDegree(color.color.h))}, ${color.color.s * 100}%, ${color.color.l * 100}%)`, borderStyle: 'solid' }}>
+      <div className={styles.VariationsControls} style={{ background: `hsl(${(color.h)}, ${color.s * 100}%, ${color.l * 150}%)`, borderWidth: '2px', borderColor: `hsl(${(getOppositeDegree(color.h))}, ${color.s * 100}%, ${color.l * 100}%)`, borderStyle: 'solid' }}>
         <label htmlFor="harmonyQuantity" title="Complementary colors, evenly spaced around the color wheel, relative to the base hue. 2 will give you a split complementary triad scheme, 3 will return a color from each quarter of the color wheel."><IoIosColorFilter /><span className={styles.textLabel}>Harmonies</span></label><input type="number" id="harmonyQuantity" value={harmonyQuantity} min="0" max="36" onChange={({ target }) => setHarmonyQuantity(target.value)} />
         <label htmlFor="inverseQuantity" title="Colors opposite from the base & harmonic colors on the color wheel. First color is inverted base, subsequent colors are inverted harmonies."><MdInvertColors /><span className={styles.textLabel}>Inverses</span></label><input type="number" id="inverseQuantity" min="0" max={inverseMax} value={inverseQuantity} onChange={({ target }) => setInverseQuantity(target.value)} />
         <label htmlFor="lighterQuantity" title="Lighter color sets to generate from the base, harmonies, and inverses, with each increment stepping closer to white."><MdBrightnessLow /><span className={styles.textLabel}>Lighter</span> &times;<input type="number" id="lighterQuantity" value={lighterQuantity} min="0" max="20" onChange={({ target }) => setLighterQuantity(target.value)} /></label>
@@ -94,5 +89,6 @@ const VariationsControls = (color, harmonyQuantity, inverseQuantity, lighterQuan
     </>
   );
 };
+
 
 export default VariationsControls;

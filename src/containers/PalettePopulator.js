@@ -5,6 +5,15 @@ import Footer from '../components/Footer/Footer';
 import { PhotoshopPicker, HuePicker } from 'react-color';
 import { IoMdColorPalette } from 'react-icons/io';
 import { DarkModeToggle } from '../components/DarkModeToggle';
+import {
+  isGrayscale, isDark,
+  getHarmonies, getOppositeDegree,
+  getInverses, getBaseHarmoniesAndInversesColorList,
+  getLighters, getDarkers, getDesaturateds
+} from '../utils/colorUtils';
+import { getPostcssValuesVariables, getCssClasses } from '../utils/styleExporters';
+import { hslToRgb, hslToObject } from '../utils/colorConverters';
+import { createPopper } from '@popperjs/core';
 
 const PalettePickerFn = () => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
@@ -21,7 +30,6 @@ const PalettePickerFn = () => {
   const [postcssExportText, setPostcssExportText] = useState('base: hsl(0, 100%, 50%);');
   const [cssExportText, setCssExportText] = useState('.base{\nhsl(0, 100%, 50%);\n}');
 
-
   const handleClick = () => {
     setDisplayColorPicker({ displayColorPicker: !displayColorPicker });
   };
@@ -33,6 +41,8 @@ const PalettePickerFn = () => {
   const handleChange = (color) => {
     setColor({ color: color.hsl });
   };
+
+  useEffect(() => {});
 
   return (
     <>
@@ -53,9 +63,8 @@ const PalettePickerFn = () => {
           <div className={styles.hueBox}><HuePicker color={color} onChange={handleChange} height={'100%'} width={'100%'} /></div>
         </div>
       </div>
-      <div className={styles.toggleDetails}></div>
-      <VariationsControls color={color} harmonyQuantity={harmonyQuantity} inverseQuantity={inverseQuantity} lighterQuantity={lighterQuantity} darkerQuantity={darkerQuantity} desaturatedQuantity={desaturatedQuantity} postcssExportText={'base: hsl(0, 100%, 50%);\n'} cssExportText={'.base{\nhsl(0, 100%, 50%);\n}'} handleSwatchClick={handleSwatchClick} onChange={handleChange} />
-
+      
+      <VariationsControls color={color} harmonyQuantity={harmonyQuantity} inverseQuantity={inverseQuantity} inverseMax={inverseMax} lighterQuantity={lighterQuantity} darkerQuantity={darkerQuantity} desaturatedQuantity={desaturatedQuantity} postcssExportText={postcssExportText} cssExportText={cssExportText} swatchToggled={swatchToggled} onChange={handleChange} />
       <Footer color={color} />
     </>
   );
