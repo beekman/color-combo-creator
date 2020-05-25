@@ -14,7 +14,7 @@ class PalettePicker extends React.Component {
       s: 1,
       l: .5,
       a: 1,
-    }, 
+    },
   };
 
   handleClick = () => {

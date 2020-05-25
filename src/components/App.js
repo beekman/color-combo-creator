@@ -1,10 +1,10 @@
 import React from 'react';
-import PalettePicker from '../containers/PalettePicker';
+import PalettePopulator from '../containers/PalettePopulator';
 import './App.css';
 export default function App() {
   return (
     <>
-      <PalettePicker />
+      <PalettePopulator />
     </>
   );
 }

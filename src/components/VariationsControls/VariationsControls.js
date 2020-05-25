@@ -15,19 +15,7 @@ import { IoIosColorFilter } from 'react-icons/io';
 import { TiAdjustBrightness } from 'react-icons/ti';
 
 
-const VariationsControls = (color) => {
-
-  const [harmonyQuantity, setHarmonyQuantity] = useState(0);
-  const [inverseQuantity, setInverseQuantity] = useState(0);
-  const [inverseMax, setInverseMax] = useState(1);
-  const [lighterQuantity, setLighterQuantity] = useState(0);
-  const [darkerQuantity, setDarkerQuantity] = useState(0);
-  const [desaturatedQuantity, setDesaturatedQuantity] = useState(0);
-  const [darkMode, setDarkMode] = useState(true);
-  const [swatchToggled, setSwatchToggled] = useState(true);
-  const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
-  const [postcssExportText, setPostcssExportText] = useState('base: hsl(0, 100%, 50%);');
-  const [cssExportText, setCssExportText] = useState('.base{\nhsl(0, 100%, 50%);\n}');
+const VariationsControls = (color, harmonyQuantity, inverseQuantity, lighterQuantity, darkerQuantity, desaturatedQuantity, postcssExportText, cssExportText, handleSwatchClick) => {
 
   useEffect(() => {
     setInverseMax(Number(harmonyQuantity) + 1);
@@ -64,7 +52,7 @@ const VariationsControls = (color) => {
         return (
           <div key={key} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }} className={styles.Swatch} onClick={handleSwatchClick}>
             <aside className={`${styles.details} ${swatchToggled && styles.hidden}`}>
-             <strong>{(color.matchType)}</strong> hsl({(color.h).toFixed(0)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)
+              <strong>{(color.matchType)}</strong> hsl({(color.h).toFixed(0)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)
             </aside>
           </div>
         );
