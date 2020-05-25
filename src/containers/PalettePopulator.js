@@ -25,7 +25,7 @@ const PalettePopulator = () => {
   const [desaturatedQuantity, setDesaturatedQuantity] = useState(0);
   const [darkMode, setDarkMode] = useState(true);
   const [swatchToggled, setSwatchToggled] = useState(true);
-  const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
+
   const [postcssExportText, setPostcssExportText] = useState('base: hsl(0, 100%, 50%);');
   const [cssExportText, setCssExportText] = useState('.base{\nhsl(0, 100%, 50%);\n}');
 
@@ -41,7 +41,9 @@ const PalettePopulator = () => {
     setColor({ color: color.hsl });
   };
 
-  useEffect(() => {});
+  useEffect(() => {
+
+  });
 
   return (
     <>
@@ -52,7 +54,7 @@ const PalettePopulator = () => {
         <div className={styles.flex}>
           <div className={styles.swatch} onClick={handleClick}>
             <label htmlFor='baseColor' className={styles.label}>Set Base Color</label>
-            <div id='baseColor' className={styles.color}>
+            <div id='baseColor' className={styles.color} style={{ background: `hsl(${(color.h)}, ${color.s * 100}%, ${color.l * 100}%)` }}>
             </div>
             {displayColorPicker ? <div style={styles.popover}>
               <div className={styles.cover} onClick={handleClose} />

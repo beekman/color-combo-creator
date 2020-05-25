@@ -21,11 +21,12 @@ const VariationsControls = (props) => {
   const [inverseQuantity, setInverseQuantity] = useState(props.inverseQuantity);
   const [inverseMax, setInverseMax] = useState(props.inverseMax);
   const [lighterQuantity, setLighterQuantity] = useState(props.lighterQuantity);
-  const [darkerQuantity, setDarkerQuantity] = useState(darkerQuantity);
-  const [desaturatedQuantity, setDesaturatedQuantity] = useState(desaturatedQuantity);
+  const [darkerQuantity, setDarkerQuantity] = useState(props.darkerQuantity);
+  const [desaturatedQuantity, setDesaturatedQuantity] = useState(props.desaturatedQuantity);
   const [postcssExportText, setPostcssExportText] = useState(props.postcssExportText);
   const [cssExportText, setCssExportText] = useState(props.cssExportText);
   const [swatchToggled, setSwatchToggled] = useState(props.swatchToggled);
+
   const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
 
   let hslHarmonies = getHarmonies(color, harmonyQuantity);
@@ -90,7 +91,14 @@ const VariationsControls = (props) => {
   );
 };
 VariationsControls.propTypes = {
-  color: PropTypes.shape({}).isRequired,
+  color: PropTypes.shape({
+    h: PropTypes.number.isRequired,
+    s: PropTypes.number.isRequired,
+    l: PropTypes.number.isRequired,
+    a: PropTypes.number.isRequired,
+    matchType: PropTypes.string,
+    step: PropTypes.string
+  }).isRequired,
   harmonyQuantity: PropTypes.number.isRequired,
   inverseQuantity: PropTypes.number.isRequired,
   inverseMax: PropTypes.number.isRequired,

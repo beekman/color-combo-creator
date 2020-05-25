@@ -32,7 +32,6 @@ label {
   width: 6rem;
   height: 1.5rem;
   border-radius: 2px;
-  background: `hsl(${this.state.color.h}, ${this.state.color.s * 100}%, ${this.state.color.l * 100}%)`;
 };
 .swatch {
   padding: 0px;
