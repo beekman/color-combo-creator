@@ -11,11 +11,10 @@ import {
   getInverses, getBaseHarmoniesAndInversesColorList,
   getLighters, getDarkers, getDesaturateds
 } from '../utils/colorUtils';
-import { getPostcssValuesVariables, getCssClasses } from '../utils/styleExporters';
 import { hslToRgb, hslToObject } from '../utils/colorConverters';
 import { createPopper } from '@popperjs/core';
 
-const PalettePickerFn = () => {
+const PalettePopulator = () => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const [color, setColor] = useState({ h: 0, s: 1, l: .5, a: 1, matchType: 'base', step: '' });
   const [harmonyQuantity, setHarmonyQuantity] = useState(0);
@@ -63,11 +62,11 @@ const PalettePickerFn = () => {
           <div className={styles.hueBox}><HuePicker color={color} onChange={handleChange} height={'100%'} width={'100%'} /></div>
         </div>
       </div>
-      
+
       <VariationsControls color={color} harmonyQuantity={harmonyQuantity} inverseQuantity={inverseQuantity} inverseMax={inverseMax} lighterQuantity={lighterQuantity} darkerQuantity={darkerQuantity} desaturatedQuantity={desaturatedQuantity} postcssExportText={postcssExportText} cssExportText={cssExportText} swatchToggled={swatchToggled} onChange={handleChange} />
       <Footer color={color} />
     </>
   );
 };
 
-export default PalettePickerFn;
+export default PalettePopulator;

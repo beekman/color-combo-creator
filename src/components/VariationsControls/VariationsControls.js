@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './VariationsControls.css';
+import PropTypes from 'prop-types';
 import { makeColorSwatches } from '../../utils/colorSwatches';
 import {
   isGrayscale, isDark,
@@ -59,7 +60,6 @@ const VariationsControls = (props) => {
     const cssClasses = (getCssClasses(color)) + (getCssClasses(hslHarmonies)) + (getCssClasses(hslInverses)) + (getCssClasses(hslLighters)) + (getCssClasses(hslDarkers)) + (getCssClasses(hslDesaturateds));
     setPostcssExportText(postcssValuesVariables);
     setCssExportText(cssClasses);
-    console.log(cssClasses);
   });
 
   return (
@@ -72,7 +72,7 @@ const VariationsControls = (props) => {
         <label htmlFor="desaturatedQuantity" title="Less saturated color sets to generate from the base, harmonies, and inverses, with each increment stepping closer to grayscale."><MdFormatColorReset /><span className={styles.textLabel}>Desaturated</span> &times;<input type="number" id="desaturatedQuantity" value={desaturatedQuantity} min="0" max="20" onChange={({ target }) => setDesaturatedQuantity(target.value)} /></label>
       </div>
 
-      <section className={styles.ColorMatches}>
+      <section className={styles.ColorMatches}><button onClick={handleSwatchClick}>See swatches</button>
         {harmonySwatches}
         {inverseSwatches}
         {lighterSwatches}
@@ -81,7 +81,7 @@ const VariationsControls = (props) => {
       </section>
       <section className={styles.export}>
         <h2>Palette Export Options</h2>
-        <h3><a href="https://github.com/css-modules/css-modules/blob/master/docs/values-variables.md" target="_blank">PostCSS Values Variables</a> color list</h3>
+        <h3><a href="https://github.com/css-modules/css-modules/blob/master/docs/values-variables.md" target="_blank" rel="noopener noreferrer">PostCSS Values Variables</a> color list</h3>
         <textarea className={styles.cssOutputText} value={postcssExportText} onChange={({ postcssValuesVariables }) => setPostcssExportText(postcssValuesVariables)} />
         <h3>CSS stylesheet</h3>
         <textarea className={styles.cssOutputText} value={cssExportText} onChange={({ cssClasses }) => setCssExportText(cssClasses)} />
@@ -89,6 +89,16 @@ const VariationsControls = (props) => {
     </>
   );
 };
-
+VariationsControls.propTypes = {
+  color: PropTypes.shape({}).isRequired,
+  harmonyQuantity: PropTypes.number.isRequired,
+  inverseQuantity: PropTypes.number.isRequired,
+  inverseMax: PropTypes.number.isRequired,
+  lighterQuantity: PropTypes.number.isRequired,
+  darkerQuantity: PropTypes.number.isRequired,
+  desaturatedQuantity: PropTypes.number.isRequired,
+  postcssExportText: PropTypes.string.isRequired,
+  cssExportText: PropTypes.string.isRequired,
+};
 
 export default VariationsControls;
