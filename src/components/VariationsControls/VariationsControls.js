@@ -25,9 +25,10 @@ const VariationsControls = (props) => {
   const [desaturatedQuantity, setDesaturatedQuantity] = useState(props.desaturatedQuantity);
   const [postcssExportText, setPostcssExportText] = useState(props.postcssExportText);
   const [cssExportText, setCssExportText] = useState(props.cssExportText);
+  const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
   const [swatchToggled, setSwatchToggled] = useState(props.swatchToggled);
 
-  const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
+
 
   let hslHarmonies = getHarmonies(color, harmonyQuantity);
   let hslInverses = getInverses(color, hslHarmonies, inverseQuantity);

@@ -16,7 +16,7 @@ import { createPopper } from '@popperjs/core';
 
 const PalettePopulator = () => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
-  const [color, setColor] = useState({ h: 0, s: 1, l: .5, a: 1, matchType: 'base', step: '' });
+  const [color, setColor] = useState({ color: { h: 75, s: 1, l: .5, a: 1, matchType: 'base', step: '' } });
   const [harmonyQuantity, setHarmonyQuantity] = useState(0);
   const [inverseQuantity, setInverseQuantity] = useState(0);
   const [inverseMax, setInverseMax] = useState(1);
@@ -47,25 +47,25 @@ const PalettePopulator = () => {
 
   return (
     <>
-      <div className={styles.wrapper} style={{ background: `hsl(${(color.h)}, ${color.s * 100}%, ${color.l * 100}%)` }}>
+      <div className={styles.wrapper} style={{ background: `hsl(${(color.color.h)}, ${color.color.s * 100}%, ${color.color.l * 100}%)` }}>
         <header onClick={handleClick} style={styles.header}>
           <h1 className={styles.logo}> <IoMdColorPalette />Live Palette Populator</h1>
         </header>
         <div className={styles.flex}>
           <div className={styles.swatch} onClick={handleClick}>
             <label htmlFor='baseColor' className={styles.label}>Set Base Color</label>
-            <div id='baseColor' className={styles.color} style={{ background: `hsl(${(color.h)}, ${color.s * 100}%, ${color.l * 100}%)` }}>
+            <div id='baseColor' className={styles.color} style={{ background: `color(${(color.color.h)}, ${color.color.s * 100}%, ${color.color.l * 100}%)` }}>
             </div>
-            {displayColorPicker ? <div style={styles.popover}>
+            {displayColorPicker ? <div className={styles.popover}>
               <div className={styles.cover} onClick={handleClose} />
               <PhotoshopPicker color={color} onChange={handleChange} />
             </div> : null}
           </div>
-          <div className={styles.hueBox}><HuePicker color={color} onChange={handleChange} height={'100%'} width={'100%'} /></div>
+          <div className={styles.hueBox}><HuePicker color={color.color} onChange={handleChange} height={'100%'} width={'100%'} /></div>
         </div>
       </div>
 
-      <VariationsControls color={color} harmonyQuantity={harmonyQuantity} inverseQuantity={inverseQuantity} inverseMax={inverseMax} lighterQuantity={lighterQuantity} darkerQuantity={darkerQuantity} desaturatedQuantity={desaturatedQuantity} postcssExportText={postcssExportText} cssExportText={cssExportText} swatchToggled={swatchToggled} onChange={handleChange} />
+      <VariationsControls color={color.color} harmonyQuantity={harmonyQuantity} inverseQuantity={inverseQuantity} inverseMax={inverseMax} lighterQuantity={lighterQuantity} darkerQuantity={darkerQuantity} desaturatedQuantity={desaturatedQuantity} postcssExportText={postcssExportText} cssExportText={cssExportText} swatchToggled={swatchToggled} onChange={handleChange} />
       <Footer color={color} />
     </>
   );
