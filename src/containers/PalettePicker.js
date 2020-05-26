@@ -39,6 +39,7 @@ class PalettePicker extends React.Component {
         },
         header: {
           cursor: 'pointer',
+          display: 'flex'
         },
         logo: {
           textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
@@ -68,6 +69,7 @@ class PalettePicker extends React.Component {
           width: '6rem',
           height: '1.5rem',
           borderRadius: '2px',
+          margin: '1rem auto 0',
           background: `hsl(${this.state.color.h}, ${this.state.color.s * 100}%, ${this.state.color.l * 100}%)`,
         },
         swatch: {
@@ -98,12 +100,11 @@ class PalettePicker extends React.Component {
           <header onClick={this.handleClick} style={styles.header}>
 
             <h1 style={styles.logo}> <IoMdColorPalette />Live Palette Populator</h1>
+            <div id='baseColor' style={styles.color}><label htmlFor='baseColor' style={styles.label}>Set Base Color</label>
+            </div>
           </header>
           <div style={styles.flex}>
             <div style={styles.swatch} onClick={this.handleClick}>
-              <label htmlFor='baseColor' style={styles.label}>Set Base Color</label>
-              <div id='baseColor' style={styles.color}>
-              </div>
               {this.state.displayColorPicker ? <div style={styles.popover}>
                 <div style={styles.cover} onClick={this.handleClose} />
                 <PhotoshopPicker color={this.state.color} onChange={this.handleChange} />

@@ -39,7 +39,6 @@ const VariationsControls = (color) => {
     hslDesaturateds = getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity);
     const postcssValuesVariables = (getPostcssValuesVariables(hslHarmonies)) + (getPostcssValuesVariables(hslInverses)) + (getPostcssValuesVariables(hslLighters)) + (getPostcssValuesVariables(hslDarkers)) + (getPostcssValuesVariables(hslDesaturateds));
     const cssClasses = (getCssClasses(color.color)) + (getCssClasses(hslHarmonies)) + (getCssClasses(hslInverses)) + (getCssClasses(hslLighters)) + (getCssClasses(hslDarkers)) + (getCssClasses(hslDesaturateds));
-    console.log(cssClasses);
 
     makeColorSwatches(hslHarmonies);
     makeColorSwatches(hslInverses);
