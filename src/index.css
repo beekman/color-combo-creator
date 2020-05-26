@@ -11,14 +11,13 @@ body.light-mode {
 body.dark-mode {
   background-color: #10171d;
   color: #dfdfdf;
-  transition: background-color 0.3s ease;
   h2{
-    color: whitesmoke;
+    color: white;
     padding: 0 0.25rem;
     font-size: 1.2rem;
   }
   h3{
-    color: whitesmoke;
+    color: white;
     padding: 0 0.25rem;
     margin: 1rem 0 0;
     font-size:1rem;

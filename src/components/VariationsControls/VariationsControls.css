@@ -1,3 +1,13 @@
+body.dark-mode .VariationsControls {
+  .export {
+    textarea.cssOutputText {
+      background-color: #121;
+      color: white;
+      border-color: #ABA;
+    }
+  }
+}
+
 .VariationsControls {
   display: flex;
   flex-wrap: wrap;
@@ -48,19 +58,19 @@
 
 .export {
   h2{
-    color: white;
+
     padding: 0 0.25rem;
     font-size: 1.2rem;
   }
   h3{
-    color: white;
+
     padding: 0 0.25rem;
     margin: 1rem 0 0;
     font-size:1rem;
 
     a {
       text-decoration: none;
-      color:#BDF;
+
     }
   }
   textarea.cssOutputText  {
@@ -69,16 +79,23 @@
     font: 11px monospace;
     padding: .5em 0 .5em 0;
     text-indent: 0;
-    border: 1px #ddd solid;
     margin: 7px;
     overflow-y: auto;
     overflow-x: hidden;
-    background-color: #101;
-    color: whitesmoke;
-    border: none;
     height: 50vh;
   }
 }
+
+body.light-mode .export {
+  color: black;
+  textarea.cssOutputText{
+    background-color: #FFF;
+    color: black;
+    border: 1px solid #101;
+  }
+}
+
+
 
 @media screen and (max-width: 840px){
   .VariationsControls {
