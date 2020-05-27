@@ -47,23 +47,20 @@
 }
 
 .export {
+  color: white;
   h2{
-    color: white;
     padding: 0 0.25rem;
     font-size: 1.2rem;
   }
   h3{
-    color: white;
-    padding: 0 0.25rem;
-    margin: 1rem 0 0;
-    font-size:1rem;
 
     a {
       text-decoration: none;
       color:#BDF;
     }
   }
-  textarea.cssOutputText  {
+
+  textarea.cssOutputText, textarea.postcssOutputText  {
     width: 98%;
     height: auto;
     font: 11px monospace;
@@ -87,4 +84,24 @@
       visibility: hidden;
     }
   }
+}
+.postcssExportToggler {
+}
+
+.postcssExportToggler:after, .cssExportToggler:after {
+content: "\2212";/* Unicode character for "minus" sign (+) */
+margin-left: 5px;
+color: gray;
+}
+
+.expandable:after{
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  margin-left: 5px;
+  color: gray;
+}
+
+
+.hidden {
+  display:none;
+  visibility: hidden;
 }
