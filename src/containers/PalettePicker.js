@@ -2,7 +2,7 @@ import React from 'react';
 import reactCSS from 'reactcss';
 import VariationsControls from '../components/VariationsControls/VariationsControls';
 import Footer from '../components/Footer/Footer';
-import { PhotoshopPicker, HuePicker } from 'react-color';
+import { ChromePicker, HuePicker } from 'react-color';
 import { IoMdColorPalette } from 'react-icons/io';
 import { DarkModeToggle } from '../components/DarkModeToggle';
 
@@ -107,7 +107,7 @@ class PalettePicker extends React.Component {
             <div style={styles.swatch} onClick={this.handleClick}>
               {this.state.displayColorPicker ? <div style={styles.popover}>
                 <div style={styles.cover} onClick={this.handleClose} />
-                <PhotoshopPicker color={this.state.color} onChange={this.handleChange} />
+                <ChromePicker color={this.state.color} disableAlpha={true} onChange={this.handleChange} />
               </div> : null}
             </div>
             <div style={styles.hueBox}>

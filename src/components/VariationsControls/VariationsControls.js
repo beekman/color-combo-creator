@@ -7,9 +7,6 @@ import {
   getLighters, getDarkers, getDesaturateds
 } from '../../utils/colorUtils';
 import { getPostcssValuesVariables, getCssClasses } from '../../utils/styleExporters';
-import { hslToRgb, hslToObject } from '../../utils/colorConverters';
-import { createPopper } from '@popperjs/core';
-
 import { MdInvertColors, MdBrightnessLow, MdFormatColorReset } from 'react-icons/md';
 import { IoIosColorFilter } from 'react-icons/io';
 import { TiAdjustBrightness } from 'react-icons/ti';
@@ -67,7 +64,7 @@ const VariationsControls = (color) => {
         return (
           <div key={key} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }} className={styles.Swatch} onClick={handleSwatchClick}>
             <aside className={`${styles.details} ${swatchToggled && styles.hidden}`}>
-              <strong>{(color.matchType)}</strong> hsl({(color.h).toFixed(0)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)
+              <strong>{(color.matchType)}</strong> hsl({(color.h).toFixed(1)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)
             </aside>
           </div>
         );
@@ -101,7 +98,7 @@ const VariationsControls = (color) => {
       </section>
       <section className={styles.export}>
         <h2>Palette Export Options</h2>
-        <h3 className={`${styles.postcssExportToggler} ${postcssExportToggled && styles.expandable}`} onClick={handlePostcssExportClick}>PostCSS Values Variables color list <a href="https://github.com/css-modules/css-modules/blob/master/docs/values-variables.md" target="_blank">?</a></h3>
+        <h3 className={`${styles.postcssExportToggler} ${postcssExportToggled && styles.expandable}`} onClick={handlePostcssExportClick}>PostCSS Values Variables color list<a href="https://github.com/css-modules/css-modules/blob/master/docs/values-variables.md" target="_blank">*</a></h3>
         <textarea className={`${styles.postcssOutputText} ${postcssExportToggled && styles.hidden}`} value={postcssExportText} onChange={({ postcssValuesVariables }) => setPostcssExportText(postcssValuesVariables)} />
         <h3 className={`${styles.cssExportToggler} ${cssExportToggled && styles.expandable}`} onClick={handleCssExportClick}>CSS stylesheet</h3>
         <textarea className={`${styles.cssOutputText} ${cssExportToggled && styles.hidden}`} value={cssExportText} onChange={({ cssClasses }) => setCssExportText(cssClasses)} />
