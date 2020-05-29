@@ -15,6 +15,21 @@ class PalettePicker extends React.Component {
       l: .5,
       a: 1,
     },
+    harmonyQuantity: 0,
+    inverseQuantity: 0,
+    inverseMax: 1,
+    lighterQuantity: 0,
+    darkerQuantity: 0,
+    desaturatedQuantity: 0,
+    swatchToggled: true,
+    postcssExportText: '',
+    cssExportText: '',
+    cssExportToggled: true,
+    exportHexToggled: true,
+    exportHslToggled: false,
+    exportRgbToggled: false,
+    postcssExportToggled: true,
+    darkMode: true
   };
 
   handleClick = () => {
@@ -109,14 +124,30 @@ class PalettePicker extends React.Component {
               {this.state.displayColorPicker ? <div style={styles.popover}>
 
                 <div style={styles.cover} onClick={this.handleClose} />
-                  <ChromePicker color={this.state.color} disableAlpha={true} onChange={this.handleChange} />
+                <ChromePicker color={this.state.color} disableAlpha={true} onChange={this.handleChange} />
               </div> : null}
             </div>
             <div style={styles.hueBox}>
               <HuePicker color={this.state.color} onChange={this.handleChange} height={'100%'} width={'100%'} /></div>
           </div>
         </div>
-        <VariationsControls color={this.state.color} onChange={this.handleChange} />
+        <VariationsControls color={this.state.color}
+          harmonyQuantity={this.state.harmonyQuantity}
+          inverseQuantity={this.state.inverseQuantity}
+          inverseMax={this.state.inverseMax}
+          lighterQuantity={this.state.lighterQuantity}
+          darkerQuantity={this.state.darkerQuantity}
+          desaturatedQuantity={this.state.desaturatedQuantity}
+          swatchToggled={this.state.swatchToggled}
+          postcssExportText={this.state.postcssExportText}
+          cssExportText={this.state.cssExportText}
+          cssExportToggled={this.state.cssExportToggled}
+          postcssExportToggled={this.state.postcssExportToggled}
+          exportHexToggled={this.state.exportHexToggled}
+          exportHslToggled={this.state.exportHslToggled}
+          exportRgbToggled={this.state.exportRgbToggled}
+          darkMode={this.state.darkMode}
+          onChange={this.handleChange} />
 
         <Footer color={this.state.color} />
       </>

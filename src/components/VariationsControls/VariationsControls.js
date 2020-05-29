@@ -17,23 +17,24 @@ import { TiAdjustBrightness } from 'react-icons/ti';
 
 const VariationsControls = (color) => {
 
-  const [harmonyQuantity, setHarmonyQuantity] = useState(0);
+  const [harmonyQuantity, setHarmonyQuantity] = useState(props.harmonyQuantity);
   const [inverseQuantity, setInverseQuantity] = useState(0);
   const [inverseMax, setInverseMax] = useState(1);
   const [lighterQuantity, setLighterQuantity] = useState(0);
   const [darkerQuantity, setDarkerQuantity] = useState(0);
   const [desaturatedQuantity, setDesaturatedQuantity] = useState(0);
-  const [darkMode, setDarkMode] = useState(true);
   const [swatchToggled, setSwatchToggled] = useState(true);
   const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
   const [postcssExportText, setPostcssExportText] = useState('');
   const [cssExportText, setCssExportText] = useState('');
   const [cssExportToggled, setCssExportToggled] = useState(true);
+  const [postcssExportToggled, setPostcssExportToggled] = useState(true);
   const [exportHexToggled, setExportHexToggled] = useState(true);
   const [exportHslToggled, setHslToggled] = useState(false);
   const [exportRgbToggled, setExportRgbToggled] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const handleCssExportClick = () => setCssExportToggled((toggled) => !toggled);
-  const [postcssExportToggled, setPostcssExportToggled] = useState(true);
+
   const handlePostcssExportClick = () => setPostcssExportToggled((toggled) => !toggled);
 
   useEffect(() => {
