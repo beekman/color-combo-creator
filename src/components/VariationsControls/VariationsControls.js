@@ -17,18 +17,21 @@ import { TiAdjustBrightness } from 'react-icons/ti';
 
 const VariationsControls = (color) => {
 
-  const [harmonyQuantity, setHarmonyQuantity] = useState('0');
-  const [inverseQuantity, setInverseQuantity] = useState('0');
-  const [inverseMax, setInverseMax] = useState('1');
-  const [lighterQuantity, setLighterQuantity] = useState('0');
-  const [darkerQuantity, setDarkerQuantity] = useState('0');
-  const [desaturatedQuantity, setDesaturatedQuantity] = useState('0');
+  const [harmonyQuantity, setHarmonyQuantity] = useState(0);
+  const [inverseQuantity, setInverseQuantity] = useState(0);
+  const [inverseMax, setInverseMax] = useState(1);
+  const [lighterQuantity, setLighterQuantity] = useState(0);
+  const [darkerQuantity, setDarkerQuantity] = useState(0);
+  const [desaturatedQuantity, setDesaturatedQuantity] = useState(0);
   const [darkMode, setDarkMode] = useState(true);
   const [swatchToggled, setSwatchToggled] = useState(true);
   const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
   const [postcssExportText, setPostcssExportText] = useState('');
   const [cssExportText, setCssExportText] = useState('');
   const [cssExportToggled, setCssExportToggled] = useState(true);
+  const [exportHexToggled, setExportHexToggled] = useState(true);
+  const [exportHslToggled, setHslToggled] = useState(false);
+  const [exportRgbToggled, setExportRgbToggled] = useState(false);
   const handleCssExportClick = () => setCssExportToggled((toggled) => !toggled);
   const [postcssExportToggled, setPostcssExportToggled] = useState(true);
   const handlePostcssExportClick = () => setPostcssExportToggled((toggled) => !toggled);
@@ -41,14 +44,14 @@ const VariationsControls = (color) => {
     hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
     hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
     hslDesaturateds = getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity);
-    const postcssValuesVariables = (getPostcssValuesVariables(hslHarmonies)) + (getPostcssValuesVariables(hslInverses)) + (getPostcssValuesVariables(hslLighters)) + (getPostcssValuesVariables(hslDarkers)) + (getPostcssValuesVariables(hslDesaturateds));
+    const postcssValuesVariables = ((getPostcssValuesVariables(hslHarmonies))) + (((getPostcssValuesVariables(hslInverses)))) + ((getPostcssValuesVariables(hslLighters))) + ((getPostcssValuesVariables(hslDarkers))) + ((getPostcssValuesVariables(hslDesaturateds)));
     const cssClasses = (getCssClasses(color.color)) + (getCssClasses(hslHarmonies)) + (getCssClasses(hslInverses)) + (getCssClasses(hslLighters)) + (getCssClasses(hslDarkers)) + (getCssClasses(hslDesaturateds));
-
     makeColorSwatches(hslHarmonies);
     makeColorSwatches(hslInverses);
     makeColorSwatches(hslLighters);
     makeColorSwatches(hslDarkers);
     makeColorSwatches(hslDesaturateds);
+
     setPostcssExportText(postcssValuesVariables);
     setCssExportText(cssClasses);
   });
@@ -64,15 +67,24 @@ const VariationsControls = (color) => {
     if(colorSet.length) {
       return colorSet.map((color, i) => {
         const key = (color.matchType + (Number(i) + 1));
+
         const rgb = hslToRgb(color.h, color.s, color.l);
         const hex = hslToHex(color.h, color.s, color.l);
+
         return (
           <div key={key} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }} className={styles.Swatch} onClick={handleSwatchClick}>
             <aside className={`${styles.details} ${swatchToggled && styles.hidden}`}>
               <strong>{(color.matchType)}</strong>
-              <p className={`${styles.hslValues} ${styles.hidden}`}>hsl({(color.h).toFixed(1)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)</p>
-              <p className={`${styles.rgbValues} ${styles.hidden}`}>rgb({rgb[0]}, {rgb[1]}, {rgb[2]})</p>
-              <p className={`${styles.hexValues}`}>{hex}</p>
+              {exportHslToggled &&
+                <p className={`${styles.hslValues} ${styles.hidden}`}>hsl({(color.h).toFixed(1)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)
+                </p>
+              }
+              {exportRgbToggled &&
+                <p className={`${styles.rgbValues} ${styles.hidden}`}>rgb({rgb[0]}, {rgb[1]}, {rgb[2]})</p>
+              }
+              {exportHexToggled &&
+                <p className={`${styles.hexValues}`}>{hex}</p>
+              }
             </aside>
           </div>
         );
