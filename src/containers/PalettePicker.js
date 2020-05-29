@@ -58,9 +58,10 @@ class PalettePicker extends React.Component {
         },
         label: {
           position: 'absolute',
-          fontSize: '0.666rem',
+          fontSize: '0.85rem',
           paddingTop: '.25rem',
           paddingLeft: '.5rem',
+          paddingRight: '.5rem',
           textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
           color: '#FFFFFF',
           cursor: 'pointer',
@@ -106,8 +107,9 @@ class PalettePicker extends React.Component {
           <div style={styles.flex}>
             <div style={styles.swatch} onClick={this.handleClick}>
               {this.state.displayColorPicker ? <div style={styles.popover}>
+
                 <div style={styles.cover} onClick={this.handleClose} />
-                <ChromePicker color={this.state.color} disableAlpha={true} onChange={this.handleChange} />
+                  <ChromePicker color={this.state.color} disableAlpha={true} onChange={this.handleChange} />
               </div> : null}
             </div>
             <div style={styles.hueBox}>

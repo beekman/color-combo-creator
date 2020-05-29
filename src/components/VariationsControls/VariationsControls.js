@@ -6,6 +6,9 @@ import {
   getInverses, getBaseHarmoniesAndInversesColorList,
   getLighters, getDarkers, getDesaturateds
 } from '../../utils/colorUtils';
+import {
+  hslToRgb, hslToObject, rgbToHsl
+} from '../../utils/colorConverters';
 import { getPostcssValuesVariables, getCssClasses } from '../../utils/styleExporters';
 import { MdInvertColors, MdBrightnessLow, MdFormatColorReset } from 'react-icons/md';
 import { IoIosColorFilter } from 'react-icons/io';
@@ -23,8 +26,8 @@ const VariationsControls = (color) => {
   const [darkMode, setDarkMode] = useState(true);
   const [swatchToggled, setSwatchToggled] = useState(true);
   const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
-  const [postcssExportText, setPostcssExportText] = useState('base: hsl(0, 100%, 50%);');
-  const [cssExportText, setCssExportText] = useState('.base{\nhsl(0, 100%, 50%);\n}');
+  const [postcssExportText, setPostcssExportText] = useState('');
+  const [cssExportText, setCssExportText] = useState('');
   const [cssExportToggled, setCssExportToggled] = useState(true);
   const handleCssExportClick = () => setCssExportToggled((toggled) => !toggled);
   const [postcssExportToggled, setPostcssExportToggled] = useState(true);
@@ -60,11 +63,13 @@ const VariationsControls = (color) => {
   const makeColorSwatches = (colorSet) => {
     if(colorSet.length) {
       return colorSet.map((color, i) => {
-        let key = (color.matchType + (Number(i) + 1));
+        const key = (color.matchType + (Number(i) + 1));
+        const rgb = hslToRgb((color.h / 360.00), color.s, color.l);
         return (
           <div key={key} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }} className={styles.Swatch} onClick={handleSwatchClick}>
             <aside className={`${styles.details} ${swatchToggled && styles.hidden}`}>
               <strong>{(color.matchType)}</strong> hsl({(color.h).toFixed(1)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)
+              <p className={styles.rgb}>rgb({rgb[0]}, {rgb[1]}, {rgb[2]})</p>
             </aside>
           </div>
         );
