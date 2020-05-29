@@ -7,7 +7,7 @@ import {
   getLighters, getDarkers, getDesaturateds
 } from '../../utils/colorUtils';
 import {
-  hslToRgb, hslToObject, rgbToHsl
+  hslToRgb, hslToHex, hslToObject
 } from '../../utils/colorConverters';
 import { getPostcssValuesVariables, getCssClasses } from '../../utils/styleExporters';
 import { MdInvertColors, MdBrightnessLow, MdFormatColorReset } from 'react-icons/md';
@@ -64,12 +64,15 @@ const VariationsControls = (color) => {
     if(colorSet.length) {
       return colorSet.map((color, i) => {
         const key = (color.matchType + (Number(i) + 1));
-        const rgb = hslToRgb((color.h / 360.00), color.s, color.l);
+        const rgb = hslToRgb(color.h, color.s, color.l);
+        const hex = hslToHex(color.h, color.s, color.l);
         return (
           <div key={key} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }} className={styles.Swatch} onClick={handleSwatchClick}>
             <aside className={`${styles.details} ${swatchToggled && styles.hidden}`}>
-              <strong>{(color.matchType)}</strong> hsl({(color.h).toFixed(1)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)
-              <p className={styles.rgb}>rgb({rgb[0]}, {rgb[1]}, {rgb[2]})</p>
+              <strong>{(color.matchType)}</strong>
+              <p className={`${styles.hslValues} ${styles.hidden}`}>hsl({(color.h).toFixed(1)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)</p>
+              <p className={`${styles.rgbValues} ${styles.hidden}`}>rgb({rgb[0]}, {rgb[1]}, {rgb[2]})</p>
+              <p className={`${styles.hexValues}`}>{hex}</p>
             </aside>
           </div>
         );

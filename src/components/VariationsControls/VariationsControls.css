@@ -38,7 +38,11 @@
       width: 5.7rem;
       color: white;
       text-shadow: black .075rem 0, black 0 .075rem, black -.075rem 0, black 0 -.075rem;
-
+      
+      .hslValues, .rgbValues, .hexValues {
+        margin: 0 auto;
+        line-height: 1;
+      }
     }
     .hidden {
       display:none;
