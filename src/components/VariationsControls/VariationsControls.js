@@ -30,8 +30,9 @@ const VariationsControls = (color) => {
   const [cssExportText, setCssExportText] = useState('');
   const [cssExportToggled, setCssExportToggled] = useState(true);
   const [exportHexToggled, setExportHexToggled] = useState(true);
+  const handleExportHexClick = () => setExportHexToggled((toggled) => !toggled);
   const [exportHslToggled, setHslToggled] = useState(false);
-  const [exportRgbToggled, setExportRgbToggled] = useState(false);
+  const [exportRgbToggled, setExportRgbToggled] = useState(true);
   const handleCssExportClick = () => setCssExportToggled((toggled) => !toggled);
   const [postcssExportToggled, setPostcssExportToggled] = useState(true);
   const handlePostcssExportClick = () => setPostcssExportToggled((toggled) => !toggled);
@@ -67,7 +68,6 @@ const VariationsControls = (color) => {
     if(colorSet.length) {
       return colorSet.map((color, i) => {
         const key = (color.matchType + (Number(i) + 1));
-
         const rgb = hslToRgb(color.h, color.s, color.l);
         const hex = hslToHex(color.h, color.s, color.l);
 
@@ -76,11 +76,11 @@ const VariationsControls = (color) => {
             <aside className={`${styles.details} ${swatchToggled && styles.hidden}`}>
               <strong>{(color.matchType)}</strong>
               {exportHslToggled &&
-                <p className={`${styles.hslValues} ${styles.hidden}`}>hsl({(color.h).toFixed(1)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)
+                <p className={`${styles.hslValues}`}>hsl({(color.h).toFixed(1)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)
                 </p>
               }
               {exportRgbToggled &&
-                <p className={`${styles.rgbValues} ${styles.hidden}`}>rgb({rgb[0]}, {rgb[1]}, {rgb[2]})</p>
+                <p className={`${styles.rgbValues}`}>rgb({rgb[0]}, {rgb[1]}, {rgb[2]})</p>
               }
               {exportHexToggled &&
                 <p className={`${styles.hexValues}`}>{hex}</p>
@@ -116,6 +116,7 @@ const VariationsControls = (color) => {
         {darkerSwatches}
         {desaturatedSwatches}
       </section>
+      <section>View: </section>
       <section className={styles.export}>
         <h2>Palette Export Options</h2>
         <h3 className={`${styles.postcssExportToggler} ${postcssExportToggled && styles.expandable}`} onClick={handlePostcssExportClick}>PostCSS Values Variables color list<a href="https://github.com/css-modules/css-modules/blob/master/docs/values-variables.md" target="_blank">*</a></h3>

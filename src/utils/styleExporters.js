@@ -15,7 +15,6 @@ export const getPostcssValuesVariables = (colorSet, exportHexToggled, exportRgbT
       }
       if(exportHexToggled) {
         colorString = hslToHex(color.h, color.s, color.l);
-
       }
       console.log(colorString);
 
