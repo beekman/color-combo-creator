@@ -21,7 +21,9 @@ export const getHarmonies = (color, harmonyQuantity) => {
     count++;
   }
   current = color.h;
-  while((current + degreeShift) < 360) {
+  while((current + degreeShift) < 360) { * @param   {number}  h       The hue
+ * @param   {number}  s       The saturation
+ * @param   {number}  l       The lightness
     current = current + degreeShift;
     h = current;
     const matchType = 'harmony' + count;
