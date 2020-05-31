@@ -31,8 +31,10 @@ const VariationsControls = (color) => {
   const [cssExportToggled, setCssExportToggled] = useState(true);
   const [exportHexToggled, setExportHexToggled] = useState(true);
   const handleExportHexClick = () => setExportHexToggled((toggled) => !toggled);
-  const [exportHslToggled, setHslToggled] = useState(false);
+  const [exportHslToggled, setExportHslToggled] = useState(false);
+  const handleExportHslClick = () => setExportHslToggled((toggled) => !toggled);
   const [exportRgbToggled, setExportRgbToggled] = useState(true);
+  const handleExportRgbClick = () => setExportRgbToggled((toggled) => !toggled);
   const handleCssExportClick = () => setCssExportToggled((toggled) => !toggled);
   const [postcssExportToggled, setPostcssExportToggled] = useState(true);
   const handlePostcssExportClick = () => setPostcssExportToggled((toggled) => !toggled);
@@ -75,15 +77,15 @@ const VariationsControls = (color) => {
           <div key={key} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }} className={styles.Swatch} onClick={handleSwatchClick}>
             <aside className={`${styles.details} ${swatchToggled && styles.hidden}`}>
               <strong>{(color.matchType)}</strong>
-              {exportHslToggled &&
-                <p className={`${styles.hslValues}`}>hsl({(color.h).toFixed(1)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)
-                </p>
+              {exportHexToggled &&
+                <p className={`${styles.hexValues}`}>{hex}</p>
               }
               {exportRgbToggled &&
                 <p className={`${styles.rgbValues}`}>rgb({rgb[0]}, {rgb[1]}, {rgb[2]})</p>
               }
-              {exportHexToggled &&
-                <p className={`${styles.hexValues}`}>{hex}</p>
+              {exportHslToggled &&
+                <p className={`${styles.hslValues}`}>hsl({(color.h).toFixed(1)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)
+                </p>
               }
             </aside>
           </div>
@@ -108,6 +110,12 @@ const VariationsControls = (color) => {
         <label htmlFor="darkerQuantity" title="Darker color sets to generate from the base, harmonies, and inverses,with each increment stepping closer to black."> <TiAdjustBrightness /><span className={styles.textLabel}>Darker</span> &times;<input type="number" id="darkerQuantity" min="0" max="20" value={darkerQuantity} onChange={({ target }) => setDarkerQuantity(target.value)} /></label>
         <label htmlFor="desaturatedQuantity" title="Less saturated color sets to generate from the base, harmonies, and inverses, with each increment stepping closer to grayscale."><MdFormatColorReset /><span className={styles.textLabel}>Desaturated</span> &times;<input type="number" id="desaturatedQuantity" value={desaturatedQuantity} min="0" max="20" onChange={({ target }) => setDesaturatedQuantity(target.value)} /></label>
       </div>
+      <section className={styles.colorFormats}>
+        <div className={`${styles.exportFormatToggle} ${(!swatchToggled) && styles.toggled}`} onClick={handleSwatchClick}>View Colors As:</div>
+        <div className={`${styles.exportFormatToggle} ${exportHexToggled && styles.toggled}`} onClick={handleExportHexClick}>Hex</div>
+        <div className={`${styles.exportFormatToggle} ${exportRgbToggled && styles.toggled}`} onClick={handleExportRgbClick}>RGB</div>
+        <div className={`${styles.exportFormatToggle} ${exportHslToggled && styles.toggled}`} onClick={handleExportHslClick}>HSL</div>
+      </section>
 
       <section className={styles.ColorMatches}>
         {harmonySwatches}
@@ -116,7 +124,7 @@ const VariationsControls = (color) => {
         {darkerSwatches}
         {desaturatedSwatches}
       </section>
-      <section>View: </section>
+
       <section className={styles.export}>
         <h2>Palette Export Options</h2>
         <h3 className={`${styles.postcssExportToggler} ${postcssExportToggled && styles.expandable}`} onClick={handlePostcssExportClick}>PostCSS Values Variables color list<a href="https://github.com/css-modules/css-modules/blob/master/docs/values-variables.md" target="_blank">*</a></h3>

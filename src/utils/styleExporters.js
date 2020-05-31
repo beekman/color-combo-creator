@@ -11,10 +11,10 @@ export const getPostcssValuesVariables = (colorSet, exportHexToggled, exportRgbT
         colorString = `hsl(${color.h.toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%;);`;
       }
       if(exportRgbToggled) {
-        colorString = `rgb(${r.toFixed(0)}, ${g}, ${b})`;
+        colorString = `rgb(${r}, ${g}, ${b})`;
       }
       if(exportHexToggled) {
-        colorString = hslToHex(color.h, color.s, color.l);
+        colorString =   (color.h, color.s, color.l);
       }
       console.log(colorString);
 
