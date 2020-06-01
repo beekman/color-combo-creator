@@ -14,7 +14,7 @@ export const getPostcssValuesVariables = (colorSet, exportHexToggled, exportRgbT
         colorString = `rgb(${r}, ${g}, ${b})`;
       }
       if(exportHexToggled) {
-        colorString =   (color.h, color.s, color.l);
+        colorString = (color.h, color.s, color.l);
       }
       console.log(colorString);
 
@@ -31,14 +31,14 @@ export const getCssClasses = (colorSet, exportHexToggled, exportRgbToggled, expo
     colorSet.map((color) => {
       const key = color.matchType;
       let colorString;
-      if(exportRgbToggled) {
-        const rgb = hslToRgb((color.h / 360.00), color.s, color.l);
-        const r = rgb[0];
-        const g = rgb[1];
-        const b = rgb[2];
-        colorString = 'rgb(' + rgb[0].toFixed(0) + ', ' + rgb[1] + ', ' + rgb[2] + ')';
-      }
-      else if(exportHslToggled) {
+
+      const rgb = hslToRgb((color.h / 360.00), color.s, color.l);
+      const r = rgb[0];
+      const g = rgb[1];
+      const b = rgb[2];
+      colorString = 'rgb(' + rgb[0].toFixed(0) + ', ' + rgb[1] + ', ' + rgb[2] + ')';
+
+      if(exportHslToggled) {
         colorString = ('hsl(' + (color.h).toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%;');
       }
       else if(exportHexToggled) {

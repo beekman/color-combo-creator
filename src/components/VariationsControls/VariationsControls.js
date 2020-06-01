@@ -25,13 +25,14 @@ const VariationsControls = (color) => {
   const [desaturatedQuantity, setDesaturatedQuantity] = useState(0);
   const [swatchToggled, setSwatchToggled] = useState(true);
   const handleShowColorsClick = () => setSwatchToggled((toggled) => !toggled);
+  const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
   const [postcssExportText, setPostcssExportText] = useState('');
   const [cssExportText, setCssExportText] = useState('');
   const [cssExportToggled, setCssExportToggled] = useState(true);
   const [postcssExportToggled, setPostcssExportToggled] = useState(true);
-  const [exportHexToggled, setExportHexToggled] = useState(true);
+  const [exportHexToggled, setExportHexToggled] = useState(false);
   const handleExportHexClick = () => setExportHexToggled((toggled) => !toggled);
-  const [exportHslToggled, setExportHslToggled] = useState(false);
+  const [exportHslToggled, setExportHslToggled] = useState(true);
   const handleExportHslClick = () => setExportHslToggled((toggled) => !toggled);
   const [exportRgbToggled, setExportRgbToggled] = useState(true);
   const handleExportRgbClick = () => setExportRgbToggled((toggled) => !toggled);
@@ -49,12 +50,12 @@ const VariationsControls = (color) => {
     hslDesaturateds = getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity);
     const postcssValuesVariables = ((getPostcssValuesVariables(hslHarmonies))) + (((getPostcssValuesVariables(hslInverses)))) + ((getPostcssValuesVariables(hslLighters))) + ((getPostcssValuesVariables(hslDarkers))) + ((getPostcssValuesVariables(hslDesaturateds)));
     const cssClasses = (getCssClasses(color.color)) + (getCssClasses(hslHarmonies)) + (getCssClasses(hslInverses)) + (getCssClasses(hslLighters)) + (getCssClasses(hslDarkers)) + (getCssClasses(hslDesaturateds));
+
     makeColorSwatches(hslHarmonies);
     makeColorSwatches(hslInverses);
     makeColorSwatches(hslLighters);
     makeColorSwatches(hslDarkers);
     makeColorSwatches(hslDesaturateds);
-
     setPostcssExportText(postcssValuesVariables);
     setCssExportText(cssClasses);
   });
@@ -74,7 +75,7 @@ const VariationsControls = (color) => {
         const hex = hslToHex(color.h, color.s, color.l);
 
         return (
-          <div key={key} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }} className={styles.Swatch} onClick={handleShowColorsClick}>
+          <div key={key} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }} className={styles.Swatch} onClick={handleSwatchClick}>
             <aside className={`${styles.details} ${swatchToggled && styles.hidden}`}>
               <strong>{(color.matchType)}</strong>
               {exportHexToggled &&
@@ -94,6 +95,60 @@ const VariationsControls = (color) => {
     }
   };
 
+
+  const getPostcssValuesVariables = (colorSet, exportHexToggled, exportRgbToggled, exportHslToggled) => {
+    let postCSSVariables = '';
+    if(colorSet.length > 0) {
+      colorSet.map((color) => {
+        const key = (color.matchType);
+        let colorString;
+        if(exportHslToggled) {
+          colorString = `hsl(${color.h.toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%;);`;
+        }
+        if(exportRgbToggled) {
+          colorString = `rgb(${r}, ${g}, ${b})`;
+        }
+        if(exportHexToggled) {
+          colorString = (color.h, color.s, color.l);
+        }
+        console.log(colorString);
+
+        const line = `@value ${key}: ${colorString}\n`;
+        postCSSVariables += line;
+      });
+    }
+    return postCSSVariables;
+  };
+
+  const getCssClasses = (colorSet, exportHexToggled, exportRgbToggled, exportHslToggled) => {
+    let styles = '';
+    if(colorSet.length > 0) {
+      colorSet.map((color) => {
+        const key = color.matchType;
+        let colorString;
+        if(exportRgbToggled) {
+          console.log(color.h);
+          const rgb = hslToRgb((color.h / 360.00), color.s, color.l);
+          const r = rgb[0];
+          const g = rgb[1];
+          const b = rgb[2];
+          colorString = 'rgb(' + r + ', ' + g + ', ' + rgb[2] + ')';
+        }
+        if(exportHslToggled) {
+          colorString = ('hsl(' + (color.h).toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%;');
+        }
+        if(exportHexToggled) {
+          colorString = hslToHex(color.h, color.s, color.l);
+        }
+
+        let line = `.${key}-color {\ncolor: ${colorString} ;\n}\n`;
+        line = line + `.${key}-bg {\nbackground-color: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%);\n}\n`;
+        line = line + `.${key}-border {\nborder-color: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%);\n}\n`;
+        styles += line;
+      });
+    }
+    return styles;
+  };
 
   let harmonySwatches = makeColorSwatches(hslHarmonies);
   let inverseSwatches = makeColorSwatches(hslInverses);
