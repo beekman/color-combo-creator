@@ -9,7 +9,7 @@ import {
 import {
   hslToRgb, hslToHex, hslToObject
 } from '../../utils/colorConverters';
-import { getPostcssValuesVariables, getCssClasses } from '../../utils/styleExporters';
+// import { getPostcssValuesVariables, getCssClasses } from '../../utils/styleExporters';
 import { MdInvertColors, MdBrightnessLow, MdFormatColorReset } from 'react-icons/md';
 import { IoIosColorFilter } from 'react-icons/io';
 import { TiAdjustBrightness } from 'react-icons/ti';
@@ -49,7 +49,7 @@ const VariationsControls = (color) => {
     hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
     hslDesaturateds = getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity);
     const postcssValuesVariables = ((getPostcssValuesVariables(hslHarmonies))) + (((getPostcssValuesVariables(hslInverses)))) + ((getPostcssValuesVariables(hslLighters))) + ((getPostcssValuesVariables(hslDarkers))) + ((getPostcssValuesVariables(hslDesaturateds)));
-    const cssClasses = (getCssClasses(color.color)) + (getCssClasses(hslHarmonies)) + (getCssClasses(hslInverses)) + (getCssClasses(hslLighters)) + (getCssClasses(hslDarkers)) + (getCssClasses(hslDesaturateds));
+    const cssClasses = (getCssClasses(color.color, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslHarmonies, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslInverses, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslLighters, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslDesaturateds));
 
     makeColorSwatches(hslHarmonies);
     makeColorSwatches(hslInverses);
@@ -120,7 +120,11 @@ const VariationsControls = (color) => {
     return postCSSVariables;
   };
 
-  const getCssClasses = (colorSet, exportHexToggled, exportRgbToggled, exportHslToggled) => {
+  const getCssClasses = (colorSet, exportHexToggled, exportHslToggled, exportRgbToggled) => {
+    console.log(colorSet);
+    console.log(exportHexToggled);
+    console.log(exportRgbToggled);
+    console.log(exportHslToggled);
     let styles = '';
     if(colorSet.length > 0) {
       colorSet.map((color) => {
