@@ -13,6 +13,24 @@
     margin: 0 1.25em 0 0.4em;
   }
 }
+.colorFormats {
+  padding: 0.25rem;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0.5rem auto;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  .exportFormatToggle{
+    padding: 0 0.5rem;
+    cursor: pointer;
+  }
+  .toggled{
+    background: yellow;
+    color: black;
+  }
+}
 
 .ColorMatches {
   padding: 0.25rem;
@@ -38,7 +56,7 @@
       width: 5.7rem;
       color: white;
       text-shadow: black .075rem 0, black 0 .075rem, black -.075rem 0, black 0 -.075rem;
-      
+
       .hslValues, .rgbValues, .hexValues {
         margin: 0 auto;
         line-height: 1;
