@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './VariationsControls.css';
 import {
-  isGrayscale, isDark,
   getHarmonies, getOppositeDegree,
   getInverses, getBaseHarmoniesAndInversesColorList,
   getLighters, getDarkers, getDesaturateds
@@ -15,7 +14,7 @@ import { IoIosColorFilter } from 'react-icons/io';
 import { TiAdjustBrightness } from 'react-icons/ti';
 import { GiAbstract074 } from 'react-icons/gi';
 
-const VariationsControls = (color) => {
+const VariationsControls = (color, darkMode) => {
 
   const [harmonyQuantity, setHarmonyQuantity] = useState(0);
   const [inverseQuantity, setInverseQuantity] = useState(0);
@@ -51,7 +50,7 @@ const VariationsControls = (color) => {
     hslDesaturateds = getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity);
     const postcssValuesVariables = ((getPostcssValuesVariables(hslHarmonies, exportHexToggled, exportHslToggled, exportRgbToggled))) + (((getPostcssValuesVariables(hslInverses, exportHexToggled, exportHslToggled, exportRgbToggled)))) + ((getPostcssValuesVariables(hslLighters, exportHexToggled, exportHslToggled, exportRgbToggled))) + ((getPostcssValuesVariables(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled))) + ((getPostcssValuesVariables(hslDesaturateds, exportHexToggled, exportHslToggled, exportRgbToggled)));
 
-    const cssClasses = (getCssClasses(color.color, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslHarmonies, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslInverses, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslLighters, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled));
+    const cssClasses = (getCssClasses(color.color, exportHexToggled, exportRgbToggled, exportHslToggled)) + (getCssClasses(hslHarmonies, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslInverses, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslLighters, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled));
 
     makeColorSwatches(hslHarmonies);
     makeColorSwatches(hslInverses);
@@ -191,9 +190,10 @@ const VariationsControls = (color) => {
       <section className={styles.export}>
         <h2>Palette Export Options</h2>
         <h3 className={`${styles.postcssExportToggler} ${postcssExportToggled && styles.expandable}`} onClick={handlePostcssExportClick}>PostCSS Values Variables color list<a href="https://github.com/css-modules/css-modules/blob/master/docs/values-variables.md" target="_blank">*</a></h3>
-        <textarea className={`${styles.postcssOutputText} ${postcssExportToggled && styles.hidden}`} value={postcssExportText} onChange={({ postcssValuesVariables }) => setPostcssExportText(postcssValuesVariables)} />
+
+        <textarea className={`${styles.postcssOutputText} ${postcssExportToggled && styles.hidden}`} style={{ color: `${(darkMode ? '#000000' : '#FFFFFF')}`, backgroundColor: `${(darkMode ? '#FFFFFF' : '#000000')}` }} value={postcssExportText} onChange={({ postcssValuesVariables }) => setPostcssExportText(postcssValuesVariables)} />
         <h3 className={`${styles.cssExportToggler} ${cssExportToggled && styles.expandable}`} onClick={handleCssExportClick}>CSS stylesheet</h3>
-        <textarea className={`${styles.cssOutputText} ${cssExportToggled && styles.hidden}`} value={cssExportText} onChange={({ cssClasses }) => setCssExportText(cssClasses)} />
+        <textarea className={`${styles.cssOutputText} ${cssExportToggled && styles.hidden}`} style={{ color: `${(darkMode ? '#FFFFFF' : '#000000')}`, backgroundColor: `${(darkMode ? '#000000' : '#FFFFFF')}` }} value={cssExportText} onChange={({ cssClasses }) => setCssExportText(cssClasses)} />
       </section>
     </>
   );
