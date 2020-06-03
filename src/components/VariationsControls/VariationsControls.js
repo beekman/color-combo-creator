@@ -13,7 +13,7 @@ import {
 import { MdInvertColors, MdBrightnessLow, MdFormatColorReset } from 'react-icons/md';
 import { IoIosColorFilter } from 'react-icons/io';
 import { TiAdjustBrightness } from 'react-icons/ti';
-
+import { GiAbstract074 } from 'react-icons/gi';
 
 const VariationsControls = (color) => {
 
@@ -23,6 +23,7 @@ const VariationsControls = (color) => {
   const [lighterQuantity, setLighterQuantity] = useState(0);
   const [darkerQuantity, setDarkerQuantity] = useState(0);
   const [desaturatedQuantity, setDesaturatedQuantity] = useState(0);
+  const [analogousQuantity, setAnalogousQuantity] = useState(0);
   const [swatchToggled, setSwatchToggled] = useState(true);
   const handleShowColorsClick = () => setSwatchToggled((toggled) => !toggled);
   const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
@@ -146,10 +147,12 @@ const VariationsControls = (color) => {
           colorString = hslToHex(color.h, color.s, color.l);
         }
 
+        if(!exportHexToggled) { }
         let line = `.${key}-color {\ncolor: ${colorString} \n}\n`;
         line = line + `.${key}-bg {\nbackground-color: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%);\n}\n`;
         line = line + `.${key}-border {\nborder-color: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%);\n}\n`;
         styles += line;
+
       });
     }
     return styles;

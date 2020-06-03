@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
 
 body.light-mode {
   background-color: #fff;
@@ -6,8 +7,7 @@ body.light-mode {
 }
 
 body.dark-mode {
-  background-color: #10171d;
-  color: #dfdfdf;
+
 
   .dark-mode-toggle > button {
     color: #999;

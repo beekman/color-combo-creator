@@ -5,6 +5,7 @@ import Footer from '../components/Footer/Footer';
 import { ChromePicker, HuePicker } from 'react-color';
 import { IoMdColorPalette } from 'react-icons/io';
 import { DarkModeToggle } from '../components/DarkModeToggle';
+import autoprefixer from 'autoprefixer';
 
 class PalettePicker extends React.Component {
   state = {
@@ -32,6 +33,8 @@ class PalettePicker extends React.Component {
     darkMode: true
   };
 
+
+
   handleClick = () => {
     this.setState({ displayColorPicker: !this.state.displayColorPicker });
   };
@@ -43,6 +46,7 @@ class PalettePicker extends React.Component {
   handleChange = (color) => {
     this.setState({ color: color.hsl });
   };
+
 
   render() {
 
@@ -61,7 +65,8 @@ class PalettePicker extends React.Component {
           color: '#FFFFFF',
           padding: '0.5rem 0 0 0.5rem',
           margin: '0',
-          lineHeight: '2'
+          lineHeight: '2',
+          fontFamily: 'Dosis, sans-serif',
         },
         flex: {
           display: 'flex',
@@ -103,15 +108,19 @@ class PalettePicker extends React.Component {
           right: '0px',
           bottom: '0px',
           left: '0px',
+          zIndex: '1',
         },
       },
     });
 
-    document.body.style.backgroundColor = 'black';
 
     return (
-      <>
-
+      <div style={{
+        backgroundColor: '#dfdfdf',
+        color: '#10171d',
+        width: '100%',
+        height: 'auto'
+      }}>
         <div style={styles.wrapper}>
           <header onClick={this.handleClick} style={styles.header}>
 
@@ -150,7 +159,7 @@ class PalettePicker extends React.Component {
           onChange={this.handleChange} />
 
         <Footer color={this.state.color} />
-      </>
+      </div>
     );
   }
 }
