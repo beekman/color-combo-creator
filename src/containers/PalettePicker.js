@@ -153,7 +153,7 @@ class PalettePicker extends React.Component {
           exportRgbToggled={this.state.exportRgbToggled}
           onChange={this.handleChange}
         />
-
+        <DarkModeToggle />
         <Footer color={this.state.color} />
       </div>
     );

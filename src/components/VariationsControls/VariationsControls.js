@@ -13,8 +13,11 @@ import { MdInvertColors, MdBrightnessLow, MdFormatColorReset } from 'react-icons
 import { IoIosColorFilter } from 'react-icons/io';
 import { TiAdjustBrightness } from 'react-icons/ti';
 import { GiAbstract074 } from 'react-icons/gi';
+import useDarkMode from 'use-dark-mode';
+import Toggle from '../Toggle';
+import DarkModeToggle from 'react-dark-mode-toggle';
 
-const VariationsControls = (color, darkMode) => {
+const VariationsControls = (color) => {
 
   const [harmonyQuantity, setHarmonyQuantity] = useState(0);
   const [inverseQuantity, setInverseQuantity] = useState(0);
@@ -39,6 +42,7 @@ const VariationsControls = (color, darkMode) => {
   const handleCssExportClick = () => setCssExportToggled((toggled) => !toggled);
 
   const handlePostcssExportClick = () => setPostcssExportToggled((toggled) => !toggled);
+  const darkMode = useDarkMode(false);
 
   useEffect(() => {
     setInverseMax(Number(harmonyQuantity) + 1);
