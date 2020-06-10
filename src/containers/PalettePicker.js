@@ -28,7 +28,8 @@ class PalettePicker extends React.Component {
     exportHexToggled: true,
     exportHslToggled: false,
     exportRgbToggled: false,
-    postcssExportToggled: true
+    postcssExportToggled: true,
+    darkMode: false,
   };
 
 
