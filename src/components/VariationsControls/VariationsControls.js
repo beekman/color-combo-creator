@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styles from './VariationsControls.css';
 import {
-  isGrayscale, isDark,
   getHarmonies, getOppositeDegree,
   getInverses, getBaseHarmoniesAndInversesColorList,
   getLighters, getDarkers, getDesaturateds
 } from '../../utils/colorUtils';
 import {
-  hslToRgb, hslToHex, hslToObject
+  hslToRgb, hslToHex
 } from '../../utils/colorConverters';
-// import { getPostcssValuesVariables, getCssClasses } from '../../utils/styleExporters';
 import { MdInvertColors, MdBrightnessLow, MdFormatColorReset } from 'react-icons/md';
 import { IoIosColorFilter } from 'react-icons/io';
 import { TiAdjustBrightness } from 'react-icons/ti';
