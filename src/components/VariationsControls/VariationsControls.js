@@ -13,8 +13,7 @@ import { IoIosColorFilter } from 'react-icons/io';
 import { TiAdjustBrightness } from 'react-icons/ti';
 import { GiAbstract074 } from 'react-icons/gi';
 import useDarkMode from 'use-dark-mode';
-import Toggle from '../Toggle';
-import DarkModeToggle from 'react-dark-mode-toggle';
+
 
 const VariationsControls = (color) => {
 
