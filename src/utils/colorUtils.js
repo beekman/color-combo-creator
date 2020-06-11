@@ -1,5 +1,3 @@
-export const isGrayscale = ({ saturation }) => saturation === 0;
-export const isDark = ({ l }) => l < .5;
 export const getHarmonies = (color, harmonyQuantity) => {
   harmonyQuantity = parseFloat(harmonyQuantity) + 1;
   const degreeShift = 360 / harmonyQuantity;

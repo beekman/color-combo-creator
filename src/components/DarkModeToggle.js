@@ -3,7 +3,7 @@ import React from 'react';
 import Toggle from './Toggle';
 import useDarkMode from 'use-dark-mode';
 
-const DarkModeToggle = () => {
+export const DarkModeToggle = () => {
   const darkMode = useDarkMode(false);
 
   return (
@@ -18,5 +18,3 @@ const DarkModeToggle = () => {
     </div>
   );
 };
-
-export default DarkModeToggle;

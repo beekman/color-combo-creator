@@ -11,6 +11,8 @@
   input{
     width: 3.5em;
     margin: 0 1.25em 0 0.4em;
+    background-color: darkslategray;
+    color: white;
   }
 }
 .colorFormats {
@@ -21,14 +23,12 @@
   margin: 0.5rem auto;
   align-items: center;
   justify-content: center;
-  color: white;
   .exportFormatToggle{
     padding: 0 0.5rem;
     cursor: pointer;
   }
   .toggled{
     background: yellow;
-    color: black;
   }
 }
 
@@ -70,7 +70,6 @@
 }
 
 .export {
-  color: white;
   h2{
     padding: 0 0.25rem;
     font-size: 1.2rem;
@@ -79,28 +78,24 @@
 
     a {
       text-decoration: none;
-      color:#BDF;
     }
   }
 
   textarea.cssOutputText, textarea.postcssOutputText  {
     width: 98%;
-    height: auto;
     font: 11px monospace;
     padding: .5em 0 .5em 0;
     text-indent: 0;
-    border: 1px #ddd solid;
+    border-width: 1px;
+    border-style: solid;
     margin: 7px;
     overflow-y: auto;
     overflow-x: hidden;
-    background-color: #212;
-    color: whitesmoke;
-    border: none;
     height: 35vh;
   }
 }
 
-.postcssExportToggler {}
+
 
 .postcssExportToggler:after, .cssExportToggler:after {
 content: "\2212";/* Unicode character for "minus" sign (+) */
