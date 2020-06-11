@@ -106,6 +106,7 @@ const VariationsControls = (color) => {
         }
         if(exportRgbToggled) {
           const rgb = hslToRgb((color.h / 360.00), color.s, color.l);
+          console.log(rgb);
           const r = rgb[0];
           const g = rgb[1];
           const b = rgb[2];
