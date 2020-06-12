@@ -2,7 +2,7 @@ export const getHarmonies = (color, harmonyQuantity) => {
   harmonyQuantity = parseFloat(harmonyQuantity) + 1;
   const degreeShift = 360 / harmonyQuantity;
   let h = Number(color.h);
-  let current = color.h;
+  let currentHueValue = color.h;
   const s = color.s;
   const l = color.l;
   const a = color.a;
@@ -11,17 +11,17 @@ export const getHarmonies = (color, harmonyQuantity) => {
   let hslHarmonies = [];
   hslHarmonies.push({ h, s, l, a, matchType, step });
   let count = 1;
-  while((current - degreeShift) >= 0) {
-    current = current - degreeShift;
-    h = current;
+  while((currentHueValue - degreeShift) >= 0) {
+    currentHueValue = currentHueValue - degreeShift;
+    h = currentHueValue;
     const matchType = 'harmony' + count;
     hslHarmonies.push({ h, s, l, a, matchType, step });
     count++;
   }
-  current = color.h;
-  while((current + degreeShift) < 360) {
-    current = current + degreeShift;
-    h = current;
+  currentHueValue = color.h;
+  while((currentHueValue + degreeShift) < 360) {
+    currentHueValue = currentHueValue + degreeShift;
+    h = currentHueValue;
     const matchType = 'harmony' + count;
     hslHarmonies.push({ h, s, l, a, matchType, step });
     count++;
@@ -119,7 +119,7 @@ export const getDesaturateds = (baseHarmoniesAndInversesColorList, desaturatedQu
   const hslDesaturateds = [];
   let stepLength = Number(desaturatedQuantity);
   for(let step = 1; (step <= stepLength); step++) {
-    baseHarmoniesAndInversesColorList.map((hslColor, i) => {
+    baseHarmoniesAndInversesColorList.map((hslColor) => {
       const h = hslColor.h;
       const stepDistance = (hslColor.s / (Number(desaturatedQuantity) + 1));
       let s = hslColor.s - (stepDistance * step);
