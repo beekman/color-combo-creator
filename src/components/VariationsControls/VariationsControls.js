@@ -109,8 +109,7 @@ const VariationsControls = (color) => {
           colorString = ('hsl(' + (color.h).toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%;');
         }
         if(exportRgbToggled) {
-          const rgb = hslToRgb((color.h / 360.00), color.s, color.l);
-          console.log(rgb);
+          const rgb = hslToRgb(color.h, color.s, color.l);
           const r = rgb[0];
           const g = rgb[1];
           const b = rgb[2];
@@ -133,7 +132,7 @@ const VariationsControls = (color) => {
         const key = color.matchType;
         let colorString = '';
         if(exportRgbToggled) {
-          const rgb = hslToRgb((color.h / 360.00), color.s, color.l);
+          const rgb = hslToRgb(color.h, color.s, color.l);
           const r = rgb[0];
           const g = rgb[1];
           const b = rgb[2];
