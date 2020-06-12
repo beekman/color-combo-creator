@@ -4,8 +4,6 @@ import VariationsControls from '../components/VariationsControls/VariationsContr
 import Footer from '../components/Footer/Footer';
 import { ChromePicker, HuePicker } from 'react-color';
 import { IoMdColorPalette } from 'react-icons/io';
-import { DarkModeToggle } from '../components/DarkModeToggle';
-
 class PalettePicker extends React.Component {
   state = {
     displayColorPicker: false,
@@ -154,7 +152,7 @@ class PalettePicker extends React.Component {
           exportRgbToggled={this.state.exportRgbToggled}
           onChange={this.handleChange}
         />
-        <DarkModeToggle darkMode={this.state.darkMode} />
+
         <Footer color={this.state.color} />
       </div>
     );
