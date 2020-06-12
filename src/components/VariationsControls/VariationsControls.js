@@ -141,18 +141,18 @@ const VariationsControls = (color, darkMode) => {
           const r = rgb[0];
           const g = rgb[1];
           const b = rgb[2];
-          colorString = 'rgb(' + r + ', ' + g + ', ' + b + ');';
+          colorString = 'rgb(' + r + ', ' + g + ', ' + b + ')';
         }
         if(exportHslToggled) {
-          colorString = ('hsl(' + (color.h).toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%);');
+          colorString = ('hsl(' + (color.h).toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%)');
         }
         if(exportHexToggled) {
           colorString = hslToHex(color.h, color.s, color.l);
         }
 
-        let line = `.${colorName}-color {\n\tcolor: ${colorString} \n}\n`;
-        line = line + `.${colorName}-bg {\n\tbackground-color: ${colorString} \n}\n`;
-        line = line + `.${colorName}-border {\n\tborder-color: ${colorString} \n}\n`;
+        let line = `.${colorName}-color {\n\tcolor: ${colorString};\n}\n`;
+        line = line + `.${colorName}-bg {\n\tbackground-color: ${colorString};\n}\n`;
+        line = line + `.${colorName}-border {\n\tborder-color: ${colorString};\n}\n`;
         styles += line;
 
       });
