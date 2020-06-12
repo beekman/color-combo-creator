@@ -38,9 +38,7 @@ const VariationsControls = (color, darkMode) => {
   const [exportRgbToggled, setExportRgbToggled] = useState(true);
   const handleExportRgbClick = () => setExportRgbToggled((toggled) => !toggled);
   const handleCssExportClick = () => setCssExportToggled((toggled) => !toggled);
-
   const handlePostcssExportClick = () => setPostcssExportToggled((toggled) => !toggled);
-
 
   useEffect(() => {
     setInverseMax(Number(harmonyQuantity) + 1);
@@ -146,15 +144,15 @@ const VariationsControls = (color, darkMode) => {
           colorString = 'rgb(' + r + ', ' + g + ', ' + b + ');';
         }
         if(exportHslToggled) {
-          colorString = ('hsl(' + (color.h).toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%;');
+          colorString = ('hsl(' + (color.h).toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%);');
         }
         if(exportHexToggled) {
           colorString = hslToHex(color.h, color.s, color.l);
         }
 
-        let line = `.${colorName}-color {\ncolor: ${colorString} \n}\n`;
-        line = line + `.${colorName}-bg {\nbackground-color: ${colorString} \n}\n`;
-        line = line + `.${colorName}-border {\nborder-color: ${colorString} \n}\n`;
+        let line = `.${colorName}-color {\n\tcolor: ${colorString} \n}\n`;
+        line = line + `.${colorName}-bg {\n\tbackground-color: ${colorString} \n}\n`;
+        line = line + `.${colorName}-border {\n\tborder-color: ${colorString} \n}\n`;
         styles += line;
 
       });
