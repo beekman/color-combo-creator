@@ -147,8 +147,8 @@ const VariationsControls = (color) => {
 
         if(!exportHexToggled) { }
         let line = `.${key}-color {\ncolor: ${colorString} \n}\n`;
-        line = line + `.${key}-bg {\nbackground-color: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%);\n}\n`;
-        line = line + `.${key}-border {\nborder-color: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%);\n}\n`;
+        line = line + `.${key}-bg {\nbackground-color: ${colorString} \n}\n`;
+        line = line + `.${key}-border {\nborder-color: ${colorString} \n}\n`;
         styles += line;
 
       });
@@ -192,7 +192,7 @@ const VariationsControls = (color) => {
 
         <textarea className={`${styles.postcssOutputText} ${postcssExportToggled && styles.hidden}`} style={{ color: `${(darkMode ? '#000000' : '#FFFFFF')}`, backgroundColor: `${(darkMode ? '#FFFFFF' : '#000000')}` }} value={postcssExportText} onChange={({ postcssValuesVariables }) => setPostcssExportText(postcssValuesVariables)} />
         <h3 className={`${styles.cssExportToggler} ${cssExportToggled && styles.expandable}`} onClick={handleCssExportClick}>CSS stylesheet</h3>
-        <textarea className={`${styles.cssOutputText} ${cssExportToggled && styles.hidden}`} style={{ color: `${(darkMode ? '#FFFFFF' : '#000000')}`, backgroundColor: `${(darkMode ? '#000000' : '#FFFFFF')}` }} value={cssExportText} onChange={({ cssClasses }) => setCssExportText(cssClasses)} />
+        <textarea className={`${styles.cssOutputText} ${cssExportToggled && styles.hidden}`} style={{ color: `${(darkMode ? '#000000' : '#FFFFFF')}`, backgroundColor: `${(darkMode ? '#FFFFFF' : '#000000')}` }} value={cssExportText} onChange={({ cssClasses }) => setCssExportText(cssClasses)} />
       </section>
     </>
   );
