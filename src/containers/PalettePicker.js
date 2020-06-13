@@ -4,8 +4,8 @@ import VariationsControls from '../components/VariationsControls/VariationsContr
 import Footer from '../components/Footer/Footer';
 import { ChromePicker, HuePicker } from 'react-color';
 import { IoMdColorPalette } from 'react-icons/io';
-import useDarkMode from 'use-dark-mode';
-import { GiTrumpetFlag } from 'react-icons/gi';
+import { DarkModeToggle } from '../components/DarkModeToggle';
+
 class PalettePicker extends React.Component {
   state = {
     displayColorPicker: false,
@@ -29,10 +29,8 @@ class PalettePicker extends React.Component {
     exportHslToggled: false,
     exportRgbToggled: false,
     postcssExportToggled: true,
-    darkMode: true,
+    darkMode: true
   };
-
-
 
   handleClick = () => {
     this.setState({ displayColorPicker: !this.state.displayColorPicker });
@@ -46,9 +44,9 @@ class PalettePicker extends React.Component {
     this.setState({ color: color.hsl });
   };
 
-
   render() {
-
+let backgroundColor= `${(this.state.darkMode ? '#000000' : '#FFFFFF')}`
+    document.body.style.backgroundColor = backgroundColor;
     const styles = reactCSS({
       'default': {
         wrapper: {
@@ -71,10 +69,9 @@ class PalettePicker extends React.Component {
           display: 'flex',
         },
         hueBox: {
-          width: '98%',
+          width: '100%',
           height: '17px',
           paddingTop: '3px',
-          paddingLeft: '1%'
         },
         label: {
           position: 'absolute',
@@ -108,14 +105,14 @@ class PalettePicker extends React.Component {
           right: '0px',
           bottom: '0px',
           left: '0px',
-          zIndex: '1',
         },
       },
     });
 
 
     return (
-      <div style={{ color: `${(this.state.darkMode ? '#FFFFFF' : '#000000')}`, backgroundColor: `${(this.state.darkMode ? '#000000' : '#FFFFFF')}`, height: '100vh' }}>
+      <>
+<div style={{ color: `${(this.state.darkMode ? '#FFFFFF' : '#000000')}`, backgroundColor: `${(this.state.darkMode ? '#000000' : '#FFFFFF')}`, height: '100vh' }}>
         <div style={styles.wrapper}>
           <header onClick={this.handleClick} style={styles.header}>
 
@@ -135,14 +132,27 @@ class PalettePicker extends React.Component {
               <HuePicker color={this.state.color} onChange={this.handleChange} height={'100%'} width={'100%'} /></div>
           </div>
         </div>
-        <VariationsControls
-          color={this.state.color}
+        <VariationsControls color={this.state.color}
+          harmonyQuantity={this.state.harmonyQuantity}
+          inverseQuantity={this.state.inverseQuantity}
+          inverseMax={this.state.inverseMax}
+          lighterQuantity={this.state.lighterQuantity}
+          darkerQuantity={this.state.darkerQuantity}
+          desaturatedQuantity={this.state.desaturatedQuantity}
+          swatchToggled={this.state.swatchToggled}
+          postcssExportText={this.state.postcssExportText}
+          cssExportText={this.state.cssExportText}
+          cssExportToggled={this.state.cssExportToggled}
+          postcssExportToggled={this.state.postcssExportToggled}
+          exportHexToggled={this.state.exportHexToggled}
+          exportHslToggled={this.state.exportHslToggled}
+          exportRgbToggled={this.state.exportRgbToggled}
           darkMode={this.state.darkMode}
-          onChange={this.handleChange}
-        />
+          onChange={this.handleChange} />
 
         <Footer color={this.state.color} />
-      </div>
+        </div>
+      </>
     );
   }
 }
