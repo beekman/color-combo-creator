@@ -61,6 +61,9 @@ const VariationsControls = (color, darkMode) => {
     setCssExportText(cssClasses);
   });
 
+
+
+
   let hslHarmonies = getHarmonies(color.color, harmonyQuantity);
   let hslInverses = getInverses(color.color, hslHarmonies, inverseQuantity);
   let baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.color, hslHarmonies, hslInverses);

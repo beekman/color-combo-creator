@@ -4,6 +4,8 @@ import VariationsControls from '../components/VariationsControls/VariationsContr
 import Footer from '../components/Footer/Footer';
 import { ChromePicker, HuePicker } from 'react-color';
 import { IoMdColorPalette } from 'react-icons/io';
+import useDarkMode from 'use-dark-mode';
+import { GiTrumpetFlag } from 'react-icons/gi';
 class PalettePicker extends React.Component {
   state = {
     displayColorPicker: false,
@@ -27,7 +29,7 @@ class PalettePicker extends React.Component {
     exportHslToggled: false,
     exportRgbToggled: false,
     postcssExportToggled: true,
-    darkMode: false,
+    darkMode: true,
   };
 
 
@@ -113,7 +115,7 @@ class PalettePicker extends React.Component {
 
 
     return (
-      <div style={{ color: `${(this.state.darkMode ? '#FFFFFF' : '#000000')}`, backgroundColor: `${(this.state.darkMode ? '#000000' : '#FFFFFF')}` }}>
+      <div style={{ color: `${(this.state.darkMode ? '#FFFFFF' : '#000000')}`, backgroundColor: `${(this.state.darkMode ? '#000000' : '#FFFFFF')}`, height: '100vh' }}>
         <div style={styles.wrapper}>
           <header onClick={this.handleClick} style={styles.header}>
 
@@ -136,20 +138,6 @@ class PalettePicker extends React.Component {
         <VariationsControls
           color={this.state.color}
           darkMode={this.state.darkMode}
-          harmonyQuantity={this.state.harmonyQuantity}
-          inverseQuantity={this.state.inverseQuantity}
-          inverseMax={this.state.inverseMax}
-          lighterQuantity={this.state.lighterQuantity}
-          darkerQuantity={this.state.darkerQuantity}
-          desaturatedQuantity={this.state.desaturatedQuantity}
-          swatchToggled={this.state.swatchToggled}
-          postcssExportText={this.state.postcssExportText}
-          cssExportText={this.state.cssExportText}
-          cssExportToggled={this.state.cssExportToggled}
-          postcssExportToggled={this.state.postcssExportToggled}
-          exportHexToggled={this.state.exportHexToggled}
-          exportHslToggled={this.state.exportHslToggled}
-          exportRgbToggled={this.state.exportRgbToggled}
           onChange={this.handleChange}
         />
 
