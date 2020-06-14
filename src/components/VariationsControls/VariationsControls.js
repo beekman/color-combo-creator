@@ -37,7 +37,6 @@ const VariationsControls = (color, darkMode) => {
   const [exportRgbToggled, setExportRgbToggled] = useState(true);
   const handleExportRgbClick = () => setExportRgbToggled((toggled) => !toggled);
   const handleCssExportClick = () => setCssExportToggled((toggled) => !toggled);
-
   const handlePostcssExportClick = () => setPostcssExportToggled((toggled) => !toggled);
 
   useEffect(() => {
@@ -110,7 +109,7 @@ const VariationsControls = (color, darkMode) => {
         const key = (color.matchType);
         let colorString = hslToHex(color.h, color.s, color.l);
         if(exportHslToggled) {
-          colorString = ('hsl(' + (color.h).toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%;');
+          colorString = ('hsl(' + color.h.toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%;');
         }
         if(exportRgbToggled) {
           const rgb = hslToRgb(color.h, color.s, color.l);
@@ -136,10 +135,10 @@ const VariationsControls = (color, darkMode) => {
         const key = color.matchType;
         let colorString = hslToHex(color.h, color.s, color.l);
         if(exportHslToggled) {
-          colorString = ('hsl(' + (color.h).toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%)');
+          colorString = ('hsl(' + color.h.toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%)');
         }
         if(exportRgbToggled) {
-          const rgb = hslToRgb((color.h / 360.00), color.s, color.l);
+          const rgb = hslToRgb(color.h, color.s, color.l);
           const r = rgb[0];
           const g = rgb[1];
           const b = rgb[2];
