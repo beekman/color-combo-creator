@@ -137,24 +137,23 @@ const VariationsControls = (color, darkMode) => {
     if(colorSet.length > 0) {
       colorSet.map((color) => {
         const key = color.matchType;
-        let colorString = '';
+        let colorString = hslToHex(color.h, color.s, color.l);
+        if(exportHslToggled) {
+          colorString = ('hsl(' + (color.h).toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%)');
+        }
         if(exportRgbToggled) {
           const rgb = hslToRgb((color.h / 360.00), color.s, color.l);
           const r = rgb[0];
           const g = rgb[1];
           const b = rgb[2];
-          colorString = 'rgb(' + r + ', ' + g + ', ' + b + ');';
-        }
-        if(exportHslToggled) {
-          colorString = ('hsl(' + (color.h).toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%;');
+          colorString = 'rgb(' + r + ', ' + g + ', ' + b + ')';
         }
         if(exportHexToggled) {
           colorString = hslToHex(color.h, color.s, color.l);
         }
-
-        let line = `.${key}-color {\ncolor: ${colorString} \n}\n`;
-        line = line + `.${key}-bg {\nbackground-color: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%);\n}\n`;
-        line = line + `.${key}-border {\nborder-color: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%);\n}\n`;
+        let line = `.${key}-color {\ncolor: ${colorString}; \n}\n`;
+        line = line + `.${key}-bg {\nbackground-color: ${colorString}; \n}\n`;
+        line = line + `.${key}-border {\nborder-color: ${colorString}; \n}\n`;
         cssStyles += line;
       });
     }
