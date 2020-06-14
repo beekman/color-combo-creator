@@ -12,7 +12,7 @@
     position: relative;
     top: .12rem;
   }
-  
+
   input{
     width: 3.5em;
     margin: 0 1.25em 0 0.4em;
@@ -33,7 +33,9 @@
     cursor: pointer;
   }
   .toggled{
-    background: yellow;
+    background: #66ff00;
+    color: black;
+    border-radius:3%;
   }
 }
 

@@ -4,7 +4,7 @@ import VariationsControls from '../components/VariationsControls/VariationsContr
 import Footer from '../components/Footer/Footer';
 import { ChromePicker, HuePicker } from 'react-color';
 import { IoMdColorPalette } from 'react-icons/io';
-import { DarkModeToggle } from '../components/DarkModeToggle';
+
 
 class PalettePicker extends React.Component {
   state = {
@@ -15,20 +15,7 @@ class PalettePicker extends React.Component {
       l: .5,
       a: 1,
     },
-    harmonyQuantity: 0,
-    inverseQuantity: 0,
-    inverseMax: 1,
-    lighterQuantity: 0,
-    darkerQuantity: 0,
-    desaturatedQuantity: 0,
-    swatchToggled: true,
-    postcssExportText: '',
-    cssExportText: '',
-    cssExportToggled: true,
-    exportHexToggled: true,
-    exportHslToggled: false,
-    exportRgbToggled: false,
-    postcssExportToggled: true,
+
     darkMode: true
   };
 
@@ -45,7 +32,7 @@ class PalettePicker extends React.Component {
   };
 
   render() {
-let backgroundColor= `${(this.state.darkMode ? '#000000' : '#FFFFFF')}`
+    let backgroundColor = `${(this.state.darkMode ? '#000000' : '#FFFFFF')}`;
     document.body.style.backgroundColor = backgroundColor;
     const styles = reactCSS({
       'default': {
@@ -112,45 +99,31 @@ let backgroundColor= `${(this.state.darkMode ? '#000000' : '#FFFFFF')}`
 
     return (
       <>
-<div style={{ color: `${(this.state.darkMode ? '#FFFFFF' : '#000000')}`, backgroundColor: `${(this.state.darkMode ? '#000000' : '#FFFFFF')}`, height: '100vh' }}>
-        <div style={styles.wrapper}>
-          <header onClick={this.handleClick} style={styles.header}>
+        <div style={{ color: `${(this.state.darkMode ? '#FFFFFF' : '#000000')}`, backgroundColor: `${(this.state.darkMode ? '#000000' : '#FFFFFF')}`, height: '100vh' }}>
+          <div style={styles.wrapper}>
+            <header onClick={this.handleClick} style={styles.header}>
 
-            <h1 style={styles.logo}> <IoMdColorPalette />Live Palette Populator</h1>
-            <div id='baseColor' style={styles.color}><label htmlFor='baseColor' style={styles.label}>Set Base Color</label>
-            </div>
-          </header>
-          <div style={styles.flex}>
-            <div style={styles.swatch} onClick={this.handleClick}>
-              {this.state.displayColorPicker ? <div style={styles.popover}>
+              <h1 style={styles.logo}> <IoMdColorPalette />Live Palette Populator</h1>
+              <div id='baseColor' style={styles.color}><label htmlFor='baseColor' style={styles.label}>Set Base Color</label>
+              </div>
+            </header>
+            <div style={styles.flex}>
+              <div style={styles.swatch} onClick={this.handleClick}>
+                {this.state.displayColorPicker ? <div style={styles.popover}>
 
-                <div style={styles.cover} onClick={this.handleClose} />
-                <ChromePicker color={this.state.color} disableAlpha={true} onChange={this.handleChange} />
-              </div> : null}
+                  <div style={styles.cover} onClick={this.handleClose} />
+                  <ChromePicker color={this.state.color} disableAlpha={true} onChange={this.handleChange} onClick={this.handleClick}/>
+                </div> : null}
+              </div>
+              <div style={styles.hueBox}>
+                <HuePicker color={this.state.color} onChange={this.handleChange} height={'100%'} width={'100%'} /></div>
             </div>
-            <div style={styles.hueBox}>
-              <HuePicker color={this.state.color} onChange={this.handleChange} height={'100%'} width={'100%'} /></div>
           </div>
-        </div>
-        <VariationsControls color={this.state.color}
-          harmonyQuantity={this.state.harmonyQuantity}
-          inverseQuantity={this.state.inverseQuantity}
-          inverseMax={this.state.inverseMax}
-          lighterQuantity={this.state.lighterQuantity}
-          darkerQuantity={this.state.darkerQuantity}
-          desaturatedQuantity={this.state.desaturatedQuantity}
-          swatchToggled={this.state.swatchToggled}
-          postcssExportText={this.state.postcssExportText}
-          cssExportText={this.state.cssExportText}
-          cssExportToggled={this.state.cssExportToggled}
-          postcssExportToggled={this.state.postcssExportToggled}
-          exportHexToggled={this.state.exportHexToggled}
-          exportHslToggled={this.state.exportHslToggled}
-          exportRgbToggled={this.state.exportRgbToggled}
-          darkMode={this.state.darkMode}
-          onChange={this.handleChange} />
+          <VariationsControls color={this.state.color}
+            darkMode={this.state.darkMode}
+            onChange={this.handleChange} />
 
-        <Footer color={this.state.color} />
+          <Footer color={this.state.color} />
         </div>
       </>
     );

@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import styles from './VariationsControls.css';
 import {
+  isGrayscale, isDark,
   getHarmonies, getOppositeDegree,
   getInverses, getBaseHarmoniesAndInversesColorList,
   getLighters, getDarkers, getDesaturateds
 } from '../../utils/colorUtils';
 import {
-  hslToRgb, hslToHex
+  hslToRgb, hslToHex, hslToObject
 } from '../../utils/colorConverters';
+// import { getPostcssValuesVariables, getCssClasses } from '../../utils/styleExporters';
 import { MdInvertColors, MdBrightnessLow, MdFormatColorReset } from 'react-icons/md';
 import { IoIosColorFilter } from 'react-icons/io';
 import { TiAdjustBrightness } from 'react-icons/ti';
-import { GiAbstract074 } from 'react-icons/gi';
-import useDarkMode from 'use-dark-mode';
 
 
 const VariationsControls = (color, darkMode) => {
@@ -23,7 +23,6 @@ const VariationsControls = (color, darkMode) => {
   const [lighterQuantity, setLighterQuantity] = useState(0);
   const [darkerQuantity, setDarkerQuantity] = useState(0);
   const [desaturatedQuantity, setDesaturatedQuantity] = useState(0);
-  const [analogousQuantity, setAnalogousQuantity] = useState(0);
   const [swatchToggled, setSwatchToggled] = useState(true);
   const handleShowColorsClick = () => setSwatchToggled((toggled) => !toggled);
   const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
@@ -38,6 +37,7 @@ const VariationsControls = (color, darkMode) => {
   const [exportRgbToggled, setExportRgbToggled] = useState(true);
   const handleExportRgbClick = () => setExportRgbToggled((toggled) => !toggled);
   const handleCssExportClick = () => setCssExportToggled((toggled) => !toggled);
+
   const handlePostcssExportClick = () => setPostcssExportToggled((toggled) => !toggled);
 
   useEffect(() => {
@@ -48,9 +48,9 @@ const VariationsControls = (color, darkMode) => {
     hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
     hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
     hslDesaturateds = getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity);
-    const postcssValuesVariables = ((getPostcssValuesVariables(hslHarmonies, exportHexToggled, exportHslToggled, exportRgbToggled))) + (((getPostcssValuesVariables(hslInverses, exportHexToggled, exportHslToggled, exportRgbToggled)))) + ((getPostcssValuesVariables(hslLighters, exportHexToggled, exportHslToggled, exportRgbToggled))) + ((getPostcssValuesVariables(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled))) + ((getPostcssValuesVariables(hslDesaturateds, exportHexToggled, exportRgbToggled, exportHslToggled)));
+    const postcssValuesVariables = ((getPostcssValuesVariables(hslHarmonies, exportHexToggled, exportHslToggled, exportRgbToggled))) + (((getPostcssValuesVariables(hslInverses, exportHexToggled, exportHslToggled, exportRgbToggled)))) + ((getPostcssValuesVariables(hslLighters, exportHexToggled, exportHslToggled, exportRgbToggled))) + ((getPostcssValuesVariables(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled))) + ((getPostcssValuesVariables(hslDesaturateds, exportHexToggled, exportHslToggled, exportRgbToggled)));
 
-    const cssClasses = (getCssClasses(color.color, exportHexToggled, exportRgbToggled, exportHslToggled)) + (getCssClasses(hslHarmonies, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslInverses, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslLighters, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled));
+    const cssClasses = (getCssClasses(color.color, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslHarmonies, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslInverses, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslLighters, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled));
 
     makeColorSwatches(hslHarmonies);
     makeColorSwatches(hslInverses);
@@ -59,10 +59,8 @@ const VariationsControls = (color, darkMode) => {
     makeColorSwatches(hslDesaturateds);
     setPostcssExportText(postcssValuesVariables);
     setCssExportText(cssClasses);
+
   });
-
-
-
 
   let hslHarmonies = getHarmonies(color.color, harmonyQuantity);
   let hslInverses = getInverses(color.color, hslHarmonies, inverseQuantity);
@@ -74,12 +72,12 @@ const VariationsControls = (color, darkMode) => {
   const makeColorSwatches = (colorSet) => {
     if(colorSet.length) {
       return colorSet.map((color, i) => {
-        const colorName = (color.matchType + (Number(i) + 1));
+        const key = (color.matchType + (Number(i) + 1));
         const rgb = hslToRgb(color.h, color.s, color.l);
         const hex = hslToHex(color.h, color.s, color.l);
 
         return (
-          <div key={colorName} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }} className={styles.Swatch} onClick={handleSwatchClick}>
+          <div key={key} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }} className={styles.Swatch} onClick={handleSwatchClick}>
             <aside className={`${styles.details} ${swatchToggled && styles.hidden}`}>
               <strong>{(color.matchType)}</strong>
               {exportHexToggled &&
@@ -99,17 +97,24 @@ const VariationsControls = (color, darkMode) => {
     }
   };
 
+  let harmonySwatches = makeColorSwatches(hslHarmonies);
+  let inverseSwatches = makeColorSwatches(hslInverses);
+  let lighterSwatches = makeColorSwatches(hslLighters);
+  let darkerSwatches = makeColorSwatches(hslDarkers);
+  let desaturatedSwatches = makeColorSwatches(hslDesaturateds);
 
-  const getPostcssValuesVariables = (colorSet, exportHexToggled, exportHslToggled, exportRgbToggled) => {
+  const getPostcssValuesVariables = (colorSet, exportHexToggled, exportRgbToggled, exportHslToggled) => {
     let postCSSVariables = '';
     if(colorSet.length > 0) {
       colorSet.map((color) => {
-        const colorName = (color.matchType);
+        const key = (color.matchType);
         let colorString;
-        if(exportHslToggled) {
-          colorString = ('hsl(' + (color.h).toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%)');
+        if(exportHexToggled) {
+          colorString = (color.h, color.s, color.l);
         }
-
+        if(exportHslToggled) {
+          colorString = ('hsl(' + (color.h).toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%;');
+        }
         if(exportRgbToggled) {
           const rgb = hslToRgb(color.h, color.s, color.l);
           const r = rgb[0];
@@ -117,16 +122,10 @@ const VariationsControls = (color, darkMode) => {
           const b = rgb[2];
           colorString = 'rgb(' + r + ', ' + g + ', ' + b + ')';
         }
-
         if(exportHexToggled) {
           colorString = hslToHex(color.h, color.s, color.l);
         }
-
-        if((!exportHexToggled) && (!exportRgbToggled) && (!exportHslToggled)) {
-          colorString = hslToHex(color.h, color.s, color.l);
-        }
-
-        const line = `@value ${colorName}: ${colorString};\n`;
+        const line = `@value ${key}: ${colorString}\n`;
         postCSSVariables += line;
       });
     }
@@ -134,40 +133,34 @@ const VariationsControls = (color, darkMode) => {
   };
 
   const getCssClasses = (colorSet, exportHexToggled, exportHslToggled, exportRgbToggled) => {
-    let styles = '';
+    let cssStyles = '';
     if(colorSet.length > 0) {
       colorSet.map((color) => {
-        const colorName = color.matchType;
-        let colorString = hslToHex(color.h, color.s, color.l);
+        const key = color.matchType;
+        let colorString = '';
         if(exportRgbToggled) {
-          const rgb = hslToRgb(color.h, color.s, color.l);
+          const rgb = hslToRgb((color.h / 360.00), color.s, color.l);
           const r = rgb[0];
           const g = rgb[1];
           const b = rgb[2];
-          colorString = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+          colorString = 'rgb(' + r + ', ' + g + ', ' + b + ');';
         }
         if(exportHslToggled) {
-          colorString = ('hsl(' + (color.h).toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%)');
+          colorString = ('hsl(' + (color.h).toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%;');
         }
         if(exportHexToggled) {
           colorString = hslToHex(color.h, color.s, color.l);
         }
 
-        let line = `.${colorName}-color {\n\tcolor: ${colorString};\n}\n`;
-        line = line + `.${colorName}-bg {\n\tbackground-color: ${colorString};\n}\n`;
-        line = line + `.${colorName}-border {\n\tborder-color: ${colorString};\n}\n`;
-        styles += line;
-
+        let line = `.${key}-color {\ncolor: ${colorString} \n}\n`;
+        line = line + `.${key}-bg {\nbackground-color: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%);\n}\n`;
+        line = line + `.${key}-border {\nborder-color: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%);\n}\n`;
+        cssStyles += line;
       });
     }
-    return styles;
+    return cssStyles;
   };
 
-  let harmonySwatches = makeColorSwatches(hslHarmonies);
-  let inverseSwatches = makeColorSwatches(hslInverses);
-  let lighterSwatches = makeColorSwatches(hslLighters);
-  let darkerSwatches = makeColorSwatches(hslDarkers);
-  let desaturatedSwatches = makeColorSwatches(hslDesaturateds);
 
   return (
     <>
@@ -196,10 +189,9 @@ const VariationsControls = (color, darkMode) => {
       <section className={styles.export}>
         <h2>Palette Export Options</h2>
         <h3 className={`${styles.postcssExportToggler} ${postcssExportToggled && styles.expandable}`} onClick={handlePostcssExportClick}>PostCSS Values Variables color list<a href="https://github.com/css-modules/css-modules/blob/master/docs/values-variables.md" target="_blank">*</a></h3>
-
-        <textarea className={`${styles.postcssOutputText} ${postcssExportToggled && styles.hidden}`} style={{ color: `${(darkMode ? '#000000' : '#FFFFFF')}`, backgroundColor: `${(darkMode ? '#FFFFFF' : '#000000')}` }} value={postcssExportText} onChange={({ postcssValuesVariables }) => setPostcssExportText(postcssValuesVariables)} />
+        <textarea className={`${styles.postcssOutputText} ${postcssExportToggled && styles.hidden}`} value={postcssExportText} onChange={({ postcssValuesVariables }) => setPostcssExportText(postcssValuesVariables)} />
         <h3 className={`${styles.cssExportToggler} ${cssExportToggled && styles.expandable}`} onClick={handleCssExportClick}>CSS stylesheet</h3>
-        <textarea className={`${styles.cssOutputText} ${cssExportToggled && styles.hidden}`} style={{ color: `${(darkMode ? '#000000' : '#FFFFFF')}`, backgroundColor: `${(darkMode ? '#FFFFFF' : '#000000')}` }} value={cssExportText} onChange={({ cssClasses }) => setCssExportText(cssClasses)} />
+        <textarea className={`${styles.cssOutputText} ${cssExportToggled && styles.hidden}`} value={cssExportText} onChange={({ cssClasses }) => setCssExportText(cssClasses)} />
       </section>
     </>
   );
