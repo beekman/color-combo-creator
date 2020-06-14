@@ -103,15 +103,12 @@ const VariationsControls = (color, darkMode) => {
   let darkerSwatches = makeColorSwatches(hslDarkers);
   let desaturatedSwatches = makeColorSwatches(hslDesaturateds);
 
-  const getPostcssValuesVariables = (colorSet, exportHexToggled, exportRgbToggled, exportHslToggled) => {
+  const getPostcssValuesVariables = (colorSet, exportHexToggled, exportHslToggled, exportRgbToggled) => {
     let postCSSVariables = '';
     if(colorSet.length > 0) {
       colorSet.map((color) => {
         const key = (color.matchType);
-        let colorString;
-        if(exportHexToggled) {
-          colorString = (color.h, color.s, color.l);
-        }
+        let colorString = hslToHex(color.h, color.s, color.l);
         if(exportHslToggled) {
           colorString = ('hsl(' + (color.h).toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%;');
         }
