@@ -13,7 +13,8 @@ import {
 import { MdInvertColors, MdBrightnessLow, MdFormatColorReset } from 'react-icons/md';
 import { IoIosColorFilter } from 'react-icons/io';
 import { TiAdjustBrightness } from 'react-icons/ti';
-
+import { DarkModeToggle } from '../DarkModeToggle';
+import useDarkMode from 'use-dark-mode';
 
 const VariationsControls = (color) => {
 
@@ -38,11 +39,11 @@ const VariationsControls = (color) => {
   const handleExportRgbClick = () => setExportRgbToggled((toggled) => !toggled);
   const handleCssExportClick = () => setCssExportToggled((toggled) => !toggled);
   const handlePostcssExportClick = () => setPostcssExportToggled((toggled) => !toggled);
-  const [darkMode, setDarkMode] = useState(true);
+  const darkMode = useDarkMode(false);
 
   useEffect(() => {
-    const backgroundColor = `${(darkMode ? '#000000' : '#FFFFFF')}`;
-    const foregroundColor = `${(darkMode ? '#FFFFFF' : '#000000')}`;
+    const backgroundColor = `${(darkMode ? '#FFFFFF' : '#000000')}`;
+    const foregroundColor = `${(darkMode ? '#000000' : '#FFFFFF')}`;
     document.body.style.backgroundColor = backgroundColor;
     document.body.style.color = foregroundColor;
     setInverseMax(Number(harmonyQuantity) + 1);
@@ -193,6 +194,7 @@ const VariationsControls = (color) => {
         <h3 className={`${styles.cssExportToggler} ${cssExportToggled && styles.expandable}`} onClick={handleCssExportClick}>CSS stylesheet</h3>
         <textarea className={`${styles.cssOutputText} ${cssExportToggled && styles.hidden}`} value={cssExportText} onChange={({ cssClasses }) => setCssExportText(cssClasses)} />
       </section>
+      <DarkModeToggle />
     </>
   );
 };

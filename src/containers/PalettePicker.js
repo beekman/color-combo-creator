@@ -95,31 +95,30 @@ class PalettePicker extends React.Component {
 
 
     return (
-      <>
-        <div style={{ height: '100vh' }}>
-          <div style={styles.wrapper}>
-            <header onClick={this.handleClick} style={styles.header}>
 
-              <h1 style={styles.logo}> <IoMdColorPalette />Live Palette Populator</h1>
-              <div id='baseColor' style={styles.color}><label htmlFor='baseColor' style={styles.label}>Set Base Color</label>
-              </div>
-            </header>
-            <div style={styles.flex}>
-              <div style={styles.swatch} onClick={this.handleClick}>
-                {this.state.displayColorPicker ? <div style={styles.popover}>
+      <div style={{ height: '100vh' }}>
+        <div style={styles.wrapper}>
+          <header onClick={this.handleClick} style={styles.header}>
 
-                  <div style={styles.cover} onClick={this.handleClose} />
-                  <ChromePicker color={this.state.color} disableAlpha={true} onChange={this.handleChange} onClick={this.handleClick} />
-                </div> : null}
-              </div>
-              <div style={styles.hueBox}>
-                <HuePicker color={this.state.color} onChange={this.handleChange} height={'100%'} width={'100%'} /></div>
+            <h1 style={styles.logo}> <IoMdColorPalette />Live Palette Populator</h1>
+            <div id='baseColor' style={styles.color}><label htmlFor='baseColor' style={styles.label}>Set Base Color</label>
             </div>
+          </header>
+          <div style={styles.flex}>
+            <div style={styles.swatch} onClick={this.handleClick}>
+              {this.state.displayColorPicker ? <div style={styles.popover}>
+
+                <div style={styles.cover} onClick={this.handleClose} />
+                <ChromePicker color={this.state.color} disableAlpha={true} onChange={this.handleChange} onClick={this.handleClick} />
+              </div> : null}
+            </div>
+            <div style={styles.hueBox}>
+              <HuePicker color={this.state.color} onChange={this.handleChange} height={'100%'} width={'100%'} /></div>
           </div>
-          <VariationsControls color={this.state.color} onChange={this.handleChange} />
-          <Footer color={this.state.color} />
         </div>
-      </>
+        <VariationsControls color={this.state.color} onChange={this.handleChange} />
+        <Footer color={this.state.color} />
+      </div>
     );
   }
 }
