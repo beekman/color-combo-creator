@@ -1,0 +1,6 @@
+.toggleControl {
+  position: relative;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+}
