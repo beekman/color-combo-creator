@@ -4,7 +4,7 @@ import styles from './Toggle.css';
 const Toggle = ({ checked, onChange }) => (
   <span className={styles.toggleControl}>
     <input
-      className="dmcheck"
+      className={styles.dmcheck}
       type="checkbox"
       checked={checked}
       onChange={onChange}
