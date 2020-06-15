@@ -15,7 +15,7 @@ import { IoIosColorFilter } from 'react-icons/io';
 import { TiAdjustBrightness } from 'react-icons/ti';
 
 
-const VariationsControls = (color, darkMode) => {
+const VariationsControls = (color) => {
 
   const [harmonyQuantity, setHarmonyQuantity] = useState(0);
   const [inverseQuantity, setInverseQuantity] = useState(0);
@@ -38,8 +38,13 @@ const VariationsControls = (color, darkMode) => {
   const handleExportRgbClick = () => setExportRgbToggled((toggled) => !toggled);
   const handleCssExportClick = () => setCssExportToggled((toggled) => !toggled);
   const handlePostcssExportClick = () => setPostcssExportToggled((toggled) => !toggled);
+  const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
+    const backgroundColor = `${(darkMode ? '#000000' : '#FFFFFF')}`;
+    const foregroundColor = `${(darkMode ? '#FFFFFF' : '#000000')}`;
+    document.body.style.backgroundColor = backgroundColor;
+    document.body.style.color = foregroundColor;
     setInverseMax(Number(harmonyQuantity) + 1);
     const hslHarmonies = getHarmonies(color.color, harmonyQuantity);
     const hslInverses = getInverses(color.color, hslHarmonies, inverseQuantity);

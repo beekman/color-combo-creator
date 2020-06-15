@@ -15,8 +15,6 @@ class PalettePicker extends React.Component {
       l: .5,
       a: 1,
     },
-
-    darkMode: true
   };
 
   handleClick = () => {
@@ -32,8 +30,7 @@ class PalettePicker extends React.Component {
   };
 
   render() {
-    let backgroundColor = `${(this.state.darkMode ? '#000000' : '#FFFFFF')}`;
-    document.body.style.backgroundColor = backgroundColor;
+
     const styles = reactCSS({
       'default': {
         wrapper: {
@@ -99,7 +96,7 @@ class PalettePicker extends React.Component {
 
     return (
       <>
-        <div style={{ color: `${(this.state.darkMode ? '#FFFFFF' : '#000000')}`, backgroundColor: `${(this.state.darkMode ? '#000000' : '#FFFFFF')}`, height: '100vh' }}>
+        <div style={{ height: '100vh' }}>
           <div style={styles.wrapper}>
             <header onClick={this.handleClick} style={styles.header}>
 
@@ -112,17 +109,14 @@ class PalettePicker extends React.Component {
                 {this.state.displayColorPicker ? <div style={styles.popover}>
 
                   <div style={styles.cover} onClick={this.handleClose} />
-                  <ChromePicker color={this.state.color} disableAlpha={true} onChange={this.handleChange} onClick={this.handleClick}/>
+                  <ChromePicker color={this.state.color} disableAlpha={true} onChange={this.handleChange} onClick={this.handleClick} />
                 </div> : null}
               </div>
               <div style={styles.hueBox}>
                 <HuePicker color={this.state.color} onChange={this.handleChange} height={'100%'} width={'100%'} /></div>
             </div>
           </div>
-          <VariationsControls color={this.state.color}
-            darkMode={this.state.darkMode}
-            onChange={this.handleChange} />
-
+          <VariationsControls color={this.state.color} onChange={this.handleChange} />
           <Footer color={this.state.color} />
         </div>
       </>
