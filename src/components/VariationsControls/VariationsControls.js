@@ -42,8 +42,8 @@ const VariationsControls = (color) => {
   const darkMode = useDarkMode(false);
 
   useEffect(() => {
-    const backgroundColor = `${(darkMode ? '#FFFFFF' : '#000000')}`;
-    const foregroundColor = `${(darkMode ? '#000000' : '#FFFFFF')}`;
+    const backgroundColor = `${(darkMode.value ? '#FFFFFF' : '#000000')}`;
+    const foregroundColor = `${(darkMode.value ? '#000000' : '#FFFFFF')}`;
     document.body.style.backgroundColor = backgroundColor;
     document.body.style.color = foregroundColor;
     setInverseMax(Number(harmonyQuantity) + 1);
