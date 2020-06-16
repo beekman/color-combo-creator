@@ -153,9 +153,9 @@ const VariationsControls = (color) => {
         if(exportHexToggled) {
           colorString = hslToHex(color.h, color.s, color.l);
         }
-        let line = `.${key}-color {\ncolor: ${colorString}; \n}\n`;
-        line = line + `.${key}-bg {\nbackground-color: ${colorString}; \n}\n`;
-        line = line + `.${key}-border {\nborder-color: ${colorString}; \n}\n`;
+        let line = `.${key}-color {\n\tcolor: ${colorString}; \n}\n`;
+        line = line + `.${key}-bg {\n\tbackground-color: ${colorString}; \n}\n`;
+        line = line + `.${key}-border {\n\tborder-color: ${colorString}; \n}\n\n`;
         cssStyles += line;
       });
     }
@@ -191,13 +191,13 @@ const VariationsControls = (color) => {
       <section className={styles.export}>
         <h2>Palette Export Options</h2>
         <h3 className={`${styles.postcssExportToggler} ${postcssExportToggled && styles.expandable}`} onClick={handlePostcssExportClick}>PostCSS Values Variables color list<a href="https://github.com/css-modules/css-modules/blob/master/docs/values-variables.md" target="_blank">*</a></h3>
-        <textarea className={`${styles.postcssOutputText} ${postcssExportToggled && styles.hidden}`} value={postcssExportText} onChange={({ postcssValuesVariables }) => setPostcssExportText(postcssValuesVariables)} />
+        <textarea className={`${styles.postcssOutputText} ${postcssExportToggled && styles.hidden}`} value={postcssExportText} onChange={({ postcssValuesVariables }) => setPostcssExportText(postcssValuesVariables)} style={{ background: `${(darkMode.value ? '#111' : '#FFFFFF')}`, color: `${(darkMode.value ? '#FFFFFF' : '#111')}` }} />
         <h3 className={`${styles.cssExportToggler} ${cssExportToggled && styles.expandable}`} onClick={handleCssExportClick}>CSS stylesheet</h3>
-        <textarea className={`${styles.cssOutputText} ${cssExportToggled && styles.hidden}`} value={cssExportText} onChange={({ cssClasses }) => setCssExportText(cssClasses)} />
+        <textarea className={`${styles.cssOutputText} ${cssExportToggled && styles.hidden}`} value={cssExportText} onChange={({ cssClasses }) => setCssExportText(cssClasses)} style={{ background: `${(darkMode.value ? '#111' : '#FFFFFF')}`, color: `${(darkMode.value ? '#FFFFFF' : '#111')}` }} />
       </section>
 
 
-      </>
+    </>
   );
 };
 
