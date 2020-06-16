@@ -13,7 +13,8 @@ import {
 import { MdInvertColors, MdBrightnessLow, MdFormatColorReset } from 'react-icons/md';
 import { IoIosColorFilter } from 'react-icons/io';
 import { TiAdjustBrightness } from 'react-icons/ti';
-
+import { DarkModeToggle } from '../DarkModeToggle';
+import useDarkMode from 'use-dark-mode';
 
 const VariationsControls = (color) => {
 
@@ -37,10 +38,14 @@ const VariationsControls = (color) => {
   const [exportRgbToggled, setExportRgbToggled] = useState(true);
   const handleExportRgbClick = () => setExportRgbToggled((toggled) => !toggled);
   const handleCssExportClick = () => setCssExportToggled((toggled) => !toggled);
-
   const handlePostcssExportClick = () => setPostcssExportToggled((toggled) => !toggled);
+  const darkMode = useDarkMode(false);
 
   useEffect(() => {
+    const backgroundColor = `${(darkMode.value ? '#000000' : '#FFFFFF')}`;
+    const foregroundColor = `${(darkMode.value ? '#FFFFFF' : '#000000')}`;
+    document.body.style.backgroundColor = backgroundColor;
+    document.body.style.color = foregroundColor;
     setInverseMax(Number(harmonyQuantity) + 1);
     const hslHarmonies = getHarmonies(color.color, harmonyQuantity);
     const hslInverses = getInverses(color.color, hslHarmonies, inverseQuantity);
@@ -59,6 +64,7 @@ const VariationsControls = (color) => {
     makeColorSwatches(hslDesaturateds);
     setPostcssExportText(postcssValuesVariables);
     setCssExportText(cssClasses);
+
   });
 
   let hslHarmonies = getHarmonies(color.color, harmonyQuantity);
@@ -96,21 +102,23 @@ const VariationsControls = (color) => {
     }
   };
 
+  let harmonySwatches = makeColorSwatches(hslHarmonies);
+  let inverseSwatches = makeColorSwatches(hslInverses);
+  let lighterSwatches = makeColorSwatches(hslLighters);
+  let darkerSwatches = makeColorSwatches(hslDarkers);
+  let desaturatedSwatches = makeColorSwatches(hslDesaturateds);
 
-  const getPostcssValuesVariables = (colorSet, exportHexToggled, exportRgbToggled, exportHslToggled) => {
+  const getPostcssValuesVariables = (colorSet, exportHexToggled, exportHslToggled, exportRgbToggled) => {
     let postCSSVariables = '';
     if(colorSet.length > 0) {
       colorSet.map((color) => {
         const key = (color.matchType);
-        let colorString;
-        if(exportHexToggled) {
-          colorString = (color.h, color.s, color.l);
-        }
+        let colorString = hslToHex(color.h, color.s, color.l);
         if(exportHslToggled) {
-          colorString = ('hsl(' + (color.h).toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%;');
+          colorString = ('hsl(' + color.h.toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%) ;');
         }
         if(exportRgbToggled) {
-          const rgb = hslToRgb((color.h / 360.00), color.s, color.l);
+          const rgb = hslToRgb(color.h, color.s, color.l);
           const r = rgb[0];
           const g = rgb[1];
           const b = rgb[2];
@@ -127,39 +135,33 @@ const VariationsControls = (color) => {
   };
 
   const getCssClasses = (colorSet, exportHexToggled, exportHslToggled, exportRgbToggled) => {
-    let styles = '';
+    let cssStyles = '';
     if(colorSet.length > 0) {
       colorSet.map((color) => {
         const key = color.matchType;
-        let colorString = '';
+        let colorString = hslToHex(color.h, color.s, color.l);
+        if(exportHslToggled) {
+          colorString = ('hsl(' + color.h.toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%)');
+        }
         if(exportRgbToggled) {
-          const rgb = hslToRgb((color.h / 360.00), color.s, color.l);
+          const rgb = hslToRgb(color.h, color.s, color.l);
           const r = rgb[0];
           const g = rgb[1];
           const b = rgb[2];
-          colorString = 'rgb(' + r + ', ' + g + ', ' + b + ');';
-        }
-        if(exportHslToggled) {
-          colorString = ('hsl(' + (color.h).toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%;');
+          colorString = 'rgb(' + r + ', ' + g + ', ' + b + ')';
         }
         if(exportHexToggled) {
           colorString = hslToHex(color.h, color.s, color.l);
         }
-
-        let line = `.${key}-color {\ncolor: ${colorString} \n}\n`;
-        line = line + `.${key}-bg {\nbackground-color: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%);\n}\n`;
-        line = line + `.${key}-border {\nborder-color: hsl(${(color.h).toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%);\n}\n`;
-        styles += line;
+        let line = `.${key}-color {\n\tcolor: ${colorString}; \n}\n`;
+        line = line + `.${key}-bg {\n\tbackground-color: ${colorString}; \n}\n`;
+        line = line + `.${key}-border {\n\tborder-color: ${colorString}; \n}\n\n`;
+        cssStyles += line;
       });
     }
-    return styles;
+    return cssStyles;
   };
 
-  let harmonySwatches = makeColorSwatches(hslHarmonies);
-  let inverseSwatches = makeColorSwatches(hslInverses);
-  let lighterSwatches = makeColorSwatches(hslLighters);
-  let darkerSwatches = makeColorSwatches(hslDarkers);
-  let desaturatedSwatches = makeColorSwatches(hslDesaturateds);
 
   return (
     <>
@@ -170,13 +172,14 @@ const VariationsControls = (color) => {
         <label htmlFor="darkerQuantity" title="Darker color sets to generate from the base, harmonies, and inverses,with each increment stepping closer to black."> <TiAdjustBrightness /><span className={styles.textLabel}>Darker</span> &times;<input type="number" id="darkerQuantity" min="0" max="20" value={darkerQuantity} onChange={({ target }) => setDarkerQuantity(target.value)} /></label>
         <label htmlFor="desaturatedQuantity" title="Less saturated color sets to generate from the base, harmonies, and inverses, with each increment stepping closer to grayscale."><MdFormatColorReset /><span className={styles.textLabel}>Desaturated</span> &times;<input type="number" id="desaturatedQuantity" value={desaturatedQuantity} min="0" max="20" onChange={({ target }) => setDesaturatedQuantity(target.value)} /></label>
       </div>
+
       <section className={styles.colorFormats}>
         <div className={`${styles.exportFormatToggle} ${(!swatchToggled) && styles.toggled}`} onClick={handleShowColorsClick}>View Colors As:</div>
         <div className={`${styles.exportFormatToggle} ${exportHexToggled && styles.toggled}`} onClick={handleExportHexClick}>Hex</div>
         <div className={`${styles.exportFormatToggle} ${exportRgbToggled && styles.toggled}`} onClick={handleExportRgbClick}>RGB</div>
         <div className={`${styles.exportFormatToggle} ${exportHslToggled && styles.toggled}`} onClick={handleExportHslClick}>HSL</div>
+        <DarkModeToggle />
       </section>
-
       <section className={styles.ColorMatches}>
         {harmonySwatches}
         {inverseSwatches}
@@ -188,10 +191,12 @@ const VariationsControls = (color) => {
       <section className={styles.export}>
         <h2>Palette Export Options</h2>
         <h3 className={`${styles.postcssExportToggler} ${postcssExportToggled && styles.expandable}`} onClick={handlePostcssExportClick}>PostCSS Values Variables color list<a href="https://github.com/css-modules/css-modules/blob/master/docs/values-variables.md" target="_blank">*</a></h3>
-        <textarea className={`${styles.postcssOutputText} ${postcssExportToggled && styles.hidden}`} value={postcssExportText} onChange={({ postcssValuesVariables }) => setPostcssExportText(postcssValuesVariables)} />
+        <textarea className={`${styles.postcssOutputText} ${postcssExportToggled && styles.hidden}`} value={postcssExportText} onChange={({ postcssValuesVariables }) => setPostcssExportText(postcssValuesVariables)} style={{ background: `${(darkMode.value ? '#111' : '#FFFFFF')}`, color: `${(darkMode.value ? '#FFFFFF' : '#111')}` }} />
         <h3 className={`${styles.cssExportToggler} ${cssExportToggled && styles.expandable}`} onClick={handleCssExportClick}>CSS stylesheet</h3>
-        <textarea className={`${styles.cssOutputText} ${cssExportToggled && styles.hidden}`} value={cssExportText} onChange={({ cssClasses }) => setCssExportText(cssClasses)} />
+        <textarea className={`${styles.cssOutputText} ${cssExportToggled && styles.hidden}`} value={cssExportText} onChange={({ cssClasses }) => setCssExportText(cssClasses)} style={{ background: `${(darkMode.value ? '#111' : '#FFFFFF')}`, color: `${(darkMode.value ? '#FFFFFF' : '#111')}` }} />
       </section>
+
+
     </>
   );
 };
