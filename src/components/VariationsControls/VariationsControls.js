@@ -115,7 +115,7 @@ const VariationsControls = (color) => {
         const key = (color.matchType);
         let colorString = hslToHex(color.h, color.s, color.l);
         if(exportHslToggled) {
-          colorString = ('hsl(' + color.h.toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%;');
+          colorString = ('hsl(' + color.h.toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%) ;');
         }
         if(exportRgbToggled) {
           const rgb = hslToRgb(color.h, color.s, color.l);
