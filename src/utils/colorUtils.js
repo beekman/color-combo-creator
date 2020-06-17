@@ -54,23 +54,30 @@ export const getInverses = (hsl, hslHarmonies, inverseQuantity) => {
   return hslInverses;
 };
 
-
+export const isOdd = (num) => {
+  return num % 2;
+};
 export const getAnalogousColors = (color, analogousQuantity) => {
-  const colorDesaturateds = [];
   let stepLength = Number(analogousQuantity);
   let hslAnalogousColors = [];
   for(let step = 1; (step <= stepLength); step++) {
+    let h = color.h;
     const s = color.s;
     const l = color.l;
     const a = color.a;
     const stepDistance = 30;
-
-    console.log(Math.floor(step / 2));
-    h = h - (stepDistance * Math.floor(step / 2));
-    let key = (color.matchType);
-    let matchType = 'analogous-' + key + step;
+    let distanceMultiplier = (Math.floor((step + 1) / 2));
+    console.log(distanceMultiplier);
+    if(isOdd(step)) {
+      h = h - (stepDistance * distanceMultiplier);
+    }
+    else if(!(isOdd(step))) {
+      h = h + (stepDistance * distanceMultiplier);
+    }
+    let matchType = 'analogous-' + step;
     hslAnalogousColors.push({ h, s, l, a, matchType, step });
   }
+  console.log(hslAnalogousColors);
   return hslAnalogousColors;
 };
 

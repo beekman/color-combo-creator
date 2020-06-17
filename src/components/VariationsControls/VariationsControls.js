@@ -4,7 +4,7 @@ import {
   isGrayscale, isDark,
   getHarmonies, getOppositeDegree,
   getInverses, getBaseHarmoniesAndInversesColorList,
-  getLighters, getDarkers, getDesaturateds
+  getLighters, getDarkers, getDesaturateds, getAnalogousColors
 } from '../../utils/colorUtils';
 import {
   hslToRgb, hslToHex, hslToObject
@@ -21,6 +21,7 @@ const VariationsControls = (color) => {
   const [harmonyQuantity, setHarmonyQuantity] = useState(0);
   const [inverseQuantity, setInverseQuantity] = useState(0);
   const [inverseMax, setInverseMax] = useState(1);
+  const [analogousQuantity, setAnalogousQuantity] = useState(6);
   const [lighterQuantity, setLighterQuantity] = useState(0);
   const [darkerQuantity, setDarkerQuantity] = useState(0);
   const [desaturatedQuantity, setDesaturatedQuantity] = useState(0);
@@ -54,6 +55,7 @@ const VariationsControls = (color) => {
     hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
     hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
     hslDesaturateds = getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity);
+    let hslAnalogousColors = getAnalogousColors(color.color, analogousQuantity);
     const postcssValuesVariables = ((getPostcssValuesVariables(hslHarmonies, exportHexToggled, exportHslToggled, exportRgbToggled))) + (((getPostcssValuesVariables(hslInverses, exportHexToggled, exportHslToggled, exportRgbToggled)))) + ((getPostcssValuesVariables(hslLighters, exportHexToggled, exportHslToggled, exportRgbToggled))) + ((getPostcssValuesVariables(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled))) + ((getPostcssValuesVariables(hslDesaturateds, exportHexToggled, exportHslToggled, exportRgbToggled)));
 
     const cssClasses = (getCssClasses(color.color, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslHarmonies, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslInverses, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslLighters, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled));
