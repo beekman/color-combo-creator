@@ -56,12 +56,14 @@ const VariationsControls = (color) => {
     hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
     hslDesaturateds = getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity);
     let hslAnalogousColors = getAnalogousColors(color.color, analogousQuantity);
+
     const postcssValuesVariables = ((getPostcssValuesVariables(hslHarmonies, exportHexToggled, exportHslToggled, exportRgbToggled))) + (((getPostcssValuesVariables(hslInverses, exportHexToggled, exportHslToggled, exportRgbToggled)))) + ((getPostcssValuesVariables(hslLighters, exportHexToggled, exportHslToggled, exportRgbToggled))) + ((getPostcssValuesVariables(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled))) + ((getPostcssValuesVariables(hslDesaturateds, exportHexToggled, exportHslToggled, exportRgbToggled)));
 
     const cssClasses = (getCssClasses(color.color, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslHarmonies, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslInverses, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslLighters, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled));
 
     makeColorSwatches(hslHarmonies);
     makeColorSwatches(hslInverses);
+    makeColorSwatches(hslAnalogousColors);
     makeColorSwatches(hslLighters);
     makeColorSwatches(hslDarkers);
     makeColorSwatches(hslDesaturateds);
@@ -72,6 +74,7 @@ const VariationsControls = (color) => {
 
   let hslHarmonies = getHarmonies(color.color, harmonyQuantity);
   let hslInverses = getInverses(color.color, hslHarmonies, inverseQuantity);
+  let hslAnalogies = getAnalogousColors(color.color, analogousQuantity);
   let baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.color, hslHarmonies, hslInverses);
   let hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
   let hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
@@ -107,6 +110,7 @@ const VariationsControls = (color) => {
 
   let harmonySwatches = makeColorSwatches(hslHarmonies);
   let inverseSwatches = makeColorSwatches(hslInverses);
+  let analogousSwatches = makeColorSwatches(hslAnalogies);
   let lighterSwatches = makeColorSwatches(hslLighters);
   let darkerSwatches = makeColorSwatches(hslDarkers);
   let desaturatedSwatches = makeColorSwatches(hslDesaturateds);
@@ -186,6 +190,7 @@ const VariationsControls = (color) => {
       <section className={styles.ColorMatches}>
         {harmonySwatches}
         {inverseSwatches}
+        {analogousSwatches}
         {lighterSwatches}
         {darkerSwatches}
         {desaturatedSwatches}
