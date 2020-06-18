@@ -73,8 +73,8 @@ const VariationsControls = (color) => {
 
   let hslHarmonies = getHarmonies(color.color, harmonyQuantity);
   let hslInverses = getInverses(color.color, hslHarmonies, inverseQuantity);
-  let hslAnalogies = getAnalogousColors(color.color, analogousQuantity);
-  let baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.color, hslHarmonies, hslInverses);
+  let hslAnalogousColors = getAnalogousColors(color.color, analogousQuantity);
+  let baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.color, hslHarmonies, hslInverses, hslAnalogousColors);
   let hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
   let hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
   let hslDesaturateds = getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity);

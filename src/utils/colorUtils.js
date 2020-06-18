@@ -84,7 +84,7 @@ export const getAnalogousColors = (color, analogousQuantity) => {
 };
 
 
-export const getBaseHarmoniesAndInversesColorList = (hsl, hslHarmonies, hslInverses) => {
+export const getBaseHarmoniesAndInversesColorList = (hsl, hslHarmonies, hslInverses, hslAnalogousColors) => {
   let baseHarmoniesAndInversesColorList = [];
   let h = hsl.h;
   const s = hsl.s;
@@ -104,6 +104,13 @@ export const getBaseHarmoniesAndInversesColorList = (hsl, hslHarmonies, hslInver
     let matchType = hslInverse.matchType;
     baseHarmoniesAndInversesColorList.push({ h, s, l, a, matchType, step });
   });
+  hslAnalogousColors.map(hslAnalogousColor => {
+    h = hslAnalogousColor.h;
+    l = hslAnalogousColor.l;
+    let matchType = hslAnalogousColor.matchType;
+    baseHarmoniesAndInversesColorList.push({ h, s, l, a, matchType, step });
+  });
+
   return baseHarmoniesAndInversesColorList;
 };
 
