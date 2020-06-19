@@ -74,7 +74,7 @@ describe('tests for getAnalogousColors function', () => {
   it('should return a single color for analogousQuantity of 1', () => {
     const hsl = { h: 180, s: 1, l: 0.5, a: 1 };
     const analogousQuantity = 1;
-    expect(getAnalogousColors(hsl, analogousQuantity)).toEqual([{ a: 1, h: 150, l: 0.5, matchType: 'analogous-1', s: 1, step: 1 }]);
+    expect(getAnalogousColors(hsl, analogousQuantity)).toEqual([{ a: 1, h: 150, l: 0.5, matchType: 'analogous1', s: 1, step: 1 }]);
   });
 });
 
