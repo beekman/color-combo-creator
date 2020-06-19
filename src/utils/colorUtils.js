@@ -1,4 +1,4 @@
-export const getHarmonies = (color, harmonyQuantity) => {
+export const getBaseAndHarmonies = (color, harmonyQuantity) => {
   harmonyQuantity = parseFloat(harmonyQuantity) + 1;
   const degreeShift = 360 / harmonyQuantity;
   let h = Number(color.h);
@@ -84,7 +84,7 @@ export const getAnalogousColors = (color, analogousQuantity) => {
 };
 
 
-export const getHarmoniesInverseAndAnalogousColorList = (hsl, hslHarmonies, hslInverses, hslAnalogousColors) => {
+export const getBaseHarmoniesInverseAndAnalogousColorList = (hsl, hslHarmonies, hslInverses, hslAnalogousColors) => {
   let baseHarmoniesInverseAndAnalogousColorList = [];
   let h = hsl.h;
   const s = hsl.s;
