@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styles from './VariationsControls.css';
 import {
-  isGrayscale, isDark,
-  getHarmonies, getOppositeDegree,
-  getInverses, getBaseHarmoniesAndInversesColorList,
-  getLighters, getDarkers, getDesaturateds, getAnalogousColors
+  getBaseAndHarmonies, getAnalogousColors, getOppositeDegree,
+  getInverses, getBaseHarmoniesInverseAndAnalogousColorList,
+  getLighters, getDarkers, getDesaturateds
 } from '../../utils/colorUtils';
 import {
   hslToRgb, hslToHex, hslToObject
@@ -48,13 +47,13 @@ const VariationsControls = (color) => {
     document.body.style.backgroundColor = backgroundColor;
     document.body.style.color = foregroundColor;
     setInverseMax(Number(harmonyQuantity) + 1);
-    const hslHarmonies = getHarmonies(color.color, harmonyQuantity);
+    const hslHarmonies = getBaseAndHarmonies(color.color, harmonyQuantity);
     const hslInverses = getInverses(color.color, hslHarmonies, inverseQuantity);
     const hslAnalogousColors = getAnalogousColors(color.color, analogousQuantity);
-    baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.color, hslHarmonies, hslInverses, hslAnalogousColors);
-    hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
-    hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
-    hslDesaturateds = getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity);
+    baseHarmoniesInverseAndAnalogousColorList = getBaseHarmoniesInverseAndAnalogousColorList(color.color, hslHarmonies, hslInverses, hslAnalogousColors);
+    hslLighters = getLighters(baseHarmoniesInverseAndAnalogousColorList, lighterQuantity);
+    hslDarkers = getDarkers(baseHarmoniesInverseAndAnalogousColorList, darkerQuantity);
+    hslDesaturateds = getDesaturateds(baseHarmoniesInverseAndAnalogousColorList, desaturatedQuantity);
 
 
     const postcssValuesVariables = ((getPostcssValuesVariables(hslHarmonies, exportHexToggled, exportHslToggled, exportRgbToggled))) + (((getPostcssValuesVariables(hslInverses, exportHexToggled, exportHslToggled, exportRgbToggled)))) + ((getPostcssValuesVariables(hslLighters, exportHexToggled, exportHslToggled, exportRgbToggled))) + ((getPostcssValuesVariables(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled))) + ((getPostcssValuesVariables(hslDesaturateds, exportHexToggled, exportHslToggled, exportRgbToggled)));
@@ -69,22 +68,22 @@ const VariationsControls = (color) => {
     makeColorSwatches(hslDesaturateds);
     setPostcssExportText(postcssValuesVariables);
     setCssExportText(cssClasses);
-
   });
 
-  let hslHarmonies = getHarmonies(color.color, harmonyQuantity);
+  let hslHarmonies = getBaseAndHarmonies(color.color, harmonyQuantity);
   let hslInverses = getInverses(color.color, hslHarmonies, inverseQuantity);
   let hslAnalogousColors = getAnalogousColors(color.color, analogousQuantity);
-  let baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.color, hslHarmonies, hslInverses, hslAnalogousColors);
-  let hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
-  let hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
-  let hslDesaturateds = getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity);
+  let baseHarmoniesInverseAndAnalogousColorList = getBaseHarmoniesInverseAndAnalogousColorList(color.color, hslHarmonies, hslInverses, hslAnalogousColors);
+  let hslLighters = getLighters(baseHarmoniesInverseAndAnalogousColorList, lighterQuantity);
+  let hslDarkers = getDarkers(baseHarmoniesInverseAndAnalogousColorList, darkerQuantity);
+  let hslDesaturateds = getDesaturateds(baseHarmoniesInverseAndAnalogousColorList, desaturatedQuantity);
 
   const makeColorSwatches = (colorSet) => {
     if(colorSet.length) {
       return colorSet.map((color, i) => {
         const key = (color.matchType + (Number(i) + 1));
         const rgb = hslToRgb(color.h, color.s, color.l);
+        const rgbString = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
         const hex = hslToHex(color.h, color.s, color.l);
 
         return (
@@ -95,7 +94,7 @@ const VariationsControls = (color) => {
                 <p className={`${styles.hexValues}`}>{hex}</p>
               }
               {exportRgbToggled &&
-                <p className={`${styles.rgbValues}`}>rgb({rgb[0]}, {rgb[1]}, {rgb[2]})</p>
+                <p className={`${styles.rgbValues}`}>{rgbString}</p>
               }
               {exportHslToggled &&
                 <p className={`${styles.hslValues}`}>hsl({(color.h).toFixed(1)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)

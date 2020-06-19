@@ -76,7 +76,7 @@ export const getAnalogousColors = (color, analogousQuantity) => {
       h = h + (stepDistance * distanceMultiplier);
       if(h < 0) { h = h + 360; }
     }
-    let matchType = 'analogous-' + step;
+    let matchType = 'analogous' + step;
     hslAnalogousColors.push({ h, s, l, a, matchType, step });
   }
   console.log(hslAnalogousColors);
