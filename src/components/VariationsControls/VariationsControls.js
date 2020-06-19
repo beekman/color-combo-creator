@@ -81,15 +81,16 @@ const VariationsControls = (color) => {
   const makeColorSwatches = (colorSet) => {
     if(colorSet.length) {
       return colorSet.map((color, i) => {
-        const key = (color.matchType + (Number(i) + 1));
+        const key = (color.matchRelationship + (Number(i) + 1));
+        const hslString = `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)`;
         const rgb = hslToRgb(color.h, color.s, color.l);
         const rgbString = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
         const hex = hslToHex(color.h, color.s, color.l);
 
         return (
-          <div key={key} style={{ background: `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)` }} className={styles.Swatch} onClick={handleSwatchClick}>
+          <div key={key} style={{ background: { hslString } }} className={styles.Swatch} onClick={handleSwatchClick}>
             <aside className={`${styles.details} ${swatchToggled && styles.hidden}`}>
-              <strong>{(color.matchType)}</strong>
+              <strong>{(color.matchRelationship)}</strong>
               {exportHexToggled &&
                 <p className={`${styles.hexValues}`}>{hex}</p>
               }
@@ -97,8 +98,7 @@ const VariationsControls = (color) => {
                 <p className={`${styles.rgbValues}`}>{rgbString}</p>
               }
               {exportHslToggled &&
-                <p className={`${styles.hslValues}`}>hsl({(color.h).toFixed(1)}, {(color.s * 100).toFixed(2)}%, {(color.l * 100).toFixed(2)}%)
-                </p>
+                <p className={`${styles.hslValues}`}>{hslString}</p>
               }
             </aside>
           </div>
@@ -118,7 +118,7 @@ const VariationsControls = (color) => {
     let postCSSVariables = '';
     if(colorSet.length > 0) {
       colorSet.map((color) => {
-        const key = (color.matchType);
+        const key = (color.matchRelationship);
         let colorString = hslToHex(color.h, color.s, color.l);
         if(exportHslToggled) {
           colorString = ('hsl(' + color.h.toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%) ;');
@@ -144,7 +144,7 @@ const VariationsControls = (color) => {
     let cssStyles = '';
     if(colorSet.length > 0) {
       colorSet.map((color) => {
-        const key = color.matchType;
+        const key = color.matchRelationship;
         let colorString = hslToHex(color.h, color.s, color.l);
         if(exportHslToggled) {
           colorString = ('hsl(' + color.h.toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%)');

@@ -6,24 +6,24 @@ export const getBaseAndHarmonies = (color, harmonyQuantity) => {
   const s = color.s;
   const l = color.l;
   const a = color.a;
-  let matchType = 'base';
+  let matchRelationship = 'base';
   const step = '';
   let hslHarmonies = [];
-  hslHarmonies.push({ h, s, l, a, matchType, step });
+  hslHarmonies.push({ h, s, l, a, matchRelationship, step });
   let count = 1;
   while((currentHueValue - degreeShift) >= 0) {
     currentHueValue = currentHueValue - degreeShift;
     h = currentHueValue;
-    const matchType = 'harmony' + count;
-    hslHarmonies.push({ h, s, l, a, matchType, step });
+    const matchRelationship = 'harmony' + count;
+    hslHarmonies.push({ h, s, l, a, matchRelationship, step });
     count++;
   }
   currentHueValue = color.h;
   while((currentHueValue + degreeShift) < 360) {
     currentHueValue = currentHueValue + degreeShift;
     h = currentHueValue;
-    const matchType = 'harmony' + count;
-    hslHarmonies.push({ h, s, l, a, matchType, step });
+    const matchRelationship = 'harmony' + count;
+    hslHarmonies.push({ h, s, l, a, matchRelationship, step });
     count++;
   }
   return hslHarmonies;
@@ -44,10 +44,10 @@ export const getInverses = (hsl, hslHarmonies, inverseQuantity) => {
     while(inverseQuantity > count) {
       let currentColor = hslHarmonies[count];
       const h = getOppositeDegree(currentColor.h);
-      let type = (currentColor.matchType);
+      let type = (currentColor.matchRelationship);
       if(!type) { type = 'base'; }
-      const matchType = 'inverse-of-' + type;
-      hslInverses.push({ h, s, l, a, matchType, step });
+      const matchRelationship = 'inverse-of-' + type;
+      hslInverses.push({ h, s, l, a, matchRelationship, step });
       count++;
     }
   }
@@ -67,7 +67,6 @@ export const getAnalogousColors = (color, analogousQuantity) => {
     const a = color.a;
     const stepDistance = 30;
     let distanceMultiplier = (Math.floor((step + 1) / 2));
-    console.log(distanceMultiplier);
     if(isOdd(step)) {
       h = h - (stepDistance * distanceMultiplier);
       if(h < 0) { h = 360 + h; }
@@ -76,10 +75,9 @@ export const getAnalogousColors = (color, analogousQuantity) => {
       h = h + (stepDistance * distanceMultiplier);
       if(h < 0) { h = h + 360; }
     }
-    let matchType = 'analogous' + step;
-    hslAnalogousColors.push({ h, s, l, a, matchType, step });
+    let matchRelationship = 'analogous' + step;
+    hslAnalogousColors.push({ h, s, l, a, matchRelationship, step });
   }
-  console.log(hslAnalogousColors);
   return hslAnalogousColors;
 };
 
@@ -94,21 +92,21 @@ export const getBaseHarmoniesInverseAndAnalogousColorList = (hsl, hslHarmonies, 
   hslHarmonies.map(hslHarmony => {
     h = hslHarmony.h;
     l = hslHarmony.l;
-    let matchType = (hsl.matchType);
-    if(!matchType) { matchType = 'base'; }
-    baseHarmoniesInverseAndAnalogousColorList.push({ h, s, l, a, matchType, step });
+    let matchRelationship = (hsl.matchRelationship);
+    if(!matchRelationship) { matchRelationship = 'base'; }
+    baseHarmoniesInverseAndAnalogousColorList.push({ h, s, l, a, matchRelationship, step });
   });
   hslInverses.map(hslInverse => {
     h = hslInverse.h;
     l = hslInverse.l;
-    let matchType = hslInverse.matchType;
-    baseHarmoniesInverseAndAnalogousColorList.push({ h, s, l, a, matchType, step });
+    let matchRelationship = hslInverse.matchRelationship;
+    baseHarmoniesInverseAndAnalogousColorList.push({ h, s, l, a, matchRelationship, step });
   });
   hslAnalogousColors.map(hslAnalogousColor => {
     h = hslAnalogousColor.h;
     l = hslAnalogousColor.l;
-    let matchType = hslAnalogousColor.matchType;
-    baseHarmoniesInverseAndAnalogousColorList.push({ h, s, l, a, matchType, step });
+    let matchRelationship = hslAnalogousColor.matchRelationship;
+    baseHarmoniesInverseAndAnalogousColorList.push({ h, s, l, a, matchRelationship, step });
   });
 
   return baseHarmoniesInverseAndAnalogousColorList;
@@ -125,10 +123,10 @@ export const getLighters = (baseHarmoniesInverseAndAnalogousColorList, lighterQu
       const stepDistance = ((1 - hslColor.l) / (Number(lighterQuantity) + 1));
       let l = (hslColor.l + (stepDistance * step));
       const a = hslColor.a;
-      let key = (hslColor.matchType);
+      let key = (hslColor.matchRelationship);
       if((!key) || (key === 'base0')) { key = 'base'; }
-      const matchType = 'lighter-' + key + '-step' + step;
-      hslLighterColorList.push({ h, s, l, a, matchType, step });
+      const matchRelationship = 'lighter-' + key + '-step' + step;
+      hslLighterColorList.push({ h, s, l, a, matchRelationship, step });
     });
   }
   return hslLighterColorList;
@@ -143,10 +141,10 @@ export const getDarkers = (baseHarmoniesInverseAndAnalogousColorList, darkerQuan
       const stepDistance = (hslColor.l / (Number(darkerQuantity) + 1));
       let l = (hslColor.l - (stepDistance * step));
       const a = hslColor.a;
-      let key = (hslColor.matchType);
+      let key = (hslColor.matchRelationship);
       if((!key) || (key === 'base0')) { key = 'base'; }
-      const matchType = 'darker-' + key + '-step' + step;
-      hslDarkerColorList.push({ h, s, l, a, matchType, step });
+      const matchRelationship = 'darker-' + key + '-step' + step;
+      hslDarkerColorList.push({ h, s, l, a, matchRelationship, step });
     });
   }
   return hslDarkerColorList;
@@ -162,10 +160,10 @@ export const getDesaturateds = (baseHarmoniesInverseAndAnalogousColorList, desat
       let s = hslColor.s - (stepDistance * step);
       const l = (hslColor.l);
       const a = hslColor.a;
-      let key = (hslColor.matchType);
+      let key = (hslColor.matchRelationship);
       if((!key) || (key === 'base0')) { key = 'base'; }
-      const matchType = 'desaturated-' + key + '-step' + step;
-      hslDesaturateds.push({ h, s, l, a, matchType, step });
+      const matchRelationship = 'desaturated-' + key + '-step' + step;
+      hslDesaturateds.push({ h, s, l, a, matchRelationship, step });
     });
   }
   return hslDesaturateds;
