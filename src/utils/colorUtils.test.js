@@ -1,5 +1,6 @@
 const {
   getBaseAndHarmonies,
+  getAnalogousColors,
   getInverses,
   getLighters,
   getDarkers,
@@ -61,6 +62,19 @@ describe('tests for getBaseAndHarmonies function', () => {
     const hsl = { h: 359, s: 1, l: 0.5, a: 1 };
     const harmonyQuantity = 3;
     expect(getBaseAndHarmonies(hsl, harmonyQuantity)).toEqual([{ h: 359, s: 1, l: 0.5, a: 1, matchType: 'base', step: '' }, { h: 269, s: 1, l: 0.5, a: 1, matchType: 'harmony1', step: '' }, { h: 179, s: 1, l: 0.5, a: 1, matchType: 'harmony2', step: '' }, { h: 89, s: 1, l: 0.5, a: 1, matchType: 'harmony3', step: '' }]);
+  });
+});
+
+describe('tests for getAnalogousColors function', () => {
+  it('should return an empty array for analogousQuantity of 0', () => {
+    const hsl = { h: 180, s: 1, l: 0.5, a: 1 };
+    const analogousQuantity = 0;
+    expect(getAnalogousColors(hsl, analogousQuantity)).toEqual([]);
+  });
+  it('should return a single color for analogousQuantity of 1', () => {
+    const hsl = { h: 180, s: 1, l: 0.5, a: 1 };
+    const analogousQuantity = 1;
+    expect(getAnalogousColors(hsl, analogousQuantity)).toEqual([{ 'a': 1, 'h': 150, 'l': 0.5, 'matchType': 'analogous-1', 's': 1, 'step': 1 }]);
   });
 });
 
