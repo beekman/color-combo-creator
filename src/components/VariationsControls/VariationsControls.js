@@ -50,11 +50,12 @@ const VariationsControls = (color) => {
     setInverseMax(Number(harmonyQuantity) + 1);
     const hslHarmonies = getHarmonies(color.color, harmonyQuantity);
     const hslInverses = getInverses(color.color, hslHarmonies, inverseQuantity);
-    baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.color, hslHarmonies, hslInverses);
+    const hslAnalogousColors = getAnalogousColors(color.color, analogousQuantity);
+    baseHarmoniesAndInversesColorList = getBaseHarmoniesAndInversesColorList(color.color, hslHarmonies, hslInverses, hslAnalogousColors);
     hslLighters = getLighters(baseHarmoniesAndInversesColorList, lighterQuantity);
     hslDarkers = getDarkers(baseHarmoniesAndInversesColorList, darkerQuantity);
     hslDesaturateds = getDesaturateds(baseHarmoniesAndInversesColorList, desaturatedQuantity);
-    let hslAnalogousColors = getAnalogousColors(color.color, analogousQuantity);
+
 
     const postcssValuesVariables = ((getPostcssValuesVariables(hslHarmonies, exportHexToggled, exportHslToggled, exportRgbToggled))) + (((getPostcssValuesVariables(hslInverses, exportHexToggled, exportHslToggled, exportRgbToggled)))) + ((getPostcssValuesVariables(hslLighters, exportHexToggled, exportHslToggled, exportRgbToggled))) + ((getPostcssValuesVariables(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled))) + ((getPostcssValuesVariables(hslDesaturateds, exportHexToggled, exportHslToggled, exportRgbToggled)));
 
@@ -109,7 +110,7 @@ const VariationsControls = (color) => {
 
   let harmonySwatches = makeColorSwatches(hslHarmonies);
   let inverseSwatches = makeColorSwatches(hslInverses);
-  let analogousSwatches = makeColorSwatches(hslAnalogies);
+  let analogousSwatches = makeColorSwatches(hslAnalogousColors);
   let lighterSwatches = makeColorSwatches(hslLighters);
   let darkerSwatches = makeColorSwatches(hslDarkers);
   let desaturatedSwatches = makeColorSwatches(hslDesaturateds);
