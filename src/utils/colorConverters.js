@@ -201,3 +201,11 @@ export const hslaToRgba = (hsla, isPct) => {
     return 'Invalid input color';
   }
 };
+
+export const hslToString = (hslColor) => {
+  return (`hsl(${hslColor.h.toFixed(0)}, ${(hslColor.s * 100).toFixed(2)}%, ${(hslColor.l * 100).toFixed(2)}%)`);
+};
+
+export const rgbToString = (rgbColor) => {
+  return (`rgb(${rgbColor[0]}, ${rgbColor[1]}, ${rgbColor[2]})`);
+};

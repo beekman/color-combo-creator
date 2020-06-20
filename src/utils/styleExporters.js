@@ -5,7 +5,7 @@ export const getPostcssValuesVariables = (colorSet, exportHexToggled, exportRgbT
   let postCSSVariables = '';
   if(colorSet.length > 0) {
     colorSet.map((color) => {
-      const key = (color.matchType);
+      const key = (color.matchRelationship);
       let colorString;
       if(exportHslToggled) {
         colorString = `hsl(${color.h.toFixed(0)}, ${(color.s * 100).toFixed(2)}%, ${(color.l * 100).toFixed(2)}%;);`;
@@ -29,7 +29,7 @@ export const getCssClasses = (colorSet, exportHexToggled, exportRgbToggled, expo
   let styles = '';
   if(colorSet.length > 0) {
     colorSet.map((color) => {
-      const key = color.matchType;
+      const key = color.matchRelationship;
       let colorString;
 
       const rgb = hslToRgb((color.h / 360.00), color.s, color.l);
