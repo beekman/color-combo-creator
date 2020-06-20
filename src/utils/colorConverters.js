@@ -203,7 +203,7 @@ export const hslaToRgba = (hsla, isPct) => {
 };
 
 export const hslToString = (hslColor) => {
-  return (`hsl(${hslColor.h}, ${hslColor.s * 100}%, ${hslColor.l * 100}%)`);
+  return (`hsl(${hslColor.h.toFixed(0)}, ${(hslColor.s * 100).toFixed(2)}%, ${(hslColor.l * 100).toFixed(2)}%)`);
 };
 
 export const rgbToString = (rgbColor) => {

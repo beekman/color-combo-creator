@@ -85,14 +85,13 @@ const VariationsControls = (color) => {
         const hslString = hslToString(color);
         const rgb = hslToRgb(color.h, color.s, color.l);
         const rgbString = rgbToString(rgb);
-        const hex = hslToHex(color.h, color.s, color.l);
-
+        const hexString = hslToHex(color.h, color.s, color.l);
         return (
           <div key={key} style={{ background: `${hslString}` }} className={styles.Swatch} onClick={handleSwatchClick}>
             <aside className={`${styles.details} ${swatchToggled && styles.hidden}`}>
               <strong>{(color.matchRelationship)}</strong>
               {exportHexToggled &&
-                <p className={`${styles.hexValues}`}>{hex}</p>
+                <p className={`${styles.hexValues}`}>{hexString}</p>
               }
               {exportRgbToggled &&
                 <p className={`${styles.rgbValues}`}>{rgbString}</p>
