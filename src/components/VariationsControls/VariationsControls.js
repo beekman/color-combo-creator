@@ -6,7 +6,7 @@ import {
   getLighters, getDarkers, getDesaturateds
 } from '../../utils/colorUtils';
 import {
-  hslToRgb, hslToHex, hslToObject
+  hslToRgb, hslToHex, hslToObject, hslToString, rgbToString
 } from '../../utils/colorConverters';
 import { MdInvertColors, MdBrightnessLow, MdFormatColorReset, MdLinearScale } from 'react-icons/md';
 import { IoIosColorFilter } from 'react-icons/io';
@@ -82,13 +82,13 @@ const VariationsControls = (color) => {
     if(colorSet.length) {
       return colorSet.map((color, i) => {
         const key = (color.matchRelationship + (Number(i) + 1));
-        const hslString = `hsl(${color.h}, ${color.s * 100}%, ${color.l * 100}%)`;
+        const hslString = hslToString(color);
         const rgb = hslToRgb(color.h, color.s, color.l);
-        const rgbString = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+        const rgbString = rgbToString(rgb);
         const hex = hslToHex(color.h, color.s, color.l);
 
         return (
-          <div key={key} style={{ background: { hslString } }} className={styles.Swatch} onClick={handleSwatchClick}>
+          <div key={key} style={{ background: `${hslString}` }} className={styles.Swatch} onClick={handleSwatchClick}>
             <aside className={`${styles.details} ${swatchToggled && styles.hidden}`}>
               <strong>{(color.matchRelationship)}</strong>
               {exportHexToggled &&
@@ -203,8 +203,6 @@ const VariationsControls = (color) => {
         <h3 className={`${styles.cssExportToggler} ${cssExportToggled && styles.expandable}`} onClick={handleCssExportClick}>CSS stylesheet</h3>
         <textarea className={`${styles.cssOutputText} ${cssExportToggled && styles.hidden}`} value={cssExportText} onChange={({ cssClasses }) => setCssExportText(cssClasses)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#EEE' : '#111')}` }} />
       </section>
-
-
     </>
   );
 };
