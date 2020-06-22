@@ -1,10 +1,10 @@
 import {
-  hslToRgb, hslToHex
+  hslToRgb, hslToHex, hslToString, rgbToString
 } from './colorConverters';
 export const getPostcssValuesVariables = (colorSet, exportHexToggled, exportHslToggled, exportRgbToggled) => {
   let postCSSVariables = '';
   if(colorSet.length > 0) {
-    colorSet.map((color) => {
+    colorSet.map((color, i) => {
       const key = (color.matchRelationship + (Number(i) + 1));
       const hslString = hslToString(color);
       const rgb = hslToRgb(color.h, color.s, color.l);
@@ -25,7 +25,7 @@ export const getPostcssValuesVariables = (colorSet, exportHexToggled, exportHslT
 export const getCssClasses = (colorSet, exportHexToggled, exportHslToggled, exportRgbToggled) => {
   let cssStyles = '';
   if(colorSet.length > 0) {
-    colorSet.map((color) => {
+    colorSet.map((color, i) => {
       const key = (color.matchRelationship + (Number(i) + 1));
       const hslString = hslToString(color);
       const rgb = hslToRgb(color.h, color.s, color.l);
