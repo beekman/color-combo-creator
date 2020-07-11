@@ -18,5 +18,5 @@ A React color palette generator with a unique interface designed for efficient b
  - New numeric input, Desaturate, which generates less colorful variant colorsets and adds them to the palette.
  
   ### Coming Soon (Future Features)
-  - Color scheme export to PostCSS values variables (https://github.com/css-modules/css-modules/blob/master/docs/values-variables.md) or CSS.
   - User login: save presets, schemes and colors for later
+  - redesigned color picker
