@@ -40,6 +40,9 @@ color: black;
     margin: 0;
   }
 }
+.swatchSizeRange{
+  padding: 0 1rem;
+}
 
 .ColorMatches {
   padding: 0.25rem;

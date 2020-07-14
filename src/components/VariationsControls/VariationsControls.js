@@ -12,7 +12,7 @@ import {
   getPostcssValuesVariables, getCssClasses
 } from '../../utils/paletteExporters';
 import { MdInvertColors, MdBrightnessLow, MdFormatColorReset, MdLinearScale, MdPhotoSizeSelectSmall, MdPhotoSizeSelectLarge } from 'react-icons/md';
-import {FaSquareFull} from 'react-icons/fa'
+import { FaSquareFull } from 'react-icons/fa';
 import { IoIosColorFilter } from 'react-icons/io';
 import { TiAdjustBrightness } from 'react-icons/ti';
 import { DarkModeToggle } from '../DarkModeToggle';
@@ -134,10 +134,10 @@ const VariationsControls = (color) => {
         <div className={`${styles.exportFormatToggle} ${exportRgbToggled && styles.toggled}`} onClick={handleExportRgbClick}>RGB</div>
         <div className={`${styles.exportFormatToggle} ${exportHslToggled && styles.toggled}`} onClick={handleExportHslClick}>HSL</div>
 
-        <div className={styles.swatchSizeRange}><label htmlFor="swatchSize"><MdPhotoSizeSelectSmall /><span className={styles.textLabel}>Swatch Size</span></label><input type="range" min={3} max={15} value={swatchSize} onChange={({ target }) => setSwatchSize(target.value)} /><FaSquareFull />
-        </div>
-        <DarkModeToggle />
 
+        <DarkModeToggle />
+        <div className={styles.swatchSizeRange}><label htmlFor="swatchSize"><MdPhotoSizeSelectSmall /><span className={styles.textLabel}></span></label><input type="range" min={3} max={15} value={swatchSize} onChange={({ target }) => setSwatchSize(target.value)} /><FaSquareFull />
+        </div>
       </section>
 
       <section className={styles.ColorMatches}>
