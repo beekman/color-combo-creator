@@ -1,6 +1,6 @@
 import React from 'react';
 import reactCSS from 'reactcss';
-import VariationsControls from '../components/VariationsControls/VariationsControls';
+import VariationsControls from '../components/VariationsControls/VariationsControlsFn';
 import Footer from '../components/Footer/Footer';
 import { ChromePicker, HuePicker } from 'react-color';
 import { IoMdColorPalette } from 'react-icons/io';
@@ -96,7 +96,7 @@ class PalettePicker extends React.Component {
 
     return (
 
-      <div style={{ height: '100vh' }}>
+
         <div style={styles.wrapper}>
           <header onClick={this.handleClick} style={styles.header}>
 
@@ -118,7 +118,7 @@ class PalettePicker extends React.Component {
         </div>
         <VariationsControls color={this.state.color} onChange={this.handleChange} />
         <Footer color={this.state.color} />
-      </div>
+
     );
   }
 }

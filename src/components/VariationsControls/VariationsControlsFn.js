@@ -18,31 +18,8 @@ import { TiAdjustBrightness } from 'react-icons/ti';
 import { DarkModeToggle } from '../DarkModeToggle';
 import useDarkMode from 'use-dark-mode';
 
-const VariationsControls = (color, harmonyQuantity) => {
+const VariationsControls = (color, harmonyQuantity, inverseQuantity, inverseMax, analogousQuantity, lighterQuantity, darkerQuantity, desaturatedQuantity, swatchToggled, postcssExportText, postcssExportToggled, cssExportText, cssExportToggled, exportHexToggled, exportRgbToggled, exportHslToggled, swatchSize, darkMode, setHarmonyQuantity, setInverseQuantity, setInverseMax, setCssExportText, setPostcssExportText, setColor, setAnalogousQuantity) => {
 
-  const [inverseQuantity, setInverseQuantity] = useState(0);
-  const [inverseMax, setInverseMax] = useState(1);
-  const [analogousQuantity, setAnalogousQuantity] = useState(0);
-  const [lighterQuantity, setLighterQuantity] = useState(0);
-  const [darkerQuantity, setDarkerQuantity] = useState(0);
-  const [desaturatedQuantity, setDesaturatedQuantity] = useState(0);
-  const [swatchToggled, setSwatchToggled] = useState(false);
-  const [postcssExportText, setPostcssExportText] = useState('');
-  const [cssExportText, setCssExportText] = useState('');
-  const [cssExportToggled, setCssExportToggled] = useState(true);
-  const [postcssExportToggled, setPostcssExportToggled] = useState(true);
-  const [exportHexToggled, setExportHexToggled] = useState(true);
-  const [exportRgbToggled, setExportRgbToggled] = useState(false);
-  const [exportHslToggled, setExportHslToggled] = useState(false);
-  const [swatchSize, setSwatchSize] = useState(5);
-  const handleShowColorsClick = () => setSwatchToggled((toggled) => !toggled);
-  const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
-  const handleExportHexClick = () => setExportHexToggled((toggled) => !toggled);
-  const handleExportRgbClick = () => setExportRgbToggled((toggled) => !toggled);
-  const handleExportHslClick = () => setExportHslToggled((toggled) => !toggled);
-  const handleCssExportClick = () => setCssExportToggled((toggled) => !toggled);
-  const handlePostcssExportClick = () => setPostcssExportToggled((toggled) => !toggled);
-  const darkMode = useDarkMode(false);
 
   useEffect(() => {
     const backgroundColor = `${(darkMode.value ? '#000000' : '#FFFFFF')}`;
