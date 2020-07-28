@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import VariationsControls from '../components/VariationsControls/VariationsControls';
+import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
-import { ChromePicker, HuePicker } from 'react-color';
-import { IoMdColorPalette } from 'react-icons/io';
+
 
 import {
   getBaseAndHarmonies, getAnalogousColors, getOppositeDegree,
@@ -15,11 +15,7 @@ import {
 import {
   getPostcssValuesVariables, getCssClasses
 } from '../utils/paletteExporters';
-import { MdInvertColors, MdBrightnessLow, MdFormatColorReset, MdLinearScale, MdPhotoSizeSelectSmall, MdPhotoSizeSelectLarge } from 'react-icons/md';
-import { FaSquareFull } from 'react-icons/fa';
-import { IoIosColorFilter } from 'react-icons/io';
-import { TiAdjustBrightness } from 'react-icons/ti';
-import { DarkModeToggle } from '../components/DarkModeToggle';
+
 import useDarkMode from 'use-dark-mode';
 import './App.css';
 export default function App() {
@@ -56,6 +52,7 @@ export default function App() {
 
   return (
     <>
+      <Header color={color} setColor={setColor} />
       <VariationsControls color={color}
         harmonyQuantity={harmonyQuantity}
         inverseQuantity={inverseQuantity}
@@ -82,7 +79,6 @@ export default function App() {
         setColor={setColor}
         setAnalogousQuantity={setAnalogousQuantity}
       />
-
       <Footer color={color} />
     </>
   );
