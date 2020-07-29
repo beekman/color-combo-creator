@@ -108,8 +108,6 @@ color: black;
   }
 }
 
-
-
 .postcssExportToggler:after, .cssExportToggler:after {
 content: "\2212";/* Unicode character for "minus" sign (+) */
 margin-left: 5px;

@@ -19,7 +19,7 @@ import { DarkModeToggle } from '../DarkModeToggle';
 import useDarkMode from 'use-dark-mode';
 
 const VariationsControls = (color, harmonyQuantity, inverseQuantity, inverseMax, analogousQuantity, lighterQuantity, darkerQuantity, desaturatedQuantity, swatchToggled, postcssExportText, postcssExportToggled, cssExportText, cssExportToggled, exportHexToggled, exportRgbToggled, exportHslToggled, swatchSize, darkMode, setHarmonyQuantity, setInverseQuantity, setInverseMax, setCssExportText, setPostcssExportText, setColor, setAnalogousQuantity) => {
-  
+
   const handleShowColorsClick = () => setSwatchToggled((toggled) => !toggled);
   const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
   const handleExportHexClick = () => setExportHexToggled((toggled) => !toggled);
@@ -34,7 +34,7 @@ const VariationsControls = (color, harmonyQuantity, inverseQuantity, inverseMax,
     document.body.style.transition = 'background-color 0.3s ease';
     document.body.style.backgroundColor = backgroundColor;
     document.body.style.color = foregroundColor;
-    setInverseMax(Number(harmonyQuantity) + 1);
+    setInverseMax(Number((harmonyQuantity) + 1));
     const hslHarmonies = getBaseAndHarmonies(color.color, harmonyQuantity);
     const hslInverses = getInverses(color.color, hslHarmonies, inverseQuantity);
     const hslAnalogousColors = getAnalogousColors(color.color, analogousQuantity);
@@ -104,7 +104,7 @@ const VariationsControls = (color, harmonyQuantity, inverseQuantity, inverseMax,
   return (
     <>
       <div className={styles.VariationsControls} style={{ background: `hsl(${(color.color.h)}, ${color.color.s * 100}%, ${color.color.l * 150}%)` }} >
-        <label htmlFor="harmonyQuantity" title="Complementary colors, evenly spaced around the color wheel, relative to the base hue. 2 will give you a split complementary triad scheme, 3 will return a color from each quarter of the color wheel."><IoIosColorFilter /><span className={styles.textLabel}>Harmonies</span></label><input type="number" id="harmonyQuantity" value={harmonyQuantity} min="0" max="36" onChange={({ target }) => setHarmonyQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFFFFF' : '#111')}` }} />
+        <label htmlFor="harmonyQuantity" title="Complementary colors, evenly spaced around the color wheel, relative to the base hue. 2 will give you a split complementary triad scheme, 3 will return a color from each quarter of the color wheel."><IoIosColorFilter /><span className={styles.textLabel}>Harmonies</span></label><input type="number" id="harmonyQuantity" value={harmonyQuantity} min="0" max={36} onChange={({ target }) => setHarmonyQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFFFFF' : '#111')}` }} />
         <label htmlFor="inverseQuantity" title="Colors opposite from the base & harmonic colors on the color wheel. First color is inverted base, subsequent colors are inverted harmonies."><MdInvertColors /><span className={styles.textLabel}>Inverses</span></label><input type="number" id="inverseQuantity" min="0" max={inverseMax} value={inverseQuantity} onChange={({ target }) => setInverseQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFF' : '#111')}` }} />
         <label htmlFor="analogousQuantity" title="Colors similar in hue to the base color. Each color is 30 degrees away from the base color or nearest analogous color."><MdLinearScale /><span className={styles.textLabel}>Analogous</span></label><input type="number" id="analogousQuantity" min="0" max="12" value={analogousQuantity} onChange={({ target }) => setAnalogousQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFF' : '#111')}` }} />
         <label htmlFor="lighterQuantity" title="Lighter color sets to generate from the base, harmonies, and inverses, with each increment stepping closer to white."><MdBrightnessLow /><span className={styles.textLabel}>Lighter</span> &times;<input type="number" id="lighterQuantity" value={lighterQuantity} min="0" max="20" onChange={({ target }) => setLighterQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFF' : '#111')}` }} /></label>

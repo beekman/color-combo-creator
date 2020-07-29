@@ -25,6 +25,8 @@ export default function App() {
     l: .5,
     a: 1,
   });
+
+
   const [harmonyQuantity, setHarmonyQuantity] = useState(0);
   const [inverseQuantity, setInverseQuantity] = useState(0);
   const [inverseMax, setInverseMax] = useState(1);
@@ -43,6 +45,10 @@ export default function App() {
   const [swatchSize, setSwatchSize] = useState(5);
 
   const darkMode = useDarkMode(false);
+
+  let tinycolor = require('tinycolor2');
+  let Color = new tinycolor('hsla(0, 100%, 50%, .5)');
+  console.log(Color);
 
   return (
     <>
