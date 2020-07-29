@@ -41,13 +41,7 @@ export default function App() {
   const [exportRgbToggled, setExportRgbToggled] = useState(false);
   const [exportHslToggled, setExportHslToggled] = useState(false);
   const [swatchSize, setSwatchSize] = useState(5);
-  const handleShowColorsClick = () => setSwatchToggled((toggled) => !toggled);
-  const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
-  const handleExportHexClick = () => setExportHexToggled((toggled) => !toggled);
-  const handleExportRgbClick = () => setExportRgbToggled((toggled) => !toggled);
-  const handleExportHslClick = () => setExportHslToggled((toggled) => !toggled);
-  const handleCssExportClick = () => setCssExportToggled((toggled) => !toggled);
-  const handlePostcssExportClick = () => setPostcssExportToggled((toggled) => !toggled);
+
   const darkMode = useDarkMode(false);
 
   return (

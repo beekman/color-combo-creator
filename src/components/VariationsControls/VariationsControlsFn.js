@@ -19,7 +19,14 @@ import { DarkModeToggle } from '../DarkModeToggle';
 import useDarkMode from 'use-dark-mode';
 
 const VariationsControls = (color, harmonyQuantity, inverseQuantity, inverseMax, analogousQuantity, lighterQuantity, darkerQuantity, desaturatedQuantity, swatchToggled, postcssExportText, postcssExportToggled, cssExportText, cssExportToggled, exportHexToggled, exportRgbToggled, exportHslToggled, swatchSize, darkMode, setHarmonyQuantity, setInverseQuantity, setInverseMax, setCssExportText, setPostcssExportText, setColor, setAnalogousQuantity) => {
-
+  
+  const handleShowColorsClick = () => setSwatchToggled((toggled) => !toggled);
+  const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
+  const handleExportHexClick = () => setExportHexToggled((toggled) => !toggled);
+  const handleExportRgbClick = () => setExportRgbToggled((toggled) => !toggled);
+  const handleExportHslClick = () => setExportHslToggled((toggled) => !toggled);
+  const handleCssExportClick = () => setCssExportToggled((toggled) => !toggled);
+  const handlePostcssExportClick = () => setPostcssExportToggled((toggled) => !toggled);
 
   useEffect(() => {
     const backgroundColor = `${(darkMode.value ? '#000000' : '#FFFFFF')}`;
