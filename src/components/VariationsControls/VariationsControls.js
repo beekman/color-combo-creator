@@ -35,7 +35,7 @@ const VariationsControls = (color) => {
   const [exportHexToggled, setExportHexToggled] = useState(true);
   const [exportRgbToggled, setExportRgbToggled] = useState(false);
   const [exportHslToggled, setExportHslToggled] = useState(false);
-  const [swatchSize, setSwatchSize] = useState(5);
+  const [swatchSize, setSwatchSize] = useState(8);
   const handleShowColorsClick = () => setSwatchToggled((toggled) => !toggled);
   const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
   const handleExportHexClick = () => setExportHexToggled((toggled) => !toggled);
@@ -84,7 +84,7 @@ const VariationsControls = (color) => {
   let hslDesaturateds = getDesaturateds(baseHarmoniesInverseAndAnalogousColorList, desaturatedQuantity);
 
   const makeColorSwatches = (colorSet, swatchSize) => {
-    if(colorSet.length) {
+    if (colorSet.length) {
       return colorSet.map((color, i) => {
         const key = (color.matchRelationship + (Number(i) + 1));
         const hslString = hslToString(color);
@@ -136,7 +136,7 @@ const VariationsControls = (color) => {
 
 
         <DarkModeToggle />
-        <div className={styles.swatchSizeRange}><label htmlFor="swatchSize"><MdPhotoSizeSelectSmall /><span className={styles.textLabel}></span></label><input type="range" min={3} max={15} value={swatchSize} onChange={({ target }) => setSwatchSize(target.value)} /><FaSquareFull />
+        <div className={styles.swatchSizeRange}><label htmlFor="swatchSize"><MdPhotoSizeSelectSmall /><span className={styles.textLabel}></span></label><input type="range" min={7} max={15} value={swatchSize} onChange={({ target }) => setSwatchSize(target.value)} /><FaSquareFull />
         </div>
       </section>
 
