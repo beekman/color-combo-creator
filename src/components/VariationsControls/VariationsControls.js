@@ -6,9 +6,13 @@ import {
   getLighters, getDarkers, getDesaturateds
 } from '../../utils/colorUtils';
 import {
-  hslToRgb, hslToHex, hslToObject, hslToString, rgbToString
+  hslToRgb, hslToHex, hslToString, rgbToString
 } from '../../utils/colorConverters';
-import { MdInvertColors, MdBrightnessLow, MdFormatColorReset, MdLinearScale } from 'react-icons/md';
+import {
+  getPostcssValuesVariables, getCssClasses
+} from '../../utils/paletteExporters';
+import { MdInvertColors, MdBrightnessLow, MdFormatColorReset, MdLinearScale, MdPhotoSizeSelectSmall, MdPhotoSizeSelectLarge } from 'react-icons/md';
+import { FaSquareFull } from 'react-icons/fa';
 import { IoIosColorFilter } from 'react-icons/io';
 import { TiAdjustBrightness } from 'react-icons/ti';
 import { DarkModeToggle } from '../DarkModeToggle';
@@ -31,6 +35,7 @@ const VariationsControls = (color) => {
   const [exportHexToggled, setExportHexToggled] = useState(true);
   const [exportRgbToggled, setExportRgbToggled] = useState(false);
   const [exportHslToggled, setExportHslToggled] = useState(false);
+  const [swatchSize, setSwatchSize] = useState(5);
   const handleShowColorsClick = () => setSwatchToggled((toggled) => !toggled);
   const handleSwatchClick = () => setSwatchToggled((toggled) => !toggled);
   const handleExportHexClick = () => setExportHexToggled((toggled) => !toggled);
@@ -78,7 +83,7 @@ const VariationsControls = (color) => {
   let hslDarkers = getDarkers(baseHarmoniesInverseAndAnalogousColorList, darkerQuantity);
   let hslDesaturateds = getDesaturateds(baseHarmoniesInverseAndAnalogousColorList, desaturatedQuantity);
 
-  const makeColorSwatches = (colorSet) => {
+  const makeColorSwatches = (colorSet, swatchSize) => {
     if(colorSet.length) {
       return colorSet.map((color, i) => {
         const key = (color.matchRelationship + (Number(i) + 1));
@@ -87,7 +92,7 @@ const VariationsControls = (color) => {
         const rgbString = rgbToString(rgb);
         const hexString = hslToHex(color.h, color.s, color.l);
         return (
-          <div key={key} style={{ background: `${hslString}` }} className={styles.Swatch} onClick={handleSwatchClick}>
+          <div key={key} style={{ background: `${hslString}`, height: `${swatchSize}rem`, width: `${swatchSize}rem` }} className={styles.Swatch} onClick={handleSwatchClick}>
             <aside className={`${styles.details} ${swatchToggled && styles.hidden}`}>
               <strong>{(color.matchRelationship)}</strong>
               {exportHexToggled &&
@@ -106,71 +111,16 @@ const VariationsControls = (color) => {
     }
   };
 
-  let harmonySwatches = makeColorSwatches(hslHarmonies);
-  let inverseSwatches = makeColorSwatches(hslInverses);
-  let analogousSwatches = makeColorSwatches(hslAnalogousColors);
-  let lighterSwatches = makeColorSwatches(hslLighters);
-  let darkerSwatches = makeColorSwatches(hslDarkers);
-  let desaturatedSwatches = makeColorSwatches(hslDesaturateds);
-
-  const getPostcssValuesVariables = (colorSet, exportHexToggled, exportHslToggled, exportRgbToggled) => {
-    let postCSSVariables = '';
-    if(colorSet.length > 0) {
-      colorSet.map((color) => {
-        const key = (color.matchRelationship);
-        let colorString = hslToHex(color.h, color.s, color.l);
-        if(exportHslToggled) {
-          colorString = ('hsl(' + color.h.toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%) ;');
-        }
-        if(exportRgbToggled) {
-          const rgb = hslToRgb(color.h, color.s, color.l);
-          const r = rgb[0];
-          const g = rgb[1];
-          const b = rgb[2];
-          colorString = 'rgb(' + r + ', ' + g + ', ' + b + ')';
-        }
-        if(exportHexToggled) {
-          colorString = hslToHex(color.h, color.s, color.l);
-        }
-        const line = `@value ${key}: ${colorString}\n`;
-        postCSSVariables += line;
-      });
-    }
-    return postCSSVariables;
-  };
-
-  const getCssClasses = (colorSet, exportHexToggled, exportHslToggled, exportRgbToggled) => {
-    let cssStyles = '';
-    if(colorSet.length > 0) {
-      colorSet.map((color) => {
-        const key = color.matchRelationship;
-        let colorString = hslToHex(color.h, color.s, color.l);
-        if(exportHslToggled) {
-          colorString = ('hsl(' + color.h.toFixed(0) + ', ' + (color.s * 100).toFixed(2) + '%, ' + ((color.l * 100).toFixed(2)) + '%)');
-        }
-        if(exportRgbToggled) {
-          const rgb = hslToRgb(color.h, color.s, color.l);
-          const r = rgb[0];
-          const g = rgb[1];
-          const b = rgb[2];
-          colorString = 'rgb(' + r + ', ' + g + ', ' + b + ')';
-        }
-        if(exportHexToggled) {
-          colorString = hslToHex(color.h, color.s, color.l);
-        }
-        let line = `.${key}-color {\n\tcolor: ${colorString}; \n}\n`;
-        line = line + `.${key}-bg {\n\tbackground-color: ${colorString}; \n}\n`;
-        line = line + `.${key}-border {\n\tborder-color: ${colorString}; \n}\n\n`;
-        cssStyles += line;
-      });
-    }
-    return cssStyles;
-  };
-
+  let harmonySwatches = makeColorSwatches(hslHarmonies, swatchSize);
+  let inverseSwatches = makeColorSwatches(hslInverses, swatchSize);
+  let analogousSwatches = makeColorSwatches(hslAnalogousColors, swatchSize);
+  let lighterSwatches = makeColorSwatches(hslLighters, swatchSize);
+  let darkerSwatches = makeColorSwatches(hslDarkers, swatchSize);
+  let desaturatedSwatches = makeColorSwatches(hslDesaturateds, swatchSize);
 
   return (
     <>
-      <div className={styles.VariationsControls} style={{ background: `hsl(${(color.color.h)}, ${color.color.s * 100}%, ${color.color.l * 150}%)` }}>
+      <div className={styles.VariationsControls} style={{ background: `hsl(${(color.color.h)}, ${color.color.s * 100}%, ${color.color.l * 150}%)` }} >
         <label htmlFor="harmonyQuantity" title="Complementary colors, evenly spaced around the color wheel, relative to the base hue. 2 will give you a split complementary triad scheme, 3 will return a color from each quarter of the color wheel."><IoIosColorFilter /><span className={styles.textLabel}>Harmonies</span></label><input type="number" id="harmonyQuantity" value={harmonyQuantity} min="0" max="36" onChange={({ target }) => setHarmonyQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFFFFF' : '#111')}` }} />
         <label htmlFor="inverseQuantity" title="Colors opposite from the base & harmonic colors on the color wheel. First color is inverted base, subsequent colors are inverted harmonies."><MdInvertColors /><span className={styles.textLabel}>Inverses</span></label><input type="number" id="inverseQuantity" min="0" max={inverseMax} value={inverseQuantity} onChange={({ target }) => setInverseQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFF' : '#111')}` }} />
         <label htmlFor="analogousQuantity" title="Colors similar in hue to the base color. Each color is 30 degrees away from the base color or nearest analogous color."><MdLinearScale /><span className={styles.textLabel}>Analogous</span></label><input type="number" id="analogousQuantity" min="0" max="12" value={analogousQuantity} onChange={({ target }) => setAnalogousQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFF' : '#111')}` }} />
@@ -183,7 +133,11 @@ const VariationsControls = (color) => {
         <div className={`${styles.exportFormatToggle} ${exportHexToggled && styles.toggled}`} onClick={handleExportHexClick}>Hex</div>
         <div className={`${styles.exportFormatToggle} ${exportRgbToggled && styles.toggled}`} onClick={handleExportRgbClick}>RGB</div>
         <div className={`${styles.exportFormatToggle} ${exportHslToggled && styles.toggled}`} onClick={handleExportHslClick}>HSL</div>
+
+
         <DarkModeToggle />
+        <div className={styles.swatchSizeRange}><label htmlFor="swatchSize"><MdPhotoSizeSelectSmall /><span className={styles.textLabel}></span></label><input type="range" min={3} max={15} value={swatchSize} onChange={({ target }) => setSwatchSize(target.value)} /><FaSquareFull />
+        </div>
       </section>
 
       <section className={styles.ColorMatches}>

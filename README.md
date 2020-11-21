@@ -1,7 +1,7 @@
 # Live Palette Populator
 
 A React color palette generator with a unique interface designed for efficient but highly customizable color palette creation with instant feedback.
-<img width="800" alt="Interface" src="https://user-images.githubusercontent.com/563233/82376818-8bc23380-99d7-11ea-9d31-26beefede592.png">
+<img width="1151" alt="Screen Shot 2020-07-10 at 6 10 36 PM" src="https://user-images.githubusercontent.com/563233/87213344-2e60a980-c2d9-11ea-81c9-e3e2ef5b78e4.png">
 
 ## Options:
  - Base Color: Pick a target color using the hue slider, or click anywhere else on the banner to open a Photoshop-style picker that allows adjustment of base saturation and lightness, then adjust the numeric inputs to set the rules that generate your palette's color scheme.
@@ -18,5 +18,5 @@ A React color palette generator with a unique interface designed for efficient b
  - New numeric input, Desaturate, which generates less colorful variant colorsets and adds them to the palette.
  
   ### Coming Soon (Future Features)
-  - Color scheme export to PostCSS values variables (https://github.com/css-modules/css-modules/blob/master/docs/values-variables.md) or CSS.
   - User login: save presets, schemes and colors for later
+  - redesigned color picker

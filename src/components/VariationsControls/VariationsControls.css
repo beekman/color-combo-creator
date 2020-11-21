@@ -40,6 +40,9 @@ color: black;
     margin: 0;
   }
 }
+.swatchSizeRange{
+  padding: 0 1rem;
+}
 
 .ColorMatches {
   padding: 0.25rem;
@@ -53,8 +56,6 @@ color: black;
   .Swatch{
     display: block;
     margin: 0.125rem;
-    height: 6rem;
-    width: 6rem;
     font-size: 0.7125rem;
     .details {
       overflow: hidden;
