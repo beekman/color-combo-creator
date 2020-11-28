@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './VariationsControls.css';
+
 import {
   getBaseAndHarmonies, getAnalogousColors, getOppositeDegree,
   getInverses, getBaseHarmoniesInverseAndAnalogousColorList,
@@ -12,6 +12,7 @@ import {
   getPostcssValuesVariables, getCssClasses
 } from '../../utils/paletteExporters';
 import { MdInvertColors, MdBrightnessLow, MdFormatColorReset, MdLinearScale, MdPhotoSizeSelectSmall, MdPhotoSizeSelectLarge } from 'react-icons/md';
+import styles from './VariationsControls.css';
 import { FaSquareFull } from 'react-icons/fa';
 import { IoIosColorFilter } from 'react-icons/io';
 import { TiAdjustBrightness } from 'react-icons/ti';

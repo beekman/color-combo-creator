@@ -37,7 +37,7 @@ export const hslToRgb = (h, s, l) => {
 
 
 /**
- * Converts an HSL color value to 6-charactee hex.
+ * Converts an HSL color value to 6-character hex.
  * Assumes h, s, and l are contained in the set [0, 255].
  *
  * @param   {number}  h       The hue
