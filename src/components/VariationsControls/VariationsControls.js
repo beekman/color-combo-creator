@@ -167,9 +167,9 @@ const VariationsControls = ({ baseColor }) => {
 
 VariationsControls.propTypes = {
   baseColor: PropTypes.PropTypes.shape({
-    h: PropTypes.Number.isRequired,
-    s: PropTypes.Number.isRequired,
-    l: PropTypes.Number.isRequired,
+    h: PropTypes.Number,
+    s: PropTypes.Number,
+    l: PropTypes.Number,
     a: PropTypes.Number,
   })
 };
