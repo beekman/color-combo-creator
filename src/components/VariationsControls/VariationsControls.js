@@ -51,7 +51,7 @@ const VariationsControls = (color) => {
     document.body.style.transition = 'background-color 0.3s ease';
     document.body.style.backgroundColor = backgroundColor;
     document.body.style.color = foregroundColor;
-    setInverseMax(Number(harmonyQuantity) + 1);
+
     const hslHarmonies = getBaseAndHarmonies(color.color, harmonyQuantity);
     const hslInverses = getInverses(color.color, hslHarmonies, inverseQuantity);
     const hslAnalogousColors = getAnalogousColors(color.color, analogousQuantity);
@@ -75,6 +75,10 @@ const VariationsControls = (color) => {
     setCssExportText(cssClasses);
   });
 
+  useEffect(() => {
+    setInverseMax(Number(harmonyQuantity) + 1);
+  }, [harmonyQuantity]);
+
   let hslHarmonies = getBaseAndHarmonies(color.color, harmonyQuantity);
   let hslInverses = getInverses(color.color, hslHarmonies, inverseQuantity);
   let hslAnalogousColors = getAnalogousColors(color.color, analogousQuantity);
@@ -84,7 +88,7 @@ const VariationsControls = (color) => {
   let hslDesaturateds = getDesaturateds(baseHarmoniesInverseAndAnalogousColorList, desaturatedQuantity);
 
   const makeColorSwatches = (colorSet, swatchSize) => {
-    if (colorSet.length) {
+    if(colorSet.length) {
       return colorSet.map((color, i) => {
         const key = (color.matchRelationship + (Number(i) + 1));
         const hslString = hslToString(color);
@@ -124,9 +128,9 @@ const VariationsControls = (color) => {
         <label htmlFor="harmonyQuantity" title="Complementary colors, evenly spaced around the color wheel, relative to the base hue. 2 will give you a split complementary triad scheme, 3 will return a color from each quarter of the color wheel."><IoIosColorFilter /><span className={styles.textLabel}>Harmonies</span></label><input type="number" id="harmonyQuantity" value={harmonyQuantity} min="0" max="36" onChange={({ target }) => setHarmonyQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFFFFF' : '#111')}` }} />
         <label htmlFor="inverseQuantity" title="Colors opposite from the base & harmonic colors on the color wheel. First color is inverted base, subsequent colors are inverted harmonies."><MdInvertColors /><span className={styles.textLabel}>Inverses</span></label><input type="number" id="inverseQuantity" min="0" max={inverseMax} value={inverseQuantity} onChange={({ target }) => setInverseQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFF' : '#111')}` }} />
         <label htmlFor="analogousQuantity" title="Colors similar in hue to the base color. Each color is 30 degrees away from the base color or nearest analogous color."><MdLinearScale /><span className={styles.textLabel}>Analogous</span></label><input type="number" id="analogousQuantity" min="0" max="12" value={analogousQuantity} onChange={({ target }) => setAnalogousQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFF' : '#111')}` }} />
-        <label htmlFor="lighterQuantity" title="Lighter color sets to generate from the base, harmonies, and inverses, with each increment stepping closer to white."><MdBrightnessLow /><span className={styles.textLabel}>Lighter</span> &times;<input type="number" id="lighterQuantity" value={lighterQuantity} min="0" max="20" onChange={({ target }) => setLighterQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFF' : '#111')}` }} /></label>
-        <label htmlFor="darkerQuantity" title="Darker color sets to generate from the base, harmonies, and inverses,with each increment stepping closer to black."> <TiAdjustBrightness /><span className={styles.textLabel}>Darker</span> &times;<input type="number" id="darkerQuantity" min="0" max="20" value={darkerQuantity} onChange={({ target }) => setDarkerQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFF' : '#111')}` }} /></label>
-        <label htmlFor="desaturatedQuantity" title="Less saturated color sets to generate from the base, harmonies, and inverses, with each increment stepping closer to grayscale."><MdFormatColorReset /><span className={styles.textLabel}>Desaturated</span> &times;<input type="number" id="desaturatedQuantity" value={desaturatedQuantity} min="0" max="20" onChange={({ target }) => setDesaturatedQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFF' : '#111')}` }} /></label>
+        <label htmlFor="lighterQuantity" title="Lighter tints to generate from the base, harmonies, inverses, and analogous colors, with each increment stepping closer to white."><MdBrightnessLow /><span className={styles.textLabel}>Lighter</span> &times;<input type="number" id="lighterQuantity" value={lighterQuantity} min="0" max="20" onChange={({ target }) => setLighterQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFF' : '#111')}` }} /></label>
+        <label htmlFor="darkerQuantity" title="Darker tints to generate from the base, harmonies, inverses, and analogous colors, with each increment stepping closer to black."> <TiAdjustBrightness /><span className={styles.textLabel}>Darker</span> &times;<input type="number" id="darkerQuantity" min="0" max="20" value={darkerQuantity} onChange={({ target }) => setDarkerQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFF' : '#111')}` }} /></label>
+        <label htmlFor="desaturatedQuantity" title="Less saturated color sets to generate from the base, harmonies, inverses, and analogous colors, with each increment stepping closer to grayscale."><MdFormatColorReset /><span className={styles.textLabel}>Desaturated</span> &times;<input type="number" id="desaturatedQuantity" value={desaturatedQuantity} min="0" max="20" onChange={({ target }) => setDesaturatedQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFF' : '#111')}` }} /></label>
       </div>
       <section className={styles.colorFormats} style={{ borderColor: `hsl(${(getOppositeDegree(color.color.h))}, ${color.color.s * 100}%, ${color.color.l * 25}%)`, borderWidth: '0 2px 2px', background: `hsl(${(getOppositeDegree(color.color.h))}, ${color.color.s * 100}%, ${color.color.l * 50}%)`, borderStyle: 'solid' }}>
         <div className={`${styles.exportFormatToggle} ${(!swatchToggled) && styles.toggled}`} onClick={handleShowColorsClick}>View Colors As:</div>

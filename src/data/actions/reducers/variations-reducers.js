@@ -5,7 +5,7 @@ const initialState = {
   list: []
 };
 export default function reducer(state = initialState, action) {
-  switch (action.type) {
+  switch(action.type) {
     case FETCH_VARIATIONS_LOADING:
       return { ...state, loading: true };
     case FETCH_VARIATIONS:

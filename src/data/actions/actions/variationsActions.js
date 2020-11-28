@@ -6,4 +6,3 @@ export const fetchVariations = () => dispatch => {
       payload: variations
     }));
 };
-
