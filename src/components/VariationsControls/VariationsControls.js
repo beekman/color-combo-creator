@@ -11,7 +11,7 @@ import {
 import {
   getPostcssValuesVariables, getCssClasses
 } from '../../utils/paletteExporters';
-import { MdInvertColors, MdBrightnessLow, MdFormatColorReset, MdLinearScale, MdPhotoSizeSelectSmall, MdPhotoSizeSelectLarge } from 'react-icons/md';
+import { MdInvertColors, MdBrightnessLow, MdFormatColorReset, MdLinearScale, MdPhotoSizeSelectSmall } from 'react-icons/md';
 import styles from './VariationsControls.css';
 import { FaSquareFull } from 'react-icons/fa';
 import { IoIosColorFilter } from 'react-icons/io';
@@ -19,7 +19,7 @@ import { TiAdjustBrightness } from 'react-icons/ti';
 import { DarkModeToggle } from '../DarkModeToggle';
 import useDarkMode from 'use-dark-mode';
 
-const VariationsControls = (color) => {
+const VariationsControls = ({ color }) => {
 
   const [harmonyQuantity, setHarmonyQuantity] = useState(0);
   const [inverseQuantity, setInverseQuantity] = useState(0);
@@ -53,10 +53,10 @@ const VariationsControls = (color) => {
     document.body.style.backgroundColor = backgroundColor;
     document.body.style.color = foregroundColor;
 
-    const hslHarmonies = getBaseAndHarmonies(color.color, harmonyQuantity);
-    const hslInverses = getInverses(color.color, hslHarmonies, inverseQuantity);
-    const hslAnalogousColors = getAnalogousColors(color.color, analogousQuantity);
-    baseHarmoniesInverseAndAnalogousColorList = getBaseHarmoniesInverseAndAnalogousColorList(color.color, hslHarmonies, hslInverses, hslAnalogousColors);
+    const hslHarmonies = getBaseAndHarmonies(color, harmonyQuantity);
+    const hslInverses = getInverses(color, hslHarmonies, inverseQuantity);
+    const hslAnalogousColors = getAnalogousColors(color, analogousQuantity);
+    baseHarmoniesInverseAndAnalogousColorList = getBaseHarmoniesInverseAndAnalogousColorList(color, hslHarmonies, hslInverses, hslAnalogousColors);
     hslLighters = getLighters(baseHarmoniesInverseAndAnalogousColorList, lighterQuantity);
     hslDarkers = getDarkers(baseHarmoniesInverseAndAnalogousColorList, darkerQuantity);
     hslDesaturateds = getDesaturateds(baseHarmoniesInverseAndAnalogousColorList, desaturatedQuantity);
@@ -64,7 +64,7 @@ const VariationsControls = (color) => {
 
     const postcssValuesVariables = ((getPostcssValuesVariables(hslHarmonies, exportHexToggled, exportHslToggled, exportRgbToggled))) + (((getPostcssValuesVariables(hslInverses, exportHexToggled, exportHslToggled, exportRgbToggled)))) + ((getPostcssValuesVariables(hslLighters, exportHexToggled, exportHslToggled, exportRgbToggled))) + ((getPostcssValuesVariables(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled))) + ((getPostcssValuesVariables(hslDesaturateds, exportHexToggled, exportHslToggled, exportRgbToggled)));
 
-    const cssClasses = (getCssClasses(color.color, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslHarmonies, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslInverses, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslLighters, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled));
+    const cssClasses = (getCssClasses(color, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslHarmonies, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslInverses, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslLighters, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled)) + (getCssClasses(hslDarkers, exportHexToggled, exportHslToggled, exportRgbToggled));
 
     makeColorSwatches(hslHarmonies);
     makeColorSwatches(hslInverses);
@@ -80,10 +80,10 @@ const VariationsControls = (color) => {
     setInverseMax(Number(harmonyQuantity) + 1);
   }, [harmonyQuantity]);
 
-  let hslHarmonies = getBaseAndHarmonies(color.color, harmonyQuantity);
-  let hslInverses = getInverses(color.color, hslHarmonies, inverseQuantity);
-  let hslAnalogousColors = getAnalogousColors(color.color, analogousQuantity);
-  let baseHarmoniesInverseAndAnalogousColorList = getBaseHarmoniesInverseAndAnalogousColorList(color.color, hslHarmonies, hslInverses, hslAnalogousColors);
+  let hslHarmonies = getBaseAndHarmonies(color, harmonyQuantity);
+  let hslInverses = getInverses(color, hslHarmonies, inverseQuantity);
+  let hslAnalogousColors = getAnalogousColors(color, analogousQuantity);
+  let baseHarmoniesInverseAndAnalogousColorList = getBaseHarmoniesInverseAndAnalogousColorList(color, hslHarmonies, hslInverses, hslAnalogousColors);
   let hslLighters = getLighters(baseHarmoniesInverseAndAnalogousColorList, lighterQuantity);
   let hslDarkers = getDarkers(baseHarmoniesInverseAndAnalogousColorList, darkerQuantity);
   let hslDesaturateds = getDesaturateds(baseHarmoniesInverseAndAnalogousColorList, desaturatedQuantity);
@@ -125,7 +125,7 @@ const VariationsControls = (color) => {
 
   return (
     <>
-      <div className={styles.VariationsControls} style={{ background: `hsl(${(color.color.h)}, ${color.color.s * 100}%, ${color.color.l * 150}%)` }} >
+      <div className={styles.VariationsControls} style={{ background: `hsl(${(color.h)}, ${color.s * 100}%, ${color.l * 150}%)` }} >
         <label htmlFor="harmonyQuantity" title="Complementary colors, evenly spaced around the color wheel, relative to the base hue. 2 will give you a split complementary triad scheme, 3 will return a color from each quarter of the color wheel."><IoIosColorFilter /><span className={styles.textLabel}>Harmonies</span></label><input type="number" id="harmonyQuantity" value={harmonyQuantity} min="0" max="36" onChange={({ target }) => setHarmonyQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFFFFF' : '#111')}` }} />
         <label htmlFor="inverseQuantity" title="Colors opposite from the base & harmonic colors on the color wheel. First color is inverted base, subsequent colors are inverted harmonies."><MdInvertColors /><span className={styles.textLabel}>Inverses</span></label><input type="number" id="inverseQuantity" min="0" max={inverseMax} value={inverseQuantity} onChange={({ target }) => setInverseQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFF' : '#111')}` }} />
         <label htmlFor="analogousQuantity" title="Colors similar in hue to the base color. Each color is 30 degrees away from the base color or nearest analogous color."><MdLinearScale /><span className={styles.textLabel}>Analogous</span></label><input type="number" id="analogousQuantity" min="0" max="12" value={analogousQuantity} onChange={({ target }) => setAnalogousQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFF' : '#111')}` }} />
@@ -133,7 +133,7 @@ const VariationsControls = (color) => {
         <label htmlFor="darkerQuantity" title="Darker tints to generate from the base, harmonies, inverses, and analogous colors, with each increment stepping closer to black."> <TiAdjustBrightness /><span className={styles.textLabel}>Darker</span> &times;<input type="number" id="darkerQuantity" min="0" max="20" value={darkerQuantity} onChange={({ target }) => setDarkerQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFF' : '#111')}` }} /></label>
         <label htmlFor="desaturatedQuantity" title="Less saturated color sets to generate from the base, harmonies, inverses, and analogous colors, with each increment stepping closer to grayscale."><MdFormatColorReset /><span className={styles.textLabel}>Desaturated</span> &times;<input type="number" id="desaturatedQuantity" value={desaturatedQuantity} min="0" max="20" onChange={({ target }) => setDesaturatedQuantity(target.value)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#FFF' : '#111')}` }} /></label>
       </div>
-      <section className={styles.colorFormats} style={{ borderColor: `hsl(${(getOppositeDegree(color.color.h))}, ${color.color.s * 100}%, ${color.color.l * 25}%)`, borderWidth: '0 2px 2px', background: `hsl(${(getOppositeDegree(color.color.h))}, ${color.color.s * 100}%, ${color.color.l * 50}%)`, borderStyle: 'solid' }}>
+      <section className={styles.colorFormats} style={{ borderColor: `hsl(${(getOppositeDegree(color.h))}, ${color.s * 100}%, ${color.l * 25}%)`, borderWidth: '0 2px 2px', background: `hsl(${(getOppositeDegree(color.h))}, ${color.s * 100}%, ${color.l * 50}%)`, borderStyle: 'solid' }}>
         <div className={`${styles.exportFormatToggle} ${(!swatchToggled) && styles.toggled}`} onClick={handleShowColorsClick}>View Colors As:</div>
         <div className={`${styles.exportFormatToggle} ${exportHexToggled && styles.toggled}`} onClick={handleExportHexClick}>Hex</div>
         <div className={`${styles.exportFormatToggle} ${exportRgbToggled && styles.toggled}`} onClick={handleExportRgbClick}>RGB</div>
