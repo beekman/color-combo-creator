@@ -9,7 +9,7 @@ import { IoMdColorPalette } from 'react-icons/io';
 class PalettePicker extends React.Component {
   state = {
     displayColorPicker: false,
-    color: {
+    baseColor: {
       h: 0,
       s: 1,
       l: .5,
@@ -25,8 +25,8 @@ class PalettePicker extends React.Component {
     this.setState({ displayColorPicker: false });
   };
 
-  handleChange = (color) => {
-    this.setState({ color: color.hsl });
+  handleChange = (baseColor) => {
+    this.setState({ baseColor: baseColor.hsl });
   };
 
   render() {
@@ -35,7 +35,7 @@ class PalettePicker extends React.Component {
       'default': {
         wrapper: {
           display: 'block',
-          backgroundColor: `hsl(${this.state.color.h}, ${this.state.color.s * 100}%, ${this.state.color.l * 100}%)`,
+          backgroundColor: `hsl(${this.state.baseColor.h}, ${this.state.baseColor.s * 100}%, ${this.state.baseColor.l * 100}%)`,
         },
         header: {
           cursor: 'pointer',
@@ -72,7 +72,7 @@ class PalettePicker extends React.Component {
           height: '1.5rem',
           borderRadius: '2px',
           margin: '1rem auto 0',
-          background: `hsl(${this.state.color.h}, ${this.state.color.s * 100}%, ${this.state.color.l * 100}%)`,
+          background: `hsl(${this.state.baseColor.h}, ${this.state.baseColor.s * 100}%, ${this.state.baseColor.l * 100}%)`,
         },
         swatch: {
           padding: '0px',
@@ -106,17 +106,16 @@ class PalettePicker extends React.Component {
           <div style={styles.flex}>
             <div style={styles.swatch} onClick={this.handleClick}>
               {this.state.displayColorPicker ? <div style={styles.popover}>
-
                 <div style={styles.cover} onClick={this.handleClose} />
-                <ChromePicker color={this.state.color} disableAlpha={true} onChange={this.handleChange} onClick={this.handleClick} />
+                <ChromePicker color={this.state.baseColor} disableAlpha={true} onChange={this.handleChange} onClick={this.handleClick} />
               </div> : null}
             </div>
             <div style={styles.hueBox}>
-              <HuePicker color={this.state.color} onChange={this.handleChange} height={'100%'} width={'100%'} /></div>
+              <HuePicker color={this.state.baseColor} onChange={this.handleChange} height={'100%'} width={'100%'} /></div>
           </div>
         </div>
-        <VariationsControls baseColor={this.state.color} onChange={this.handleChange} />
-        <Footer baseColor={this.state.color} />
+        <VariationsControls baseColor={this.state.baseColor} onChange={this.handleChange} />
+        <Footer baseColor={this.state.baseColor} />
       </div>
     );
   }

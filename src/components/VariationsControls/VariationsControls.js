@@ -87,7 +87,7 @@ const VariationsControls = ({ baseColor }) => {
   let hslLighters = getLighters(baseHarmoniesInverseAndAnalogousColorList, lighterQuantity);
   let hslDarkers = getDarkers(baseHarmoniesInverseAndAnalogousColorList, darkerQuantity);
   let hslDesaturateds = getDesaturateds(baseHarmoniesInverseAndAnalogousColorList, desaturatedQuantity);
-
+  console.log(baseColor);
   const makeColorSwatches = (colorSet, swatchSize) => {
     if(colorSet.length) {
       return colorSet.map((singleColor, i) => {
@@ -166,7 +166,7 @@ const VariationsControls = ({ baseColor }) => {
 };
 
 VariationsControls.propTypes = {
-  baseColor: PropTypes.PropTypes.shape({
+  baseColor: PropTypes.shape({
     h: PropTypes.Number,
     s: PropTypes.Number,
     l: PropTypes.Number,

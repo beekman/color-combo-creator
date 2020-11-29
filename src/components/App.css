@@ -7,8 +7,6 @@ body.light-mode {
 }
 
 body.dark-mode {
-
-
   .dark-mode-toggle > button {
     color: #999;
     &:last-child {
@@ -16,3 +14,4 @@ body.dark-mode {
     }
   }
 }
+ 
