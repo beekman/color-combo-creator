@@ -23,7 +23,7 @@ const PalettePicker = () => {
   };
 
   const handleChange = (baseColor) => {
-    setBaseColor({ baseColor: baseColor.hsl });
+    setBaseColor(baseColor.hsl);
   };
 
   const styles = reactCSS({
