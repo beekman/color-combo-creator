@@ -1,10 +1,12 @@
-import { FETCH_VARIATIONS_LOADING, FETCH_VARIATIONS } from '../action-types/action-types';
+import { GET_COLOR, SET_COLOR } from '../action-types/action-types';
 
 const initialState = {
-  loading: true,
-  list: []
+  a: 1,
+  h: 0,
+  l: 0.5,
+  s: 1
 };
-export default function reducer(state = initialState, action) {
+export default function colorsReducer(state = initialState, action) {
   switch(action.type) {
     case FETCH_VARIATIONS_LOADING:
       return { ...state, loading: true };
