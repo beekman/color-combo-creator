@@ -1,11 +1,7 @@
-import { FETCH_VARIATIONS_LOADING, FETCH_VARIATIONS } from '../action-types/action-types';
-
-const initialState = {
-  harmonyQuantity: 0,
-};
+import { FETCH_VARIATIONS_PENDING, FETCH_VARIATIONS, SET_HARMONY_QUANTITY, SET_INVERSE_MAX_QUANTITY, SET_INVERSE_QUANTITY, SET_ANALOGOUS_QUANTITY, SET_LIGHTER_QUANTITY, SET_DARKER_QUANTITY, SET_DESATURATED_QUANTITY } from '../action-types/action-types';
 export const variationsReducer = (state = initialState, action) => {
   switch(action.type) {
-    case FETCH_VARIATIONS_LOADING:
+    case FETCH_VARIATIONS_PENDING:
       return { ...state, loading: true };
     case FETCH_VARIATIONS:
       return { ...state, loading: false, list: action.payload };

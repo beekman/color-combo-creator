@@ -11,7 +11,7 @@ export const colorsReducer = (state = initialState, action) => {
     case FETCH_COLOR:
       return { ...state, baseColor: true };
     case SET_COLOR:
-      return { ...state, color: action.payload };
+      return { ...state, baseColor: action.payload };
     default:
       return state;
   }
