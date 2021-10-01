@@ -6,9 +6,11 @@ body.light-mode {
   transition: background-color 0.5s ease;
 }
 
-.dark-mode-toggle > button {
-  color: #999;
-  &:last-child {
-    color: lightblue;
+body.dark-mode {
+  .dark-mode-toggle > button {
+    color: #999;
+    &:last-child {
+      color: lightblue;
+    }
   }
 }
