@@ -8,6 +8,7 @@
     color: #ffe600;
     cursor: pointer;
     transition: color 0.3s ease;
+    
     &:last-child {
       color: lightblue;
     }
