@@ -4,8 +4,6 @@ import VariationsControls from '../components/VariationsControls/VariationsContr
 import Footer from '../components/Footer/Footer';
 import { ChromePicker, HuePicker } from 'react-color';
 import { IoMdColorPalette } from 'react-icons/io';
-
-
 class PalettePicker extends React.Component {
   state = {
     displayColorPicker: false,
