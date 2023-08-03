@@ -4,8 +4,8 @@ import {
 export const getPostcssValuesVariables = (colorSet, exportHexToggled, exportHslToggled, exportRgbToggled) => {
   let postCSSVariables = '';
   if(colorSet.length > 0) {
-    colorSet.map((color, i) => {
-      const key = (color.matchRelationship + (Number(i) + 1));
+    colorSet.map((color) => {
+      const key = (color.matchRelationship);
       const hslString = hslToString(color);
       const rgb = hslToRgb(color.h, color.s, color.l);
       const rgbString = rgbToString(rgb);

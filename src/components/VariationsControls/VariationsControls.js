@@ -84,7 +84,7 @@ const VariationsControls = (color) => {
   let hslDesaturateds = getDesaturateds(baseHarmoniesInverseAndAnalogousColorList, desaturatedQuantity);
 
   const makeColorSwatches = (colorSet, swatchSize) => {
-    if (colorSet.length) {
+    if(colorSet.length) {
       return colorSet.map((color, i) => {
         const key = (color.matchRelationship + (Number(i) + 1));
         const hslString = hslToString(color);
@@ -151,7 +151,7 @@ const VariationsControls = (color) => {
 
       <section className={styles.export}>
         <h2>Palette Export Options</h2>
-        <h3 className={`${styles.postcssExportToggler} ${postcssExportToggled && styles.expandable}`} onClick={handlePostcssExportClick}>PostCSS Values Variables color list<a href="https://github.com/css-modules/css-modules/blob/master/docs/values-variables.md" target="_blank">*</a></h3>
+        <h3 className={`${styles.postcssExportToggler} ${postcssExportToggled && styles.expandable}`} onClick={handlePostcssExportClick}>PostCSS Values Variables color list<a href="https://github.com/css-modules/css-modules/blob/master/docs/values-variables.md" target="_blank" rel="noopener noreferrer">*</a></h3>
         <textarea className={`${styles.postcssOutputText} ${postcssExportToggled && styles.hidden}`} value={postcssExportText} onChange={({ postcssValuesVariables }) => setPostcssExportText(postcssValuesVariables)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#EEE' : '#111')}` }} />
         <h3 className={`${styles.cssExportToggler} ${cssExportToggled && styles.expandable}`} onClick={handleCssExportClick}>CSS stylesheet</h3>
         <textarea className={`${styles.cssOutputText} ${cssExportToggled && styles.hidden}`} value={cssExportText} onChange={({ cssClasses }) => setCssExportText(cssClasses)} style={{ background: `${(darkMode.value ? '#111' : '#FFF')}`, color: `${(darkMode.value ? '#EEE' : '#111')}` }} />
